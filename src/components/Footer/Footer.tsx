@@ -1,7 +1,6 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 
-
 interface NavigationLink {
   href: string;
   text: string;
@@ -12,63 +11,114 @@ interface FooterProps {
   brandName?: string;
   navigationLinks?: NavigationLink[];
   showLogoBranding?: boolean;
+  email?: string;
+  phone?: string;
+  address?: string;
 }
 
-
 const Footer: React.FC<FooterProps> = ({
-  brandName = "Ron's Body Shop",
+  brandName = "Ron's Auto",
   navigationLinks = [
-    { href: "/scheduling", text: "Schedule appointment" },
-    { href: "/intake-form", text: "Complete intake" }
+    { href: "#home", text: "Home" },
+    { href: "#about", text: "About" },
+    { href: "#services", text: "Services" },
+    { href: "#contact", text: "Contact" }
   ],
-  showLogoBranding = true
+  showLogoBranding = true,
+  email = "contact@ronsauto.com",
+  phone = "(310) 555-0123",
+  address = "Torrance, CA"
 }) => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col items-center text-center">
-          <div className="w-full">
-            <div className="mb-8">
-              {/* Brand Name */}
-              <h2 className="text-2xl font-bold mb-6">
-                <a 
-                  href="/" 
-                  className="text-white hover:text-gray-300 transition-colors duration-200"
-                >
-                  {brandName}
-                </a>
-              </h2>
+    <footer className="bg-white border-t border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <a 
+              href="#home" 
+              className="inline-flex items-center gap-2 text-gray-900 hover:text-gray-600 transition-colors duration-200 mb-4"
+            >
+              <svg className="w-7 h-7" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="6" fill="currentColor"/>
+                <path d="M12 10h8M12 16h8M12 22h5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+              <span className="font-semibold text-lg">{brandName}</span>
+            </a>
+            <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
+              Expert collision repair and auto body services. Trusted by thousands of satisfied customers for over 30 years.
+            </p>
+          </div>
 
-              {/* Navigation Links */}
-              <nav aria-label="Secondary navigation">
-                <ul className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8">
-                  {navigationLinks.map((link, index) => (
-                    <li key={index}>
-                      <a
-                        href={link.href}
-                        target={link.target || ""}
-                        className="text-gray-300 hover:text-white hover:underline transition-colors duration-200 text-lg"
-                      >
-                        {link.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+          {/* Quick Links */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Navigation</h3>
+            <ul className="space-y-3">
+              {navigationLinks.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    target={link.target || ""}
+                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className="lg:col-span-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Services</h3>
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li>Collision Repair</li>
+              <li>Paint Matching</li>
+              <li>Dent Removal</li>
+              <li>Frame Straightening</li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="lg:col-span-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Contact</h3>
+            <div className="space-y-3">
+              <a 
+                href={`mailto:${email}`}
+                className="block text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+              >
+                {email}
+              </a>
+              <a 
+                href={`tel:${phone.replace(/\D/g, '')}`}
+                className="block text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+              >
+                {phone}
+              </a>
+              <p className="text-sm text-gray-600">
+                {address}
+              </p>
             </div>
+          </div>
+        </div>
 
-            {/* B12 Branding */}
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-100 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Copyright */}
+            <p className="text-sm text-gray-600">
+              © {currentYear} {brandName}. All rights reserved.
+            </p>
+
+            {/* Developer Branding */}
             {showLogoBranding && (
-              <div className="mt-8 pt-8 border-t border-gray-700">
-                <a
-                  href="https://www.b12.io/ai-web-design/?utm_source=client&utm_medium=footer&utm_campaign=ai-web-design"
-                  rel="nofollow noopener noreferrer"
-                  target="_blank"
-                  className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  <span className="text-sm">Web design by</span>
-                  <Logo />
-                </a>
+              <div className="inline-flex items-center gap-2">
+                <span className="text-sm text-gray-600">Designed by</span>
+                <Logo />
               </div>
             )}
           </div>
