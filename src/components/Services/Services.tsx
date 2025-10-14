@@ -1,93 +1,95 @@
 import React from 'react';
 import useScrollAnimation from '../../hooks/useScroll';
-import ServiceCard, {type Service } from './Service';
+import ServiceCard, { type Service } from './Service';
+import ronsCollisionRepair from '../../assets/rons-collision-repair.jpg'
+import ronsColorMatching from '../../assets/rons-color-matching.jpg'
+import ronsDentRepair from '../../assets/rons-dent-repair.jpg'
 
 const ServicesSection: React.FC = () => {
   const animatedElements = useScrollAnimation();
 
   const getAnimationClass = (id: string, baseClass: string = '') => {
     const isAnimated = animatedElements.has(id);
-    return `${baseClass} transition-all duration-500 ease-out ${
+    return `${baseClass} transition-all duration-700 ease-out ${
       isAnimated 
         ? 'opacity-100 translate-y-0' 
-        : 'opacity-0 translate-y-8'
+        : 'opacity-0 translate-y-12'
     }`;
   };
 
-  // Services data
   const services: Service[] = [
     {
       id: '1',
-      title: 'Collision repair',
-      description: 'Restore your vehicle to pre-accident condition with expert collision repair.',
-      image: 'https://cdn.b12.io/client_media/OIudL3H6/97a22d2e-71ac-11f0-be53-0242ac110002-jpg-regular_image.jpeg',
-      href: '/collision-repair',
+      title: 'Collision Repair',
+      description: 'Restore your vehicle to pre-accident condition with our expert collision repair services using advanced techniques and OEM parts.',
+      image: ronsCollisionRepair,
+      href: '#contact',
       delay: 0
     },
     {
       id: '2',
-      title: 'Paint-less dent repair',
-      description: 'Efficiently remove dents without affecting your car\'s original paint finish.',
-      image: 'https://cdn.b12.io/client_media/OIudL3H6/9809e66c-71ac-11f0-be53-0242ac110002-jpg-regular_image.jpeg',
-      href: '/paint-less-dent-repair',
-      delay: 50
+      title: 'Paint-less Dent Repair',
+      description: 'Efficiently remove dents without affecting your car\'s original paint finish with precision craftsmanship.',
+      image: ronsDentRepair,
+      href: '#contact',
+      delay: 100
     },
     {
       id: '3',
-      title: 'Color matching',
-      description: 'Achieve seamless paint color matching for flawless vehicle appearance.',
-      image: 'https://cdn.b12.io/client_media/OIudL3H6/97e2fe62-71ac-11f0-be53-0242ac110002-jpg-regular_image.jpeg',
-      href: '/color-matching',
-      delay: 100
+      title: 'Color Matching',
+      description: 'Achieve seamless paint color matching for flawless vehicle appearance with our advanced technology.',
+      image: ronsColorMatching,
+      href: '#contact',
+      delay: 200
     }
   ];
 
   return (
     <section 
       id="services" 
-      className="py-16 lg:py-24 bg-gray-50"
+      className="py-20 lg:py-32 bg-white w-full"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          {/* Section Title */}
+        <div className="max-w-3xl mb-16">
+          {/* Label */}
+          <div 
+            data-animate-id="services-label"
+            className={getAnimationClass(
+              'services-label',
+              'inline-block text-sm font-semibold text-blue-600 mb-4'
+            )}
+          >
+            Our Services
+          </div>
+
+          {/* Title */}
           <h2 
             data-animate-id="services-title"
             className={getAnimationClass(
               'services-title',
-              'font-poppins font-semibold text-4xl md:text-5xl text-gray-900 mb-6'
-            )}
-          >
-            Expert collision repair
-          </h2>
-
-          {/* Section Subtitle */}
-          <div 
-            data-animate-id="services-subtitle"
-            className={getAnimationClass(
-              'services-subtitle',
-              'font-poppins font-medium text-xl md:text-2xl text-blue-600 mb-4'
-            )}
-            style={{ transitionDelay: '50ms' }}
-          >
-            Precision repairs and custom auto care
-          </div>
-
-          {/* Optional paragraph space - empty in original but keeping structure */}
-          <div 
-            data-animate-id="services-paragraph"
-            className={getAnimationClass(
-              'services-paragraph',
-              'font-poppins font-normal text-lg text-gray-600 max-w-3xl mx-auto'
+              'text-4xl md:text-5xl font-bold text-gray-900 mb-4'
             )}
             style={{ transitionDelay: '100ms' }}
           >
-            {/* Empty paragraph as in original, but you can add content here if needed */}
-          </div>
+            Expert Collision Repair
+          </h2>
+
+          {/* Description */}
+          <p 
+            data-animate-id="services-description"
+            className={getAnimationClass(
+              'services-description',
+              'text-lg text-gray-600 leading-relaxed'
+            )}
+            style={{ transitionDelay: '200ms' }}
+          >
+            From minor dents to major collision repairs, our ASE-certified technicians deliver exceptional results using state-of-the-art equipment.
+          </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {services.map((service) => (
             <ServiceCard
               key={service.id}
@@ -97,23 +99,21 @@ const ServicesSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Optional CTA Section */}
-        <div className="text-center mt-16">
-          <div 
-            data-animate-id="services-cta"
-            className={getAnimationClass('services-cta')}
-            style={{ transitionDelay: '200ms' }}
+        {/* CTA Section */}
+        <div 
+          data-animate-id="services-cta"
+          className={getAnimationClass('services-cta', 'text-center')}
+          style={{ transitionDelay: '400ms' }}
+        >
+          <p className="text-lg text-gray-600 mb-6">
+            Need a service not listed? We offer comprehensive auto body repair solutions.
+          </p>
+          <a
+            href="#contact"
+            className="inline-block px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
           >
-            <p className="font-poppins font-normal text-lg text-gray-600 mb-8">
-              Need a service not listed? We offer comprehensive auto body repair solutions.
-            </p>
-            <a
-              href="#contact"
-              className="inline-block font-poppins font-semibold px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Get a quote today
-            </a>
-          </div>
+            Get a Free Quote
+          </a>
         </div>
       </div>
     </section>
