@@ -87,31 +87,33 @@ const NavigationLink: React.FC = () => {
     };
 
     return (
-        <header 
+        <header
             ref={navRef}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                isScrolled 
-                    ? 'bg-white/80 backdrop-blur-md shadow-sm' 
-                    : 'bg-white'
+                isScrolled
+                    ? 'bg-white/95 backdrop-blur-lg shadow-lg'
+                    : 'bg-white shadow-sm'
             }`}
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <nav className="flex items-center justify-between h-16">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+                <nav className="flex items-center justify-between h-18 sm:h-20">
                     {/* Logo */}
-                    <a 
-                        href="#home" 
-                        className="flex items-center gap-2 text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                    <a
+                        href="#home"
+                        className="flex items-center gap-3 text-gray-900 hover:text-blue-600 transition-all duration-300 group"
                         onClick={(e) => handleNavClick('#home', e)}
                     >
-                        <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="32" height="32" rx="6" fill="currentColor"/>
-                            <path d="M12 10h8M12 16h8M12 22h5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                        <span className="font-semibold text-lg">Ron's Auto</span>
+                        <div className="relative">
+                            <svg className="w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="32" height="32" rx="6" fill="currentColor"/>
+                                <path d="M12 10h8M12 16h8M12 22h5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                        </div>
+                        <span className="font-bold text-lg sm:text-xl">Ron's Auto</span>
                     </a>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
+                    <div className="hidden md:flex items-center gap-2">
                         {navigationLinks.map((link) => (
                             <a
                                 key={link.id}
@@ -119,11 +121,11 @@ const NavigationLink: React.FC = () => {
                                 onClick={(e) => handleNavClick(link.href, e)}
                                 className={
                                     link.isButton
-                                        ? "px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
-                                        : `px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-md ${
+                                        ? "px-6 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-0.5"
+                                        : `px-4 py-2.5 text-sm font-semibold transition-all duration-300 rounded-lg relative ${
                                             activeSection === link.href.replace('#', '')
-                                                ? 'text-gray-900'
-                                                : 'text-gray-600 hover:text-gray-900'
+                                                ? 'text-blue-600 bg-blue-50'
+                                                : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                                         }`
                                 }
                             >
@@ -136,7 +138,7 @@ const NavigationLink: React.FC = () => {
                     <button
                         type="button"
                         onClick={toggleMobileMenu}
-                        className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                        className="md:hidden p-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
                         aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                     >
                         {isMobileMenuOpen ? (
@@ -149,8 +151,8 @@ const NavigationLink: React.FC = () => {
 
                 {/* Mobile Navigation Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-gray-100">
-                        <div className="flex flex-col gap-1">
+                    <div className="md:hidden py-6 border-t border-gray-100">
+                        <div className="flex flex-col gap-2">
                             {navigationLinks.map((link) => (
                                 <a
                                     key={link.id}
@@ -158,11 +160,11 @@ const NavigationLink: React.FC = () => {
                                     onClick={(e) => handleNavClick(link.href, e)}
                                     className={
                                         link.isButton
-                                            ? "px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200 text-center"
-                                            : `px-4 py-2.5 text-sm font-medium transition-colors duration-200 rounded-md ${
+                                            ? "px-6 py-3.5 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 hover:shadow-lg transition-all duration-300 text-center"
+                                            : `px-6 py-3.5 text-base font-semibold transition-all duration-300 rounded-xl ${
                                                 activeSection === link.href.replace('#', '')
-                                                    ? 'text-gray-900 bg-gray-50'
-                                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                                    ? 'text-blue-600 bg-blue-50'
+                                                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                                             }`
                                     }
                                 >

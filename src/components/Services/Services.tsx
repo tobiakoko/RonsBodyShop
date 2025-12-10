@@ -45,30 +45,31 @@ const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section 
-      id="services" 
-      className="py-20 lg:py-32 bg-white w-full"
+    <section
+      id="services"
+      className="py-20 sm:py-24 lg:py-32 xl:py-40 bg-white w-full"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-16 sm:mb-20">
           {/* Label */}
-          <div 
+          <div
             data-animate-id="services-label"
             className={getAnimationClass(
               'services-label',
-              'inline-block text-sm font-semibold text-blue-600 mb-4'
+              'inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-blue-600 mb-4 sm:mb-6'
             )}
           >
+            <span className="w-8 h-0.5 bg-blue-600"></span>
             Our Services
           </div>
 
           {/* Title */}
-          <h2 
+          <h2
             data-animate-id="services-title"
             className={getAnimationClass(
               'services-title',
-              'text-4xl md:text-5xl font-bold text-gray-900 mb-4'
+              'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight'
             )}
             style={{ transitionDelay: '100ms' }}
           >
@@ -76,11 +77,11 @@ const ServicesSection: React.FC = () => {
           </h2>
 
           {/* Description */}
-          <p 
+          <p
             data-animate-id="services-description"
             className={getAnimationClass(
               'services-description',
-              'text-lg text-gray-600 leading-relaxed'
+              'text-base sm:text-lg text-gray-600 leading-relaxed'
             )}
             style={{ transitionDelay: '200ms' }}
           >
@@ -89,7 +90,7 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20">
           {services.map((service) => (
             <ServiceCard
               key={service.id}
@@ -100,19 +101,22 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* CTA Section */}
-        <div 
+        <div
           data-animate-id="services-cta"
-          className={getAnimationClass('services-cta', 'text-center')}
+          className={getAnimationClass('services-cta', 'text-center max-w-2xl mx-auto')}
           style={{ transitionDelay: '400ms' }}
         >
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
             Need a service not listed? We offer comprehensive auto body repair solutions.
           </p>
           <a
             href="#contact"
-            className="inline-block px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
+            className="group inline-flex items-center px-8 py-4 bg-blue-600 text-white text-base font-semibold rounded-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-0.5"
           >
             Get a Free Quote
+            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </div>
       </div>

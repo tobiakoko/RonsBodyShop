@@ -99,27 +99,27 @@ function App() {
         <Footer />
       </main>
 
-      {/* Scroll to Top Button */}
+      {/* Enhanced Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-40 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 flex items-center justify-center ${
-          showScrollTop 
-            ? 'opacity-100 translate-y-0' 
+        className={`group fixed bottom-8 right-8 z-40 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl hover:bg-blue-700 hover:shadow-blue-600/50 transition-all duration-300 flex items-center justify-center hover:scale-110 ${
+          showScrollTop
+            ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-16 pointer-events-none'
         }`}
         aria-label="Scroll to top"
       >
-        <svg 
-          className="w-5 h-5" 
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          className="w-6 h-6 group-hover:-translate-y-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M5 10l7-7m0 0l7 7m-7-7v18" 
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
           />
         </svg>
       </button>
