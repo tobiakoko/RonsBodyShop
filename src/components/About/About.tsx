@@ -24,7 +24,7 @@ const AboutSection: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative py-20 sm:py-24 lg:py-32 xl:py-40 bg-gray-50 overflow-hidden w-full"
+      className="relative py-16 sm:py-20 md:py-24 lg:py-32 xl:py-40 bg-gray-50 overflow-hidden w-full"
     >
 
       {/* Background Pattern */}
@@ -44,8 +44,8 @@ const AboutSection: React.FC = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-800/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
           
           {/* Content Column */}
           <div className="order-2 lg:order-1">
@@ -150,16 +150,16 @@ const AboutSection: React.FC = () => {
                 </video>
 
                 {/* Enhanced Badge */}
-                <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 bg-white px-6 py-4 rounded-xl shadow-2xl backdrop-blur-sm bg-white/95">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 bg-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow-2xl backdrop-blur-sm bg-white/95">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-gray-900">30+</div>
-                      <div className="text-sm font-medium text-gray-600">Years Experience</div>
+                      <div className="text-2xl sm:text-3xl font-bold text-gray-900">30+</div>
+                      <div className="text-xs sm:text-sm font-medium text-gray-600">Years Experience</div>
                     </div>
                   </div>
                 </div>

@@ -102,7 +102,7 @@ function App() {
       {/* Enhanced Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`group fixed bottom-8 right-8 z-40 w-14 h-14 bg-blue-600 text-white rounded-full shadow-2xl hover:bg-blue-700 hover:shadow-blue-600/50 transition-all duration-300 flex items-center justify-center hover:scale-110 ${
+        className={`group fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 text-white rounded-full shadow-2xl hover:bg-blue-700 hover:shadow-blue-600/50 transition-all duration-300 flex items-center justify-center hover:scale-110 ${
           showScrollTop
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-16 pointer-events-none'
@@ -110,7 +110,7 @@ function App() {
         aria-label="Scroll to top"
       >
         <svg
-          className="w-6 h-6 group-hover:-translate-y-1 transition-transform"
+          className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-y-1 transition-transform"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

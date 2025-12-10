@@ -51,10 +51,10 @@ const ContactSection: React.FC<ContactSectionProps> = ({
   onSubmit
 }) => {
   return (
-    <section id="contact" className="py-20 sm:py-24 lg:py-32 xl:py-40 bg-gray-50 w-full">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 lg:py-32 xl:py-40 bg-gray-50 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
+        <div className="max-w-3xl mb-12 sm:mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-blue-600 mb-4 sm:mb-6">
             <span className="w-8 h-0.5 bg-blue-600"></span>
             Contact Us
