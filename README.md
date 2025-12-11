@@ -124,7 +124,7 @@ The built site in `/dist` can be deployed to any static hosting service:
 
 ## License
 
-© 2024 Ron's Body Shop. All rights reserved.
+© 2025 Ron's Body Shop. All rights reserved.
 
 ## Developer
 
