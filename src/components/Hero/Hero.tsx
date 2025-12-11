@@ -47,10 +47,10 @@ const HeroSection: React.FC = () => {
               data-animate-id="hero-label"
               className={getAnimationClass(
                 'hero-label',
-                'inline-flex items-center gap-2 text-sm font-semibold text-blue-400 mb-6 sm:mb-8'
+                'inline-flex items-center gap-2 text-sm font-semibold [color:var(--color-gold-light)] mb-6 sm:mb-8'
               )}
             >
-              <span className="w-8 h-0.5 bg-blue-400"></span>
+              <span className="w-8 h-0.5 [background-color:var(--color-gold-light)]"></span>
               Ron's Auto — Since 1995
             </div>
 
@@ -59,9 +59,9 @@ const HeroSection: React.FC = () => {
               data-animate-id="hero-title"
               className={getAnimationClass(
                 'hero-title',
-                'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 md:mb-8 leading-[1.1] tracking-tight'
+                'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-[1.1] tracking-tight'
               )}
-              style={{ transitionDelay: '100ms' }}
+              style={{ transitionDelay: '100ms', color: '#ffffff' }}
             >
               Expert Collision Repair You Can Trust
             </h1>
@@ -86,7 +86,7 @@ const HeroSection: React.FC = () => {
             >
               <a
                 href="#services"
-                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 [background-color:var(--color-red)] text-white text-sm sm:text-base font-semibold rounded-lg hover:[background-color:var(--color-red-dark)] hover:shadow-xl hover:shadow-[var(--color-red)]/40 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
               >
                 View Our Services
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ const HeroSection: React.FC = () => {
 
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-white/10 backdrop-blur-md text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-white/20 border-2 border-white/30 hover:border-white/60 transition-all duration-300"
+                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 [background-color:var(--color-gold-light)] [color:var(--color-navy-darker)] text-sm sm:text-base font-semibold rounded-lg hover:[background-color:var(--color-gold)] hover:shadow-xl hover:shadow-[var(--color-gold)]/30 border-2 [border-color:var(--color-gold-light)] hover:[border-color:var(--color-gold-dark)] transition-all duration-300 hover:-translate-y-1"
               >
                 Get Free Estimate
               </a>
@@ -112,8 +112,8 @@ const HeroSection: React.FC = () => {
               style={{ transitionDelay: '400ms' }}
             >
               <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 </div>
@@ -121,8 +121,8 @@ const HeroSection: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -130,8 +130,8 @@ const HeroSection: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                   </svg>
                 </div>

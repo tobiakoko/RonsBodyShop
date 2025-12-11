@@ -57,10 +57,10 @@ const ServicesSection: React.FC = () => {
             data-animate-id="services-label"
             className={getAnimationClass(
               'services-label',
-              'inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-blue-600 mb-4 sm:mb-6'
+              'inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase [color:var(--color-navy)] mb-4 sm:mb-6'
             )}
           >
-            <span className="w-8 h-0.5 bg-blue-600"></span>
+            <span className="w-8 h-0.5 [background-color:var(--color-navy)]"></span>
             Our Services
           </div>
 
@@ -111,7 +111,7 @@ const ServicesSection: React.FC = () => {
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center px-8 py-4 bg-blue-600 text-white text-base font-semibold rounded-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-0.5"
+            className="group inline-flex items-center px-8 py-4 [background-color:var(--color-red)] text-white text-base font-semibold rounded-lg hover:[background-color:var(--color-red-dark)] hover:shadow-xl hover:shadow-[var(--color-red)]/40 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
           >
             Get a Free Quote
             <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

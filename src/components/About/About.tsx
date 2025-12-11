@@ -15,7 +15,7 @@ const AboutSection: React.FC = () => {
   };
 
   const features = [
-    { title: 'ASE-Certified', description: 'Expert technicians' },
+    { title: 'I-CAR Certified', description: 'Expert technicians' },
     { title: 'Advanced Tech', description: 'Celette frame system' },
     { title: 'Fast Service', description: 'Quick turnaround' },
     { title: 'Full Support', description: 'Rentals & towing' }
@@ -41,8 +41,8 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Enhanced Gradient Accents */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-800/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
+      <div className="absolute top-0 left-0 w-96 h-96 [background-color:var(--color-navy)]/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--color-navy-dark)]/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
@@ -54,10 +54,10 @@ const AboutSection: React.FC = () => {
               data-animate-id="about-label"
               className={getAnimationClass(
                 'about-label',
-                'inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase text-blue-600 mb-4 sm:mb-6'
+                'inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase [color:var(--color-navy)] mb-4 sm:mb-6'
               )}
             >
-              <span className="w-8 h-0.5 bg-blue-600"></span>
+              <span className="w-8 h-0.5 [background-color:var(--color-navy)]"></span>
               About Us
             </div>
 
@@ -102,10 +102,11 @@ const AboutSection: React.FC = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="group p-5 sm:p-6 bg-white rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className="group p-5 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:[border-color:var(--color-gold-dark)] hover:shadow-xl hover:shadow-[var(--color-gold-dark)]/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
                 >
-                  <h3 className="font-bold text-base sm:text-lg text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
-                  <p className="text-sm text-gray-600">{feature.description}</p>
+                  <div className="absolute top-0 right-0 w-16 h-16 [background:linear-gradient(135deg,var(--color-gold)_0%,var(--color-red)_100%)] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-bl-full"></div>
+                  <h3 className="font-bold text-base sm:text-lg [color:var(--color-navy)] mb-1 group-hover:[color:var(--color-red)] transition-colors relative z-10">{feature.title}</h3>
+                  <p className="text-sm text-gray-600 relative z-10">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -118,7 +119,7 @@ const AboutSection: React.FC = () => {
             >
               <a
                 href="#contact"
-                className="group inline-flex items-center px-8 py-4 bg-blue-600 text-white text-base font-semibold rounded-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-0.5"
+                className="group inline-flex items-center px-8 py-4 [background-color:var(--color-red)] text-white text-base font-semibold rounded-lg hover:[background-color:var(--color-red-dark)] hover:shadow-xl hover:shadow-[var(--color-red)]/40 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
               >
                 Get in Touch
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,15 +151,15 @@ const AboutSection: React.FC = () => {
                 </video>
 
                 {/* Enhanced Badge */}
-                <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 bg-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow-2xl backdrop-blur-sm bg-white/95">
+                <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow-2xl backdrop-blur-sm bg-white/95 border-2 [border-color:var(--color-gold-dark)]">
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 [background:linear-gradient(135deg,var(--color-red)_0%,var(--color-gold-light)_100%)] rounded-full flex items-center justify-center shadow-lg">
                       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     </div>
                     <div>
-                      <div className="text-2xl sm:text-3xl font-bold text-gray-900">30+</div>
+                      <div className="text-2xl sm:text-3xl font-bold [color:var(--color-navy)]">30+</div>
                       <div className="text-xs sm:text-sm font-medium text-gray-600">Years Experience</div>
                     </div>
                   </div>

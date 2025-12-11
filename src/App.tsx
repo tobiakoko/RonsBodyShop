@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import ContactSection from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import NavigationLink from './components/Header/Navigation';

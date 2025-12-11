@@ -41,7 +41,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     }
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone is required';
-    } else if (!/^[\d\s\-\(\)\+\.]+$/.test(formData.phone)) {
+    } else if (!/^[\d\s\-()+=.]+$/.test(formData.phone)) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 
@@ -88,7 +88,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       }
       setSubmitSuccess(true);
       setTimeout(() => resetForm(), 3000);
-    } catch (error) {
+    } catch {
       setSubmitError('Sorry, something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -128,7 +128,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             value={formData.name}
             onChange={handleInputChange}
             placeholder="John Smith"
-            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all text-base ${
+            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-[var(--color-navy)] focus:border-[var(--color-navy)] transition-all text-base ${
               errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
             }`}
             required
@@ -157,7 +157,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               value={formData.email}
               onChange={handleInputChange}
               placeholder="john@example.com"
-              className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all text-base ${
+              className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-[var(--color-navy)] focus:border-[var(--color-navy)] transition-all text-base ${
                 errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
               }`}
               required
@@ -184,7 +184,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               value={formData.phone}
               onChange={handleInputChange}
               placeholder="(555) 555-5555"
-              className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all text-base ${
+              className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-2 focus:ring-[var(--color-navy)] focus:border-[var(--color-navy)] transition-all text-base ${
                 errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'
               }`}
               required
@@ -213,7 +213,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange}
             rows={5}
             placeholder="Tell us about your vehicle..."
-            className="w-full px-5 py-4 border-2 border-gray-300 hover:border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all resize-none text-base"
+            className="w-full px-5 py-4 border-2 border-gray-300 hover:border-gray-400 rounded-xl focus:ring-2 focus:ring-[var(--color-navy)] focus:border-[var(--color-navy)] transition-all resize-none text-base"
             disabled={isSubmitting}
           />
         </div>
@@ -226,7 +226,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             name="consent"
             checked={formData.consent}
             onChange={handleInputChange}
-            className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-600"
+            className="mt-1 w-4 h-4 [color:var(--color-navy)] border-gray-300 rounded focus:ring-2 focus:ring-[var(--color-navy)]"
             required
             disabled={isSubmitting}
           />
@@ -239,7 +239,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group w-full inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-base font-semibold rounded-xl hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
+          className="group w-full inline-flex items-center justify-center px-8 py-4 [background-color:var(--color-red)] text-white text-base font-semibold rounded-xl hover:[background-color:var(--color-red-dark)] hover:shadow-xl hover:shadow-[var(--color-red)]/40 focus:ring-2 focus:ring-[var(--color-red)] focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-1 hover:scale-[1.02]"
         >
           {isSubmitting ? (
             <>
