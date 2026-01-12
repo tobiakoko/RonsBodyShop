@@ -1,137 +1,132 @@
-import React from 'react';
-import Logo from '../Logo/Logo';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import {
+  MdLeaderboard,
+  MdPhotoCamera,
+  MdVideoLibrary,
+} from "react-icons/md";
 
-interface NavigationLink {
-  href: string;
-  text: string;
-  target?: string;
-}
-
-interface FooterProps {
-  brandName?: string;
-  navigationLinks?: NavigationLink[];
-  showLogoBranding?: boolean;
-  email?: string;
-  phone?: string;
-  address?: string;
-}
-
-const Footer: React.FC<FooterProps> = ({
-  brandName = "Ron's Auto",
-  navigationLinks = [
-    { href: "#home", text: "Home" },
-    { href: "#about", text: "About" },
-    { href: "#services", text: "Services" },
-    { href: "#contact", text: "Contact" }
-  ],
-  showLogoBranding = true,
-  email = "ronsbodyshop@sbcglobal.net",
-  phone = "(310) 555-0123",
-  address = "1324 Cabrillo Ave. Torrance CA 90501"
-}) => {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative [background-color:var(--color-navy-dark)] text-white overflow-hidden">
-      {/* Decorative Gradient Overlay */}
-      <div className="absolute inset-0 [background:linear-gradient(135deg,transparent_0%,rgba(220,38,38,0.05)_50%,rgba(251,191,36,0.05)_100%)] pointer-events-none"></div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-12">
-          
-          {/* Brand Column */}
-          <div className="lg:col-span-4">
-            <a
-              href="#home"
-              className="inline-flex items-center text-white hover:[color:var(--color-gold-dark)] transition-all duration-300 mb-6 group"
-            >
-              <img
-                src="/logo.png"
-                alt="Ron's Body Shop Logo"
-                className="w-30 h-30 transition-transform duration-300 group-hover:scale-110 object-contain"
+    <footer className="bg-[#0f1419] text-white relative">
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-[#f4b942]"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Company Info */}
+          <div>
+            <a href="/">
+              <img 
+                src='/logo.png' 
+                alt="Ron's Body Shop" 
+                className="h-24 w-auto mb-4"
               />
             </a>
-            <p className="text-base text-gray-300 leading-relaxed max-w-sm">
-              Expert collision repair and auto body services. Trusted by thousands of satisfied customers for over 30 years.
+            <p className="text-gray-400 leading-relaxed text-sm">
+              Where satisfaction is a tradition.
             </p>
+            <div className="flex space-x-6 mt-8">
+              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-3" href="#">
+                <MdLeaderboard />
+              </a>
+              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all -rotate-3" href="#">
+                <MdPhotoCamera />
+              </a>
+              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-6" href="#">
+                <MdVideoLibrary />
+              </a>
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold tracking-wider uppercase [color:var(--color-gold-dark)] mb-6">Navigation</h3>
+          {/* The Shop */}
+          <div>
+            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+              THE SHOP
+            </h4>
             <ul className="space-y-3">
-              {navigationLinks.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    target={link.target || ""}
-                    className="text-base !text-white hover:!text-[var(--color-gold)] transition-colors duration-300"
-                  >
-                    {link.text}
-                  </a>
-                </li>
-              ))}
+              <li className="flex items-start space-x-2">
+                <MapPin className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
+                <div>
+                  <p className="text-sm text-gray-400">1324 Cabrillo Ave.</p>
+                  <p className="text-sm text-gray-400">Torrance, CA 90501</p>
+                </div>
+              </li>
+              <li className="flex items-start space-x-2">
+                <Phone className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
+                <a href="tel:+13106188791" className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors">
+                  (310) 618-8791
+                </a>
+              </li>
+              <li className="flex items-start space-x-2">
+                <Mail className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
+                <a href="mailto:info@ronsbodyshop.net" className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors">
+                  ronsbodyshop@sbcglobal.net
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="lg:col-span-5">
-            <h3 className="text-sm font-bold tracking-wider uppercase [color:var(--color-gold-dark)] mb-6">Contact</h3>
-            <div className="space-y-4">
-              <a
-                href={`mailto:${email}`}
-                className="flex items-center gap-3 text-base text-gray-300 hover:[color:var(--color-gold-dark)] transition-colors duration-300 group"
-              >
-                <svg className="w-5 h-5 [color:var(--color-gold-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {email}
-              </a>
-              <a
-                href={`tel:${phone.replace(/\D/g, '')}`}
-                className="flex items-center gap-3 text-base text-gray-300 hover:[color:var(--color-gold-dark)] transition-colors duration-300 group"
-              >
-                <svg className="w-5 h-5 [color:var(--color-gold-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {phone}
-              </a>
-              <a
-                href="https://www.google.com/maps/place/1324+Cabrillo+Ave,+Torrance,+CA+90501"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 text-base text-gray-300 hover:[color:var(--color-gold-dark)] transition-colors duration-300 group"
-              >
-                <svg className="w-5 h-5 [color:var(--color-gold-dark)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {address}
-              </a>
+          {/* Hours */}
+          <div>
+            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+              HOURS
+            </h4>
+            <ul className="space-y-2">
+              <li className="flex justify-between text-sm">
+                <span className="text-gray-400">MON - FRI</span>
+                <span className="text-white">8AM - 5:30PM</span>
+              </li>
+              <li className="flex justify-between text-sm">
+                <span className="text-gray-400">SAT</span>
+                <span className="text-white">8AM - 12:00PM</span>
+              </li>
+              <li className="flex justify-between text-sm">
+                <span className="text-gray-400">SUN</span>
+                <span className="text-white">CLOSED</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+              NEWSLETTER
+            </h4>
+            <p className="text-sm text-gray-400 mb-4">
+              Get the latest updates and special offers
+            </p>
+            <div className="flex flex-col space-y-3">
+              <input 
+                type="email" 
+                placeholder="Your email"
+                className="bg-[#1a1f2e] border border-gray-700 px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#f4b942]"
+              />
+              <button className="bg-[#d64436] text-white px-6 py-3 hover:bg-[#f4b942] hover:text-[#1a1f2e] transition-all text-sm tracking-wider font-medium">
+                SUBSCRIBE
+              </button>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t [border-color:var(--color-gold-dark)]/30 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            {/* Copyright */}
-            <p className="text-sm text-gray-400">
-              © {currentYear} {brandName}. All rights reserved.
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-500">
+            <p>
+              © {currentYear} Ron's Body Shop. All rights reserved.
             </p>
-
-            {/* Developer Branding */}
-            {showLogoBranding && (
-              <div className="inline-flex items-center gap-2">
-                <span className="text-sm text-gray-400">Designed by</span>
-                <Logo />
-              </div>
-            )}
+            <a 
+              href="https://arkomedialabs.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-[#f4b942] transition-colors"
+            >
+              Designed by Arko Media Labs
+            </a>
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

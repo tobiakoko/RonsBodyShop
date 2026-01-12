@@ -1,148 +1,60 @@
-import React from 'react';
-import useScrollAnimation from '../../hooks/useScroll';
-import heroVideo from '../../assets/rons-hero-vid.mp4'
+import { ASSETS } from "../../config/data";
+import { MdSettingsSuggest, MdLocalGasStation } from "react-icons/md";
 
-const HeroSection: React.FC = () => {
-  const animatedElements = useScrollAnimation();
-
-  const getAnimationClass = (id: string, baseClass: string = '') => {
-    const isAnimated = animatedElements.has(id);
-    return `${baseClass} transition-all duration-700 ease-out ${
-      isAnimated 
-        ? 'opacity-100 translate-y-0' 
-        : 'opacity-0 translate-y-12'
-    }`;
-  };
-
+export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden w-full"
-    >
-      {/* Background Video with Overlay */}
-      <div className="absolute inset-0">
-        {/* Video Element */}
+    <section className="relative h-[85vh] flex items-center overflow-hidden">
+      {/* Background media */}
+      <figure className="absolute inset-0 z-0 m-0">
         <video
+          className="w-full h-full object-cover"
+          src={ASSETS.HERO_BG}
           autoPlay
-          loop
           muted
+          loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src={heroVideo} type="video/mp4" />
-          {/* Fallback image if video doesn't load */}
-          Your browser does not support the video tag.
-        </video>
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent" />
+      </figure>
 
-        {/* Enhanced Dark Overlay with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/60 to-black/70"></div>
-      </div>
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl">
+          <div className="inline-block bg-accent text-white font-display px-4 py-1 mb-6 enamel-button">
+            ESTABLISHED 1982  •  I-CAR CERTIFIED
+          </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 md:px-8 lg:px-12 py-20 sm:py-24 md:py-32 lg:py-40">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-4xl">
-            {/* Label */}
-            <div
-              data-animate-id="hero-label"
-              className={getAnimationClass(
-                'hero-label',
-                'inline-flex items-center gap-2 text-sm font-semibold [color:var(--color-gold-light)] mb-6 sm:mb-8'
-              )}
+          <h1 className="font-display text-6xl md:text-8xl text-gold mb-6 leading-none drop-shadow-[4px_4px_0px_#d64436]">
+            QUALITY <br />
+            <span className="text-white">WITHOUT COMPROMISE</span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-slate-100 mb-10 font-retro tracking-wide max-w-xl">
+            Where satisfaction is a tradition.
+          </p>
+
+          <div className="flex flex-wrap gap-6">
+            <a
+              className="enamel-button bg-gold text-primary px-10 py-4 rounded-sm font-display tracking-widest text-lg hover:brightness-105 flex items-center gap-3"
+              href="#services"
             >
-              <span className="w-8 h-0.5 [background-color:var(--color-gold-light)]"></span>
-              Ron's Auto — Since 1995
-            </div>
+              OUR SPECIALTIES <MdSettingsSuggest />
+            </a>
 
-            {/* Hero Title */}
-            <h1
-              data-animate-id="hero-title"
-              className={getAnimationClass(
-                'hero-title',
-                'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-[1.1] tracking-tight'
-              )}
-              style={{ transitionDelay: '100ms', color: '#ffffff' }}
+            <a
+              className="enamel-button bg-white text-primary px-10 py-4 rounded-sm font-display tracking-widest text-lg hover:bg-slate-100"
+              href="#contact"
             >
-              Expert Collision Repair You Can Trust
-            </h1>
-
-            {/* Hero Subtitle */}
-            <p
-              data-animate-id="hero-subtitle"
-              className={getAnimationClass(
-                'hero-subtitle',
-                'text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 md:mb-10 lg:mb-12 leading-relaxed max-w-3xl'
-              )}
-              style={{ transitionDelay: '200ms' }}
-            >
-              Precision craftsmanship meets decades of experience. We restore your vehicle to factory condition with care and attention to detail.
-            </p>
-            
-            {/* CTA Buttons */}
-            <div
-              data-animate-id="hero-cta"
-              className={getAnimationClass('hero-cta', 'flex flex-col sm:flex-row gap-3 sm:gap-4')}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <a
-                href="#services"
-                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 [background-color:var(--color-red)] text-white text-sm sm:text-base font-semibold rounded-lg hover:[background-color:var(--color-red-dark)] hover:shadow-xl hover:shadow-[var(--color-red)]/40 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
-              >
-                View Our Services
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-
-              <a
-                href="#contact"
-                className="group inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 [background-color:var(--color-gold-light)] [color:var(--color-navy-darker)] text-sm sm:text-base font-semibold rounded-lg hover:[background-color:var(--color-gold)] hover:shadow-xl hover:shadow-[var(--color-gold)]/30 border-2 [border-color:var(--color-gold-light)] hover:[border-color:var(--color-gold-dark)] transition-all duration-300 hover:-translate-y-1"
-              >
-                Get Free Estimate
-              </a>
-            </div>
-
-            {/* Trust Indicators */}
-            <div
-              data-animate-id="hero-badges"
-              className={getAnimationClass(
-                'hero-badges',
-                'flex flex-wrap gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 md:mt-16 pt-6 sm:pt-8 md:pt-10 border-t border-white/20'
-              )}
-              style={{ transitionDelay: '400ms' }}
-            >
-              <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <span className="font-semibold text-sm sm:text-base">30+ Years Experience</span>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <span className="font-semibold text-sm sm:text-base">Certified Technicians</span>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-3 text-white">
-                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-[var(--color-gold-light)]/25 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 [color:var(--color-gold-light)]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <span className="font-semibold text-sm sm:text-base">Lifetime Warranty</span>
-              </div>
-            </div>
+              FREE ESTIMATE
+            </a>
           </div>
         </div>
       </div>
+
+      <div className="absolute right-10 bottom-10 hidden lg:block opacity-20">
+        <MdLocalGasStation className="text-[200px] text-gold" />
+      </div>
     </section>
   );
-};
-
-export default HeroSection;
+}
