@@ -4,9 +4,28 @@ import {
   MdPhotoCamera,
   MdVideoLibrary,
 } from "react-icons/md";
+import { track } from "@vercel/analytics";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    track("Newsletter Subscription", { location: "Footer" });
+    // Add your newsletter submission logic here
+  };
+
+  const handlePhoneClick = () => {
+    track("Phone Number Clicked", { location: "Footer" });
+  };
+
+  const handleEmailClick = () => {
+    track("Email Clicked", { location: "Footer" });
+  };
+
+  const handleSocialClick = (platform: string) => {
+    track("Social Link Clicked", { platform });
+  };
 
   return (
     <footer className="bg-[#0f1419] text-white relative">
@@ -28,13 +47,25 @@ export default function Footer() {
               Where satisfaction is a tradition.
             </p>
             <div className="flex space-x-4 sm:space-x-6 mt-6 sm:mt-8">
-              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-3" href="#">
+              <a
+                className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-3"
+                href="#"
+                onClick={() => handleSocialClick("Platform 1")}
+              >
                 <MdLeaderboard />
               </a>
-              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all -rotate-3" href="#">
+              <a
+                className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all -rotate-3"
+                href="#"
+                onClick={() => handleSocialClick("Instagram")}
+              >
                 <MdPhotoCamera />
               </a>
-              <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-6" href="#">
+              <a
+                className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-6"
+                href="#"
+                onClick={() => handleSocialClick("YouTube")}
+              >
                 <MdVideoLibrary />
               </a>
             </div>
@@ -55,13 +86,21 @@ export default function Footer() {
               </li>
               <li className="flex items-start space-x-2">
                 <Phone className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
-                <a href="tel:+13106188791" className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors">
+                <a
+                  href="tel:+13106188791"
+                  className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors"
+                  onClick={handlePhoneClick}
+                >
                   (310) 618-8791
                 </a>
               </li>
               <li className="flex items-start space-x-2">
                 <Mail className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
-                <a href="mailto:info@ronsbodyshop.net" className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors">
+                <a
+                  href="mailto:info@ronsbodyshop.net"
+                  className="text-sm text-gray-400 hover:text-[#f4b942] transition-colors"
+                  onClick={handleEmailClick}
+                >
                   ronsbodyshop@sbcglobal.net
                 </a>
               </li>
@@ -97,16 +136,20 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">
               Get the latest updates and special offers
             </p>
-            <div className="flex flex-col space-y-2 sm:space-y-3">
-              <input 
-                type="email" 
+            <form className="flex flex-col space-y-2 sm:space-y-3" onSubmit={handleNewsletterSubmit}>
+              <input
+                type="email"
                 placeholder="Your email"
+                required
                 className="bg-[#1a1f2e] border border-gray-700 px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#f4b942]"
               />
-              <button className="bg-[#d64436] text-white px-6 py-3 hover:bg-[#f4b942] hover:text-[#1a1f2e] transition-all text-sm tracking-wider font-medium">
+              <button
+                type="submit"
+                className="bg-[#d64436] text-white px-6 py-3 hover:bg-[#f4b942] hover:text-[#1a1f2e] transition-all text-sm tracking-wider font-medium"
+              >
                 SUBSCRIBE
               </button>
-            </div>
+            </form>
           </div>
         </div>
 

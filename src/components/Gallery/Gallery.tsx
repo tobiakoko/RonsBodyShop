@@ -1,7 +1,12 @@
 import { GALLERY } from "../../config/data";
 import { MdSportsFootball } from "react-icons/md";
+import { track } from "@vercel/analytics";
 
 export default function Gallery() {
+  const handleViewGalleryClick = () => {
+    track("View Full Gallery Clicked");
+  };
+
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-primary relative overflow-hidden" id="gallery">
       <div className="absolute left-[-50px] top-20 opacity-10 rotate-12 hidden xl:block">
@@ -34,7 +39,10 @@ export default function Gallery() {
         </div>
 
         <div className="mt-10 sm:mt-12 md:mt-16 text-center">
-          <button className="enamel-button bg-accent text-white px-8 sm:px-10 md:px-12 py-3 sm:py-4 rounded-sm font-display text-base sm:text-lg md:text-xl tracking-widest hover:brightness-110">
+          <button
+            className="enamel-button bg-accent text-white px-8 sm:px-10 md:px-12 py-3 sm:py-4 rounded-sm font-display text-base sm:text-lg md:text-xl tracking-widest hover:brightness-110"
+            onClick={handleViewGalleryClick}
+          >
             VIEW FULL GALLERY
           </button>
         </div>

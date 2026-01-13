@@ -1,7 +1,16 @@
 import { ASSETS } from "../../config/data";
 import { MdSettingsSuggest, MdLocalGasStation } from "react-icons/md";
+import { track } from "@vercel/analytics";
 
 export default function Hero() {
+  const handleServicesClick = () => {
+    track("Hero CTA: View Services");
+  };
+
+  const handleEstimateClick = () => {
+    track("Hero CTA: Request Estimate");
+  };
+
   return (
     <section className="relative min-h-[70vh] md:h-[85vh] flex items-center overflow-hidden">
       {/* Background media */}
@@ -38,6 +47,7 @@ export default function Hero() {
             <a
               className="enamel-button bg-gold text-primary px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-sm font-display tracking-widest text-sm sm:text-base md:text-lg hover:brightness-105 flex items-center justify-center gap-2 sm:gap-3"
               href="#services"
+              onClick={handleServicesClick}
             >
               OUR SPECIALTIES <MdSettingsSuggest />
             </a>
@@ -45,6 +55,7 @@ export default function Hero() {
             <a
               className="enamel-button bg-white text-primary px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-sm font-display tracking-widest text-sm sm:text-base md:text-lg hover:bg-slate-100 text-center"
               href="#contact"
+              onClick={handleEstimateClick}
             >
               FREE ESTIMATE
             </a>

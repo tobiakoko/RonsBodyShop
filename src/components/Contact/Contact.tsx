@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { track } from '@vercel/analytics';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,14 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Track form submission with service type
+    track('Contact Form Submitted', {
+      service: formData.service || 'not specified',
+      hasPhone: !!formData.phone,
+      messageLength: formData.message.length
+    });
+
     // Mock form submission
     setSubmitted(true);
     setTimeout(() => {
@@ -27,6 +36,14 @@ export default function Contact() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handlePhoneClick = () => {
+    track('Phone Number Clicked', { location: 'Contact Section' });
+  };
+
+  const handleEmailClick = () => {
+    track('Email Clicked', { location: 'Contact Section' });
   };
 
   return (
@@ -71,7 +88,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-white mb-1 text-sm sm:text-base">Phone</p>
-                    <a href="tel:+15555551975" className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors">
+                    <a
+                      href="tel:+15555551975"
+                      className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors"
+                      onClick={handlePhoneClick}
+                    >
                       (310) 618-8791
                     </a>
                   </div>
@@ -83,7 +104,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-white mb-1 text-sm sm:text-base">Email</p>
-                    <a href="mailto:info@ronsbodyshop.net" className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors break-all">
+                    <a
+                      href="mailto:info@ronsbodyshop.net"
+                      className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors break-all"
+                      onClick={handleEmailClick}
+                    >
                       ronsbodyshop@sbcglobal.net
                     </a>
                   </div>

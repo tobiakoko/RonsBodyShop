@@ -8,13 +8,34 @@ import {
   MdMenu,
   MdClose,
 } from "react-icons/md";
+import { track } from "@vercel/analytics";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => {
+    const newState = !isMenuOpen;
+    setIsMenuOpen(newState);
+    if (newState) {
+      track("Mobile Menu Opened");
+    }
+  };
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleNavClick = (label: string, isMobile: boolean) => {
+    track("Navigation Link Clicked", {
+      section: label,
+      device: isMobile ? "mobile" : "desktop"
+    });
+  };
+
+  const handleCallClick = (isMobile: boolean) => {
+    track("Call Button Clicked", {
+      location: "Header",
+      device: isMobile ? "mobile" : "desktop"
+    });
+  };
 
   const navLinks = [
     { href: "#services", icon: MdBuild, label: "Services" },
@@ -44,6 +65,7 @@ export default function Header() {
               key={href}
               className="hover:text-gold transition-colors flex items-center gap-2"
               href={href}
+              onClick={() => handleNavClick(label, false)}
             >
               <Icon className="text-lg" /> {label}
             </a>
@@ -55,6 +77,7 @@ export default function Header() {
           <a
             className="enamel-button bg-accent text-white px-6 lg:px-8 py-2.5 rounded-sm font-display text-sm tracking-widest hover:brightness-110"
             href="tel:+13106188791"
+            onClick={() => handleCallClick(false)}
           >
             CALL NOW
           </a>
@@ -82,7 +105,10 @@ export default function Header() {
               key={href}
               className="text-white hover:text-gold transition-colors flex items-center gap-3 font-display uppercase tracking-widest text-base py-3 border-b border-gold/20"
               href={href}
-              onClick={closeMenu}
+              onClick={() => {
+                handleNavClick(label, true);
+                closeMenu();
+              }}
             >
               <Icon className="text-2xl" /> {label}
             </a>
@@ -90,7 +116,10 @@ export default function Header() {
           <a
             className="enamel-button bg-accent text-white px-8 py-3 rounded-sm font-display text-sm tracking-widest hover:brightness-110 text-center mt-4"
             href="tel:+13106188791"
-            onClick={closeMenu}
+            onClick={() => {
+              handleCallClick(true);
+              closeMenu();
+            }}
           >
             CALL NOW
           </a>
