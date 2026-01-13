@@ -13,21 +13,21 @@ export default function Footer() {
       {/* Decorative top border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-[#f4b942]"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-6 sm:pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-12">
           {/* Company Info */}
           <div>
             <a href="/">
-              <img 
-                src='/logo.png' 
-                alt="Ron's Body Shop" 
-                className="h-24 w-auto mb-4"
+              <img
+                src='/logo.png'
+                alt="Ron's Body Shop"
+                className="h-20 sm:h-24 w-auto mb-3 sm:mb-4"
               />
             </a>
             <p className="text-gray-400 leading-relaxed text-sm">
               Where satisfaction is a tradition.
             </p>
-            <div className="flex space-x-6 mt-8">
+            <div className="flex space-x-4 sm:space-x-6 mt-6 sm:mt-8">
               <a className="w-8 h-8 rounded-none border-2 border-gold flex items-center justify-center hover:bg-gold hover:text-primary transition-all rotate-3" href="#">
                 <MdLeaderboard />
               </a>
@@ -42,10 +42,10 @@ export default function Footer() {
 
           {/* The Shop */}
           <div>
-            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+            <h4 className="text-base sm:text-lg mb-4 sm:mb-6 tracking-wider text-white uppercase">
               THE SHOP
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-start space-x-2">
                 <MapPin className="text-[#d64436] flex-shrink-0 mt-1" size={16} />
                 <div>
@@ -70,7 +70,7 @@ export default function Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+            <h4 className="text-base sm:text-lg mb-4 sm:mb-6 tracking-wider text-white uppercase">
               HOURS
             </h4>
             <ul className="space-y-2">
@@ -91,13 +91,13 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-lg mb-6 tracking-wider text-white uppercase">
+            <h4 className="text-base sm:text-lg mb-4 sm:mb-6 tracking-wider text-white uppercase">
               NEWSLETTER
             </h4>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">
               Get the latest updates and special offers
             </p>
-            <div className="flex flex-col space-y-3">
+            <div className="flex flex-col space-y-2 sm:space-y-3">
               <input 
                 type="email" 
                 placeholder="Your email"
@@ -111,8 +111,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-500">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 text-xs sm:text-sm text-gray-500">
             <p>
               © {currentYear} Ron's Body Shop. All rights reserved.
             </p>

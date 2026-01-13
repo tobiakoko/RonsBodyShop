@@ -30,74 +30,74 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#1a1f2e] relative">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-[#1a1f2e] relative">
       {/* Decorative top border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-[#f4b942]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl text-[#f4b942] mb-3 tracking-wider uppercase">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#f4b942] mb-3 tracking-wider uppercase">
             GET IN TOUCH
           </h2>
-          <p className="text-white text-lg">
+          <p className="text-white text-base sm:text-lg">
             Ready to restore your vehicle? Contact us today for a free estimate
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="bg-[#0f1419] border-2 border-[#f4b942] p-8">
-              <h3 className="text-2xl text-[#f4b942] mb-6 tracking-wider uppercase">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="bg-[#0f1419] border-2 border-[#f4b942] p-6 sm:p-8">
+              <h3 className="text-xl sm:text-2xl text-[#f4b942] mb-4 sm:mb-6 tracking-wider uppercase">
                 CONTACT INFO
               </h3>
               
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-white" size={24} />
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-white" size={20} />
                   </div>
                   <div>
-                    <p className="text-white mb-1">Address</p>
-                    <p className="text-gray-400 text-sm">1324 Cabrillo Ave.</p>
-                    <p className="text-gray-400 text-sm">Torrance, CA 90501</p>
+                    <p className="text-white mb-1 text-sm sm:text-base">Address</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">1324 Cabrillo Ave.</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Torrance, CA 90501</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
-                    <Phone className="text-white" size={24} />
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
+                    <Phone className="text-white" size={20} />
                   </div>
                   <div>
-                    <p className="text-white mb-1">Phone</p>
-                    <a href="tel:+15555551975" className="text-gray-400 text-sm hover:text-[#f4b942] transition-colors">
+                    <p className="text-white mb-1 text-sm sm:text-base">Phone</p>
+                    <a href="tel:+15555551975" className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors">
                       (310) 618-8791
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
-                    <Mail className="text-white" size={24} />
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
+                    <Mail className="text-white" size={20} />
                   </div>
                   <div>
-                    <p className="text-white mb-1">Email</p>
-                    <a href="mailto:info@ronsbodyshop.net" className="text-gray-400 text-sm hover:text-[#f4b942] transition-colors">
+                    <p className="text-white mb-1 text-sm sm:text-base">Email</p>
+                    <a href="mailto:info@ronsbodyshop.net" className="text-gray-400 text-xs sm:text-sm hover:text-[#f4b942] transition-colors break-all">
                       ronsbodyshop@sbcglobal.net
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
-                    <Clock className="text-white" size={24} />
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#d64436] flex items-center justify-center flex-shrink-0">
+                    <Clock className="text-white" size={20} />
                   </div>
                   <div>
-                    <p className="text-white mb-2">Hours</p>
-                    <p className="text-gray-400 text-sm">Mon - Fri: 8:00 AM - 5:30 PM</p>
-                    <p className="text-gray-400 text-sm">Sat: 8:00 AM - 12:00 PM</p>
-                    <p className="text-gray-400 text-sm">Sun: Closed</p>
+                    <p className="text-white mb-2 text-sm sm:text-base">Hours</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Mon - Fri: 8:00 AM - 5:30 PM</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Sat: 8:00 AM - 12:00 PM</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Sun: Closed</p>
                   </div>
                 </div>
               </div>
@@ -106,8 +106,8 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block text-white mb-2 text-sm tracking-wider">
                     YOUR NAME *
@@ -138,7 +138,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="phone" className="block text-white mb-2 text-sm tracking-wider">
                     PHONE NUMBER

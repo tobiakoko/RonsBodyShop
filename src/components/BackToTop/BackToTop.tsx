@@ -11,9 +11,9 @@ export default function BackToTop() {
       type="button"
       onClick={onClick}
       aria-label="Back to top"
-      className="fixed bottom-8 right-8 enamel-button bg-gold text-primary w-14 h-14 rounded-sm flex items-center justify-center hover:scale-110 z-40"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 enamel-button bg-gold text-primary w-12 h-12 sm:w-14 sm:h-14 rounded-sm flex items-center justify-center hover:scale-110 z-40 transition-transform"
     >
-      <MdNorth />
+      <MdNorth className="text-xl sm:text-2xl" />
     </button>
   );
 }
