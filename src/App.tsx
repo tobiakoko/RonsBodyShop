@@ -1,10 +1,8 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/layout/Navbar';
+import { Footer } from './components/layout/Footer';
+import { MobileFloatingBar } from './components/layout/MobileFloatingBar';
 import { Hero } from './components/sections/Hero';
 import { HowItWorks } from './components/sections/HowItWorks';
 import { Services } from './components/sections/Services';
@@ -13,74 +11,49 @@ import { InsuranceAdvocacy } from './components/sections/InsuranceAdvocacy';
 import { ReviewsAndTrust } from './components/sections/ReviewsAndTrust';
 import { EstimateCalculator } from './components/sections/EstimateCalculator';
 import { LocationAndHours } from './components/sections/LocationAndHours';
-import { Footer } from './components/layout/Footer';
-import { MobileFloatingBar } from './components/layout/MobileFloatingBar';
+import type { ServiceId } from './content/services';
 
 export default function App() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
+  const [preselect, setPreselect] = useState<{ id: ServiceId; nonce: number }>();
 
-  const handleOpenEstimate = () => {
-    setIsEstimateModalOpen(true);
-  };
+  const handleOpenEstimate = useCallback(() => setIsEstimateModalOpen(true), []);
+  const handleCloseEstimate = useCallback(() => setIsEstimateModalOpen(false), []);
 
-  const handleCloseEstimate = () => {
-    setIsEstimateModalOpen(false);
-  };
-
-  const handleSelectService = (_serviceId: string) => {
-    const estimateElement = document.getElementById('estimate');
-    if (estimateElement) {
-      estimateElement.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setIsEstimateModalOpen(true);
-    }
-  };
+  // Pre-fill the inline wizard's damage type and scroll to it.
+  const handleSelectService = useCallback((id: ServiceId) => {
+    setPreselect((prev) => ({ id, nonce: (prev?.nonce ?? 0) + 1 }));
+    document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1A1D20] font-sans selection:bg-[#E7A622]/30 selection:text-[#16203B]">
-      {/* 3-Zone Top Navigation Bar */}
+    <div className="min-h-screen flex flex-col bg-vcream text-vink font-sans selection:bg-vamber/30 selection:text-vnavy">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-vamber focus:text-vnavy focus:font-bold focus:rounded-md"
+      >
+        Skip to main content
+      </a>
+
       <Navbar onOpenEstimate={handleOpenEstimate} />
 
-      <main className="flex-1">
-        {/* 10-Second Hero: What We Are, What We Do, How To Get Service */}
+      <main id="main" className="flex-1">
         <Hero onOpenEstimate={handleOpenEstimate} />
-
-        {/* 3-Step Clear Action Flow */}
         <HowItWorks onOpenEstimate={handleOpenEstimate} />
-
-        {/* Verified Auto Body & Repair Services */}
         <Services onSelectService={handleSelectService} />
-
-        {/* About Our Torrance Shop & Authentic Facility Atmosphere */}
         <AboutShop />
-
-        {/* California Insurance Claims & Code § 758.5 Rights */}
         <InsuranceAdvocacy onOpenEstimate={handleOpenEstimate} />
-
-        {/* Real Customer Feedback (Verified 4.7 Google Rating) */}
         <ReviewsAndTrust />
-
-        {/* Free Online Estimate Calculator */}
-        <EstimateCalculator />
-
-        {/* Shop Hours, Live Status, Location Map & Inquiry */}
+        <EstimateCalculator preselect={preselect} />
         <LocationAndHours />
       </main>
 
-      {/* Global Footer */}
       <Footer onOpenEstimate={handleOpenEstimate} />
-
-      {/* Mobile Floating Bottom Bar (<15% Mobile Viewport) */}
       <MobileFloatingBar onOpenEstimate={handleOpenEstimate} />
 
-      {/* Full Estimate Modal */}
-      {isEstimateModalOpen && (
-        <EstimateCalculator
-          isModal={true}
-          isOpen={isEstimateModalOpen}
-          onClose={handleCloseEstimate}
-        />
-      )}
+      {isEstimateModalOpen && <EstimateCalculator isModal onClose={handleCloseEstimate} />}
+
+      <Analytics />
     </div>
   );
 }

@@ -1,150 +1,174 @@
-import React, { useState } from 'react';
-import { Camera, Check, Phone, ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
+import { useEffect, useId, useReducer, useRef, type ReactNode } from 'react';
+import { ArrowRight, Check, Loader2, Phone, Shield, X } from 'lucide-react';
 import { SHOP_INFO, INSURANCE_PARTNERS } from '../../content/shop';
+import { CORE_SERVICES, type ServiceId } from '../../content/services';
+import {
+  STEPS,
+  estimateReducer,
+  initialWizardState,
+  type EstimateData,
+  type EstimateField,
+  type Step,
+} from '../../lib/estimateWizard';
+import { formatHoursShort } from '../../lib/hours';
+import { submitLead } from '../../lib/submitLead';
+import { FormField } from '../ui/FormField';
+import { inputClass } from '../ui/formStyles';
+import { SubmitErrorNotice } from '../ui/SubmitErrorNotice';
+import { TurnstileWidget } from '../ui/Turnstile';
+import { useTurnstile } from '../ui/useTurnstile';
+
+const POPULAR_MAKES = ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Mercedes-Benz', 'BMW', 'Lexus', 'Nissan', 'Classic / Custom'];
 
 interface EstimateCalculatorProps {
-  isOpen?: boolean;
-  onClose?: () => void;
   isModal?: boolean;
+  onClose?: () => void;
+  /** Pre-select a damage type, e.g. from the Services section. `nonce` lets the same id re-trigger. */
+  preselect?: { id: ServiceId; nonce: number };
 }
 
-export const EstimateCalculator: React.FC<EstimateCalculatorProps> = ({ 
-  isOpen = true, 
-  onClose,
-  isModal = false 
-}) => {
-  const [step, setStep] = useState<number>(1);
-  const [damageType, setDamageType] = useState<string>('collision');
-  const [vehicleMake, setVehicleMake] = useState<string>('Mercedes-Benz');
-  const [vehicleModel, setVehicleModel] = useState<string>('');
-  const [vehicleYear, setVehicleYear] = useState<string>('2021');
-  const [paymentType, setPaymentType] = useState<'insurance' | 'out-of-pocket'>('insurance');
-  const [insuranceCarrier, setInsuranceCarrier] = useState<string>('AAA Auto Club');
-  const [claimNumber, setClaimNumber] = useState<string>('');
-  const [notes, setNotes] = useState<string>('');
-  const [photosUploaded, setPhotosUploaded] = useState<string[]>([]);
-  const [contactName, setContactName] = useState<string>('');
-  const [contactPhone, setContactPhone] = useState<string>('');
-  const [contactEmail, setContactEmail] = useState<string>('');
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [ticketNumber, setTicketNumber] = useState<string>('');
+/**
+ * Renders inline (`<section id="estimate">`) and as a modal. The two instances
+ * keep independent wizard state on purpose — they are alternate entry points.
+ */
+export const EstimateCalculator = ({ isModal = false, onClose, preselect }: EstimateCalculatorProps) => {
+  const [state, dispatch] = useReducer(estimateReducer, preselect?.id ?? '', initialWizardState);
+  const { status, step, data, errors } = state;
+  const uid = useId();
+  const fid = (name: string) => `${uid}-${name}`;
+  const titleId = fid('title');
+  const stepHeading = useRef<HTMLHeadingElement>(null);
+  const turnstile = useTurnstile();
 
-  const damageOptions = [
-    { id: 'collision', label: 'Collision & Body Damage', desc: 'Fender, bumper, door, or structural impact' },
-    { id: 'paint', label: 'Custom Paint & Scratch', desc: 'Down-draft refinishing & spot color match' },
-    { id: 'dent', label: 'Paintless Dent Repair (PDR)', desc: 'Hail, door dings & minor metal creases' },
-    { id: 'frame', label: 'Frame Alignment & Pull', desc: 'Laser chassis measurement & pull' },
-    { id: 'classic', label: 'Classic Car Restoration', desc: 'Vintage fabrication & custom project' }
-  ];
+  const set = <K extends EstimateField>(key: K, value: EstimateData[K]) =>
+    dispatch({ type: 'FIELD', key, value });
 
-  const popularMakes = ['Mercedes-Benz', 'BMW', 'Lexus', 'Porsche', 'Chevrolet', 'Ford', 'Toyota', 'Classic / Custom'];
+  // Services section → pre-fill the damage type.
+  useEffect(() => {
+    if (preselect) dispatch({ type: 'FIELD', key: 'damageType', value: preselect.id });
+  }, [preselect]);
 
-  const handleFakePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const fakeUrl = URL.createObjectURL(e.target.files[0]);
-      setPhotosUploaded(prev => [...prev, fakeUrl]);
+  // Move focus to the step heading when the step changes (skip first render).
+  const firstRender = useRef(true);
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
     }
-  };
+    stepHeading.current?.focus();
+  }, [step]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const randomTicket = 'RBS-' + Math.floor(100000 + Math.random() * 900000);
-    setTicketNumber(randomTicket);
-    setIsSubmitted(true);
-  };
+  // Side effect of entering `submitting`: perform the real network call.
+  useEffect(() => {
+    if (status !== 'submitting') return;
+    let active = true;
+    submitLead('estimate', data, turnstile.getToken())
+      .then(({ reference }) => active && dispatch({ type: 'RESOLVED', ticket: reference }))
+      .catch((err: unknown) =>
+        active && dispatch({ type: 'REJECTED', message: err instanceof Error ? err.message : '' }),
+      );
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once per entry into `submitting`
+  }, [status]);
 
-  const handleReset = () => {
-    setIsSubmitted(false);
-    setStep(1);
-    setContactName('');
-    setContactPhone('');
-    setContactEmail('');
-    setNotes('');
-  };
+  const selectedService = CORE_SERVICES.find((s) => s.id === data.damageType);
+  const submitting = status === 'submitting';
+  const weekdayHours = SHOP_INFO.hours[0];
 
   const content = (
     <div className="bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden">
       {/* Header banner */}
-      <div className="bg-[#16203B] text-white p-5 sm:p-6 border-b-2 border-[#E7A622]">
-        <div className="flex items-center justify-between">
+      <div className="bg-vnavy text-white p-5 sm:p-6 border-b-2 border-vamber">
+        <div className="flex items-start justify-between gap-4">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#E7A622]">
-              Instant Online Consultation
-            </span>
-            <h3 className="font-['Oswald'] text-2xl sm:text-3xl uppercase font-bold text-white mt-0.5">
-              Request Your Free Photo Estimate
-            </h3>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-vamber">Free Online Estimate</span>
+            <h2 id={titleId} className="font-display text-2xl sm:text-3xl uppercase font-bold text-white mt-0.5">
+              Request Your Free Estimate
+            </h2>
             <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Takes under 2 minutes. Receive an itemized preliminary assessment from Ron and our master estimators.
+              Takes under 2 minutes. Ron's estimators will call you back with next steps.
             </p>
           </div>
           {isModal && onClose && (
-            <button 
+            <button
+              type="button"
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-2 rounded-md transition-colors"
+              aria-label="Close estimate form"
+              className="text-slate-300 hover:text-white p-2 rounded-md transition-colors"
             >
-              ✕
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           )}
         </div>
 
-        {/* Step Indicator */}
-        {!isSubmitted && (
-          <div className="mt-5 grid grid-cols-4 gap-2 text-xs font-semibold">
-            <div className={`pb-1.5 border-b-2 transition-colors ${step >= 1 ? 'border-[#E7A622] text-[#E7A622]' : 'border-slate-700 text-slate-400'}`}>
-              1. Damage
-            </div>
-            <div className={`pb-1.5 border-b-2 transition-colors ${step >= 2 ? 'border-[#E7A622] text-[#E7A622]' : 'border-slate-700 text-slate-400'}`}>
-              2. Vehicle
-            </div>
-            <div className={`pb-1.5 border-b-2 transition-colors ${step >= 3 ? 'border-[#E7A622] text-[#E7A622]' : 'border-slate-700 text-slate-400'}`}>
-              3. Insurance
-            </div>
-            <div className={`pb-1.5 border-b-2 transition-colors ${step >= 4 ? 'border-[#E7A622] text-[#E7A622]' : 'border-slate-700 text-slate-400'}`}>
-              4. Contact
-            </div>
-          </div>
+        {/* Step indicator, rendered from STEPS */}
+        {status !== 'success' && (
+          <ol className="mt-5 grid grid-cols-4 gap-2 text-xs font-semibold" aria-label="Progress">
+            {STEPS.map((s) => {
+              const reached = step >= s.n;
+              const canJump = s.n < step && !submitting;
+              const label = `${s.n}. ${s.label}`;
+              return (
+                <li
+                  key={s.n}
+                  aria-current={step === s.n ? 'step' : undefined}
+                  className={`pb-1.5 border-b-2 transition-colors ${
+                    reached ? 'border-vamber text-vamber' : 'border-slate-700 text-slate-400'
+                  }`}
+                >
+                  {canJump ? (
+                    <button type="button" className="hover:underline" onClick={() => dispatch({ type: 'GOTO', step: s.n })}>
+                      {label}
+                    </button>
+                  ) : (
+                    label
+                  )}
+                </li>
+              );
+            })}
+          </ol>
         )}
       </div>
 
-      <div className="p-5 sm:p-8">
-        {isSubmitted ? (
+      <div className="p-5 sm:p-8" aria-live="polite">
+        {status === 'success' ? (
           <div className="text-center py-8 space-y-4 max-w-lg mx-auto">
             <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2">
-              <Check className="w-8 h-8 stroke-[2.5]" />
+              <Check className="w-8 h-8 stroke-[2.5]" aria-hidden="true" />
             </div>
-            <span className="text-xs uppercase font-bold tracking-widest text-[#16203B]">
-              Estimate Request Received
-            </span>
-            <h4 className="font-['Oswald'] text-3xl font-bold uppercase text-slate-900">
-              Reference #{ticketNumber}
-            </h4>
+            <span className="text-xs uppercase font-bold tracking-widest text-vnavy">Estimate Request Received</span>
+            <h3 className="font-display text-3xl font-bold uppercase text-slate-900">Reference #{state.ticket}</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Thank you, <strong className="text-slate-900">{contactName || 'Valued Customer'}</strong>. Our master estimator is reviewing your {vehicleYear} {vehicleMake} specifications. We will contact you at <strong className="text-slate-900">{contactPhone || '(Your phone)'}</strong> within 1–2 business hours.
+              Thank you, <strong className="text-slate-900">{data.contactName}</strong>. We've received your{' '}
+              {data.vehicleYear} {data.vehicleMake} details and will call you at{' '}
+              <strong className="text-slate-900">{data.contactPhone}</strong> within 1–2 business hours.
             </p>
 
-            <div className="p-4 bg-[#FAF7F2] border border-amber-200/80 rounded-lg text-left text-xs space-y-2 text-slate-700">
-              <div className="font-semibold text-[#16203B] flex items-center gap-1.5">
-                <Shield className="w-4 h-4 text-[#E7A622]" />
-                Next Steps with Ron's Body Shop:
+            <div className="p-4 bg-vcream border border-amber-200/80 rounded-lg text-left text-xs space-y-2 text-slate-700">
+              <div className="font-semibold text-vnavy flex items-center gap-1.5">
+                <Shield className="w-4 h-4 text-vamber" aria-hidden="true" />
+                Next Steps with {SHOP_INFO.name}:
               </div>
               <ul className="list-disc pl-4 space-y-1 text-slate-600">
-                <li>We review photos and compile OEM parts vs. repair labor hours.</li>
+                <li>Have photos of the damage? Text them to {SHOP_INFO.phone} with your reference number.</li>
                 <li>If using insurance, we handle adjuster communication and supplemental filings directly.</li>
-                <li>Drop-in vehicle drop-offs welcome Monday–Friday 8:00 AM – 5:30 PM.</li>
+                <li>Drop-offs welcome {formatHoursShort(weekdayHours)}.</li>
               </ul>
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
                 href={`tel:${SHOP_INFO.phoneRaw}`}
-                className="w-full sm:w-auto px-5 py-2.5 bg-[#16203B] text-white font-semibold rounded-md text-sm flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-5 py-2.5 bg-vnavy text-white font-semibold rounded-md text-sm flex items-center justify-center gap-2"
               >
-                <Phone className="w-4 h-4 text-[#E7A622]" />
+                <Phone className="w-4 h-4 text-vamber" aria-hidden="true" />
                 <span>Call Shop Directly: {SHOP_INFO.phone}</span>
               </a>
               <button
-                onClick={handleReset}
+                type="button"
+                onClick={() => dispatch({ type: 'RESET' })}
                 className="w-full sm:w-auto px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-md text-sm hover:bg-slate-50"
               >
                 Submit Another Request
@@ -152,349 +176,384 @@ export const EstimateCalculator: React.FC<EstimateCalculatorProps> = ({
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            
-            {/* Step 1: Select Damage */}
+          <form
+            noValidate
+            className="space-y-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(step === 4 ? { type: 'SUBMIT' } : { type: 'NEXT' });
+            }}
+          >
+            {/* Honeypot — hidden from humans and assistive tech */}
+            <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+              <label>
+                Company
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={data.company}
+                  onChange={(e) => set('company', e.target.value)}
+                />
+              </label>
+            </div>
+
             {step === 1 && (
-              <div className="space-y-4 animate-in fade-in duration-200">
-                <label className="block text-sm font-bold text-slate-900 uppercase tracking-wide">
-                  Select Type of Damage or Project
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {damageOptions.map((opt) => (
+              <StepFrame headingRef={stepHeading} title="Select Type of Damage or Project">
+                <div
+                  role="radiogroup"
+                  aria-label="Type of damage or project"
+                  aria-describedby={errors.damageType ? fid('damage-error') : undefined}
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                >
+                  {CORE_SERVICES.map((opt) => {
+                    const selected = data.damageType === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={selected}
+                        onClick={() => set('damageType', opt.id)}
+                        className={`text-left p-4 rounded-lg border transition-all ${
+                          selected ? 'border-vnavy bg-slate-50 ring-2 ring-vamber' : 'border-slate-200 hover:border-slate-300 bg-white'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-slate-900 text-sm">{opt.wizardLabel}</span>
+                          {selected && (
+                            <span className="w-5 h-5 rounded-full bg-vnavy text-vamber flex items-center justify-center" aria-hidden="true">
+                              <Check className="w-3 h-3" />
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500 mt-1">{opt.wizardDesc}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+                {errors.damageType && (
+                  <p id={fid('damage-error')} className="text-xs font-medium text-vred">
+                    {errors.damageType}
+                  </p>
+                )}
+                <StepNav step={step} onBack={() => dispatch({ type: 'BACK' })} />
+              </StepFrame>
+            )}
+
+            {step === 2 && (
+              <StepFrame headingRef={stepHeading} title="Vehicle Details">
+                <div className="flex flex-wrap gap-2" aria-label="Popular makes">
+                  {POPULAR_MAKES.map((make) => (
                     <button
-                      key={opt.id}
+                      key={make}
                       type="button"
-                      onClick={() => setDamageType(opt.id)}
-                      className={`text-left p-4 rounded-lg border transition-all ${
-                        damageType === opt.id
-                          ? 'border-[#16203B] bg-slate-50 ring-2 ring-[#E7A622]'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                      aria-pressed={data.vehicleMake === make}
+                      onClick={() => set('vehicleMake', make)}
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors ${
+                        data.vehicleMake === make
+                          ? 'bg-vnavy text-white border-vnavy'
+                          : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
                       }`}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-slate-900 text-sm">{opt.label}</span>
-                        {damageType === opt.id && (
-                          <span className="w-5 h-5 rounded-full bg-[#16203B] text-[#E7A622] flex items-center justify-center text-xs">
-                            ✓
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-slate-500 mt-1">{opt.desc}</p>
+                      {make}
                     </button>
                   ))}
                 </div>
-
-                <div className="pt-4 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    className="px-6 py-2.5 bg-[#16203B] text-white font-bold text-sm uppercase tracking-wide rounded-md hover:bg-[#0F1626] transition-colors flex items-center gap-2"
-                  >
-                    <span>Next: Vehicle Specs</span>
-                    <ArrowRight className="w-4 h-4 text-[#E7A622]" />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Step 2: Vehicle Specs */}
-            {step === 2 && (
-              <div className="space-y-5 animate-in fade-in duration-200">
-                <div>
-                  <label className="block text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">
-                    Vehicle Make
-                  </label>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {popularMakes.map((make) => (
-                      <button
-                        key={make}
-                        type="button"
-                        onClick={() => setVehicleMake(make)}
-                        className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors ${
-                          vehicleMake === make
-                            ? 'bg-[#16203B] text-white border-[#16203B]'
-                            : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
-                        }`}
-                      >
-                        {make}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      Model / Trim
-                    </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <FormField id={fid('make')} label="Make" required error={errors.vehicleMake}>
                     <input
                       type="text"
-                      placeholder="e.g. C300, M3, RX350, Mustang, C10"
-                      value={vehicleModel}
-                      onChange={(e) => setVehicleModel(e.target.value)}
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                      required
+                      autoComplete="off"
+                      placeholder="e.g. Toyota"
+                      value={data.vehicleMake}
+                      onChange={(e) => set('vehicleMake', e.target.value)}
+                      className={inputClass(!!errors.vehicleMake)}
                     />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      Year
-                    </label>
+                  </FormField>
+                  <FormField id={fid('model')} label="Model / Trim" required error={errors.vehicleModel}>
                     <input
                       type="text"
-                      placeholder="e.g. 2022 or 1967"
-                      value={vehicleYear}
-                      onChange={(e) => setVehicleYear(e.target.value)}
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                      required
+                      autoComplete="off"
+                      placeholder="e.g. Camry, C300, F-150"
+                      value={data.vehicleModel}
+                      onChange={(e) => set('vehicleModel', e.target.value)}
+                      className={inputClass(!!errors.vehicleModel)}
                     />
-                  </div>
+                  </FormField>
+                  <FormField id={fid('year')} label="Year" required error={errors.vehicleYear}>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={4}
+                      placeholder="e.g. 2019"
+                      value={data.vehicleYear}
+                      onChange={(e) => set('vehicleYear', e.target.value)}
+                      className={inputClass(!!errors.vehicleYear)}
+                    />
+                  </FormField>
                 </div>
-
-                <div className="flex justify-between pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="px-5 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-md hover:bg-slate-50"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    className="px-6 py-2.5 bg-[#16203B] text-white font-bold text-sm uppercase tracking-wide rounded-md hover:bg-[#0F1626] transition-colors flex items-center gap-2"
-                  >
-                    <span>Next: Insurance / Billing</span>
-                    <ArrowRight className="w-4 h-4 text-[#E7A622]" />
-                  </button>
-                </div>
-              </div>
+                <StepNav step={step} onBack={() => dispatch({ type: 'BACK' })} />
+              </StepFrame>
             )}
 
-            {/* Step 3: Insurance & Claim info */}
             {step === 3 && (
-              <div className="space-y-5 animate-in fade-in duration-200">
-                <div>
-                  <label className="block text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">
-                    How Will This Repair Be Handled?
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
+              <StepFrame headingRef={stepHeading} title="How Will This Repair Be Handled?">
+                <div role="radiogroup" aria-label="Payment type" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {(
+                    [
+                      ['insurance', 'Insurance Claim', 'We coordinate adjusters & deductibles'],
+                      ['out-of-pocket', 'Customer Pay / Out-of-Pocket', 'Direct transparent estimate'],
+                    ] as const
+                  ).map(([value, title, desc]) => (
                     <button
+                      key={value}
                       type="button"
-                      onClick={() => setPaymentType('insurance')}
+                      role="radio"
+                      aria-checked={data.paymentType === value}
+                      onClick={() => set('paymentType', value)}
                       className={`p-3.5 rounded-lg border text-left transition-all ${
-                        paymentType === 'insurance'
-                          ? 'border-[#16203B] bg-slate-50 ring-2 ring-[#E7A622]'
-                          : 'border-slate-200 bg-white'
+                        data.paymentType === value ? 'border-vnavy bg-slate-50 ring-2 ring-vamber' : 'border-slate-200 bg-white'
                       }`}
                     >
-                      <div className="font-bold text-slate-900 text-sm">Insurance Claim</div>
-                      <div className="text-xs text-slate-500 mt-0.5">We coordinate adjusters & deductibles</div>
+                      <div className="font-bold text-slate-900 text-sm">{title}</div>
+                      <div className="text-xs text-slate-500 mt-0.5">{desc}</div>
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => setPaymentType('out-of-pocket')}
-                      className={`p-3.5 rounded-lg border text-left transition-all ${
-                        paymentType === 'out-of-pocket'
-                          ? 'border-[#16203B] bg-slate-50 ring-2 ring-[#E7A622]'
-                          : 'border-slate-200 bg-white'
-                      }`}
-                    >
-                      <div className="font-bold text-slate-900 text-sm">Customer Pay / Out-of-Pocket</div>
-                      <div className="text-xs text-slate-500 mt-0.5">Direct transparent estimate</div>
-                    </button>
-                  </div>
+                  ))}
                 </div>
+                {errors.paymentType && <p className="text-xs font-medium text-vred">{errors.paymentType}</p>}
 
-                {paymentType === 'insurance' && (
+                {data.paymentType === 'insurance' && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                        Insurance Carrier
-                      </label>
+                    <FormField id={fid('carrier')} label="Insurance Carrier" required error={errors.insuranceCarrier}>
                       <select
-                        value={insuranceCarrier}
-                        onChange={(e) => setInsuranceCarrier(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
+                        value={data.insuranceCarrier}
+                        onChange={(e) => set('insuranceCarrier', e.target.value)}
+                        className={inputClass(!!errors.insuranceCarrier)}
                       >
-                        {INSURANCE_PARTNERS.map((p: { name: string; desc: string }) => (
-                          <option key={p.name} value={p.name}>{p.name}</option>
+                        <option value="">Select your carrier…</option>
+                        {INSURANCE_PARTNERS.map((p) => (
+                          <option key={p.name} value={p.name}>
+                            {p.name}
+                          </option>
                         ))}
                         <option value="Other">Other Carrier</option>
                       </select>
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                        Claim Number (If available)
-                      </label>
+                    </FormField>
+                    <FormField id={fid('claim')} label="Claim Number (if available)" error={errors.claimNumber}>
                       <input
                         type="text"
                         placeholder="e.g. 0123456-CA"
-                        value={claimNumber}
-                        onChange={(e) => setClaimNumber(e.target.value)}
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
+                        value={data.claimNumber}
+                        onChange={(e) => set('claimNumber', e.target.value)}
+                        className={inputClass(!!errors.claimNumber)}
                       />
-                    </div>
+                    </FormField>
                   </div>
                 )}
-
-                {/* Optional Photo Attachment */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    Upload Damage Photos (Recommended for Fast Estimate)
-                  </label>
-                  <div className="border-2 border-dashed border-slate-300 hover:border-[#16203B] rounded-lg p-5 text-center cursor-pointer transition-colors bg-slate-50 relative">
-                    <input 
-                      type="file" 
-                      accept="image/*" 
-                      onChange={handleFakePhotoUpload}
-                      className="absolute inset-0 opacity-0 cursor-pointer" 
-                    />
-                    <Camera className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                    <span className="text-xs font-semibold text-slate-700 block">
-                      Tap or click to attach damage photos
-                    </span>
-                    <span className="text-[11px] text-slate-500">
-                      Include 1 wide-angle and 1 close-up of damage
-                    </span>
-                  </div>
-                  {photosUploaded.length > 0 && (
-                    <div className="mt-2 text-xs text-emerald-700 font-medium flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>{photosUploaded.length} photo(s) queued for Ron's appraisal team</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex justify-between pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    className="px-5 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-md hover:bg-slate-50"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(4)}
-                    className="px-6 py-2.5 bg-[#16203B] text-white font-bold text-sm uppercase tracking-wide rounded-md hover:bg-[#0F1626] transition-colors flex items-center gap-2"
-                  >
-                    <span>Next: Your Contact Info</span>
-                    <ArrowRight className="w-4 h-4 text-[#E7A622]" />
-                  </button>
-                </div>
-              </div>
+                <StepNav step={step} onBack={() => dispatch({ type: 'BACK' })} />
+              </StepFrame>
             )}
 
-            {/* Step 4: Contact & Final Submit */}
             {step === 4 && (
-              <div className="space-y-4 animate-in fade-in duration-200">
+              <StepFrame headingRef={stepHeading} title="Your Contact Info">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      Full Name *
-                    </label>
+                  <FormField id={fid('name')} label="Full Name" required error={errors.contactName}>
                     <input
                       type="text"
-                      placeholder="e.g. Michael Miller"
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                      required
+                      autoComplete="name"
+                      value={data.contactName}
+                      onChange={(e) => set('contactName', e.target.value)}
+                      className={inputClass(!!errors.contactName)}
                     />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                      Phone Number *
-                    </label>
+                  </FormField>
+                  <FormField id={fid('phone')} label="Phone Number" required error={errors.contactPhone}>
                     <input
                       type="tel"
-                      placeholder="e.g. (310) 555-0199"
-                      value={contactPhone}
-                      onChange={(e) => setContactPhone(e.target.value)}
-                      className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                      required
+                      autoComplete="tel"
+                      placeholder="(310) 555-0199"
+                      value={data.contactPhone}
+                      onChange={(e) => set('contactPhone', e.target.value)}
+                      className={inputClass(!!errors.contactPhone)}
                     />
-                  </div>
+                  </FormField>
                 </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    Email Address
-                  </label>
+                <FormField id={fid('email')} label="Email Address" error={errors.contactEmail}>
                   <input
                     type="email"
-                    placeholder="e.g. yourname@gmail.com"
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
+                    autoComplete="email"
+                    value={data.contactEmail}
+                    onChange={(e) => set('contactEmail', e.target.value)}
+                    className={inputClass(!!errors.contactEmail)}
                   />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    Specific Details or Needs (Optional)
-                  </label>
+                </FormField>
+                <FormField id={fid('notes')} label="Details or Special Needs (optional)" error={errors.notes}>
                   <textarea
-                    rows={2}
-                    placeholder="Any specific instructions, tow assistance needed, or timeline considerations..."
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    className="w-full px-3.5 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
+                    rows={3}
+                    placeholder="Describe the damage, tow assistance needed, timeline…"
+                    value={data.notes}
+                    onChange={(e) => set('notes', e.target.value)}
+                    className={inputClass(!!errors.notes)}
                   />
-                </div>
+                </FormField>
 
                 {/* Summary preview */}
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-md text-xs text-amber-900 space-y-1">
                   <div className="font-bold uppercase tracking-wider">Summary of Request:</div>
                   <div className="text-amber-800">
-                    {damageOptions.find(d => d.id === damageType)?.label} for {vehicleYear} {vehicleMake} {vehicleModel || ''}
-                    {' '}(Billing: {paymentType === 'insurance' ? insuranceCarrier : 'Customer Pay'})
+                    {selectedService?.wizardLabel} for {data.vehicleYear} {data.vehicleMake} {data.vehicleModel} (Billing:{' '}
+                    {data.paymentType === 'insurance' ? data.insuranceCarrier : 'Customer Pay'})
                   </div>
                 </div>
 
-                <div className="flex justify-between pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    className="px-5 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-md hover:bg-slate-50"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-8 py-3 bg-[#E7A622] hover:bg-[#D3951B] text-[#16203B] font-bold text-sm uppercase tracking-wider rounded-md transition-all shadow-md hover:shadow-lg flex items-center gap-2"
-                  >
-                    <span>Submit Free Estimate Request</span>
-                    <Check className="w-4 h-4 stroke-[3]" />
-                  </button>
+                <div>
+                  <div className="flex items-start gap-2.5">
+                    <input
+                      id={fid('consent')}
+                      type="checkbox"
+                      checked={data.consent}
+                      onChange={(e) => set('consent', e.target.checked)}
+                      aria-invalid={errors.consent ? true : undefined}
+                      aria-describedby={errors.consent ? fid('consent-error') : undefined}
+                      className="mt-0.5 w-4 h-4 accent-vnavy"
+                    />
+                    <label htmlFor={fid('consent')} className="text-xs text-slate-700 leading-relaxed">
+                      I agree that {SHOP_INFO.name} may use the information above to contact me about this estimate. We
+                      never sell or share your information. <span className="text-vred" aria-hidden="true">*</span>
+                    </label>
+                  </div>
+                  {errors.consent && (
+                    <p id={fid('consent-error')} className="mt-1 text-xs font-medium text-vred">
+                      {errors.consent}
+                    </p>
+                  )}
                 </div>
-              </div>
-            )}
 
+                <TurnstileWidget onToken={turnstile.setToken} />
+
+                {status === 'error' && <SubmitErrorNotice message={state.errorMessage} />}
+
+                <StepNav step={step} submitting={submitting} onBack={() => dispatch({ type: 'BACK' })} />
+              </StepFrame>
+            )}
           </form>
         )}
       </div>
     </div>
   );
 
-  if (isModal) {
-    if (!isOpen) return null;
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-        <div className="max-w-2xl w-full my-8">
-          {content}
-        </div>
-      </div>
-    );
-  }
+  if (isModal) return <EstimateModal titleId={titleId} onClose={onClose}>{content}</EstimateModal>;
 
   return (
-    <section id="estimate" className="py-16 bg-[#F3EFE6] border-b border-slate-300/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {content}
-      </div>
+    <section id="estimate" className="py-16 bg-vsand border-b border-slate-300/80 scroll-mt-28">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">{content}</div>
     </section>
+  );
+};
+
+// ─── pieces ───────────────────────────────────────────────────────────────────
+
+const StepFrame = ({
+  title,
+  headingRef,
+  children,
+}: {
+  title: string;
+  headingRef: React.RefObject<HTMLHeadingElement | null>;
+  children: ReactNode;
+}) => (
+  <div className="space-y-5 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-200">
+    <h3 ref={headingRef} tabIndex={-1} className="text-sm font-bold text-slate-900 uppercase tracking-wide outline-none">
+      {title}
+    </h3>
+    {children}
+  </div>
+);
+
+const StepNav = ({ step, submitting = false, onBack }: { step: Step; submitting?: boolean; onBack: () => void }) => {
+  const meta = STEPS[step - 1];
+  return (
+    <div className={`flex pt-4 ${step === 1 ? 'justify-end' : 'justify-between'} gap-3`}>
+      {step > 1 && (
+        <button
+          type="button"
+          onClick={onBack}
+          disabled={submitting}
+          className="px-5 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-md hover:bg-slate-50 disabled:opacity-50"
+        >
+          Back
+        </button>
+      )}
+      {meta.next ? (
+        <button
+          type="submit"
+          className="px-6 py-2.5 bg-vnavy text-white font-bold text-sm uppercase tracking-wide rounded-md hover:bg-vnavy-dark transition-colors flex items-center gap-2"
+        >
+          <span>Next: {meta.next}</span>
+          <ArrowRight className="w-4 h-4 text-vamber" aria-hidden="true" />
+        </button>
+      ) : (
+        <button
+          type="submit"
+          disabled={submitting}
+          aria-busy={submitting}
+          className="px-6 sm:px-8 py-3 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-sm uppercase tracking-wider rounded-md transition-all shadow-md hover:shadow-lg flex items-center gap-2 disabled:opacity-60 disabled:cursor-wait"
+        >
+          {submitting ? (
+            <>
+              <Loader2 className="w-4 h-4 motion-safe:animate-spin" aria-hidden="true" />
+              <span>Sending…</span>
+            </>
+          ) : (
+            <>
+              <span>Submit Free Estimate Request</span>
+              <Check className="w-4 h-4 stroke-[3]" aria-hidden="true" />
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
+};
+
+/** Dialog chrome: Escape closes, background scroll locked, focus moved in and restored on close. */
+const EstimateModal = ({ titleId, onClose, children }: { titleId: string; onClose?: () => void; children: ReactNode }) => {
+  const dialog = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.current?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose?.();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
+
+  return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click is a mouse convenience; Escape handles keyboard
+    <div
+      className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={(e) => e.target === e.currentTarget && onClose?.()}
+    >
+      <div
+        ref={dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        className="max-w-2xl w-full my-8 outline-none"
+      >
+        {children}
+      </div>
+    </div>
   );
 };

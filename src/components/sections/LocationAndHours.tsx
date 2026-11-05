@@ -1,49 +1,23 @@
-import React, { useState, useMemo } from 'react';
-import { Clock, Navigation, CheckCircle2, Send, Car } from 'lucide-react';
+import { Clock, Navigation, CheckCircle2, Send, Car, Loader2 } from 'lucide-react';
 import { SHOP_INFO } from '../../content/shop';
+import { formatHours } from '../../lib/hours';
+import { useShopStatus } from '../../lib/useShopStatus';
+import { useLeadForm } from '../../lib/useLeadForm';
+import { messageSchema } from '../../lib/validation';
+import { FormField } from '../ui/FormField';
+import { inputClass } from '../ui/formStyles';
+import { SubmitErrorNotice } from '../ui/SubmitErrorNotice';
+import { TurnstileWidget } from '../ui/Turnstile';
+import { useTurnstile } from '../ui/useTurnstile';
 
-export const LocationAndHours: React.FC = () => {
-  const [name, setName] = useState('');
-  const [contact, setContact] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+const INITIAL_MESSAGE = { name: '', contact: '', message: '', consent: false, company: '' };
 
-  // Pacific Time open/closed calculation
-  const status = useMemo(() => {
-    try {
-      const now = new Date();
-      const ptString = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-      const ptDate = new Date(ptString);
-      const day = ptDate.getDay();
-      const hour = ptDate.getHours() + ptDate.getMinutes() / 60;
-
-      if (day === 0) {
-        return { isOpen: false, text: "Closed on Sundays", subtext: "Opens Monday at 8:00 AM" };
-      } else if (day >= 1 && day <= 5) {
-        if (hour >= 8 && hour < 17.5) {
-          return { isOpen: true, text: "Open Today until 5:30 PM", subtext: "Walk-ins & Drop-offs Welcome" };
-        } else if (hour < 8) {
-          return { isOpen: false, text: "Opens Today at 8:00 AM", subtext: "Mon–Fri Schedule" };
-        } else {
-          return { isOpen: false, text: "Closed for the Evening", subtext: "Opens Tomorrow at 8:00 AM" };
-        }
-      } else if (day === 6) {
-        if (hour >= 8 && hour < 12) {
-          return { isOpen: true, text: "Open Saturday until 12:00 PM", subtext: "Morning Estimates & Pickups" };
-        } else {
-          return { isOpen: false, text: "Closed for the Weekend", subtext: "Opens Monday at 8:00 AM" };
-        }
-      }
-    } catch {
-      // Fallback
-    }
-    return { isOpen: true, text: "Open Mon–Fri: 8am–5:30pm", subtext: "Sat: 8am–12pm" };
-  }, []);
-
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+export const LocationAndHours = () => {
+  const status = useShopStatus();
+  const turnstile = useTurnstile();
+  const form = useLeadForm({ kind: 'message', schema: messageSchema, initial: INITIAL_MESSAGE, getToken: turnstile.getToken });
+  const { data, errors, state } = form;
+  const submitting = state.status === 'submitting';
 
   return (
     <section id="contact" className="py-20 bg-[#F3EFE6] border-b border-slate-300/80">
@@ -80,14 +54,15 @@ export const LocationAndHours: React.FC = () => {
                     {status.isOpen ? '● Open Now' : '○ Currently Closed'}
                   </span>
                   <div className="text-[11px] text-slate-500">{status.text}</div>
+                  <div className="text-[11px] text-slate-400">{status.subtext}</div>
                 </div>
               </div>
 
               <div className="mt-4 space-y-2.5 text-sm">
-                {SHOP_INFO.hours.map((h, i) => (
-                  <div key={i} className="flex items-center justify-between py-1 border-b border-slate-50 last:border-0">
-                    <span className="font-semibold text-slate-800">{h.day}</span>
-                    <span className="text-slate-600 font-mono text-xs tabular-nums">{h.time}</span>
+                {SHOP_INFO.hours.map((h) => (
+                  <div key={h.label} className="flex items-center justify-between py-1 border-b border-slate-50 last:border-0">
+                    <span className="font-semibold text-slate-800">{h.label}</span>
+                    <span className="text-slate-600 font-mono text-xs tabular-nums">{formatHours(h)}</span>
                   </div>
                 ))}
               </div>
@@ -107,8 +82,9 @@ export const LocationAndHours: React.FC = () => {
                   {SHOP_INFO.name}
                 </div>
                 <p className="text-sm text-slate-600 mt-1 leading-snug">
-                  1324 Cabrillo Ave<br />
-                  Torrance, CA 90501
+                  {SHOP_INFO.address}
+                  <br />
+                  {SHOP_INFO.city}, {SHOP_INFO.state} {SHOP_INFO.zip}
                 </p>
                 <div className="mt-3">
                   <a
@@ -169,78 +145,106 @@ export const LocationAndHours: React.FC = () => {
               Have a question regarding restoration, insurance, or general collision inquiries? Drop us a quick note.
             </p>
 
-            {submitted ? (
+            <div aria-live="polite">
+            {state.status === 'success' ? (
               <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-lg text-center space-y-3">
-                <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                <h4 className="font-['Oswald'] text-xl font-bold uppercase text-emerald-900">
-                  Message Dispatched!
-                </h4>
+                <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" aria-hidden="true" />
+                <h4 className="font-display text-xl font-bold uppercase text-emerald-900">Message Dispatched!</h4>
                 <p className="text-xs text-emerald-800 leading-relaxed">
-                  Thank you! Ron's front office team has received your inquiry and will reach back out promptly.
+                  Thank you, {data.name}. Ron's front office has your message
+                  {state.reference ? ` (ref. ${state.reference})` : ''} and will get back to you promptly.
                 </p>
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setMessage('');
-                  }}
-                  className="text-xs font-semibold text-emerald-900 underline mt-2"
-                >
+                <button type="button" onClick={form.reset} className="text-xs font-semibold text-emerald-900 underline mt-2">
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSendMessage} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    Your Name
+              <form onSubmit={form.handleSubmit} noValidate className="space-y-4">
+                <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                  <label>
+                    Company
+                    <input type="text" name="company" tabIndex={-1} autoComplete="off" value={data.company} onChange={form.handleChange} />
                   </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. John Davis"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                    required
-                  />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    Phone or Email
-                  </label>
+                <FormField id="qm-name" label="Your Name" required error={errors.name}>
                   <input
                     type="text"
-                    placeholder="e.g. (310) 555-0199 or email"
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                    required
+                    name="name"
+                    autoComplete="name"
+                    value={data.name}
+                    onChange={form.handleChange}
+                    className={inputClass(!!errors.name)}
                   />
-                </div>
+                </FormField>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
-                    How Can We Assist?
-                  </label>
+                <FormField id="qm-contact" label="Phone or Email" required error={errors.contact}>
+                  <input
+                    type="text"
+                    name="contact"
+                    autoComplete="tel"
+                    placeholder="(310) 555-0199 or you@example.com"
+                    value={data.contact}
+                    onChange={form.handleChange}
+                    className={inputClass(!!errors.contact)}
+                  />
+                </FormField>
+
+                <FormField id="qm-message" label="How Can We Assist?" required error={errors.message}>
                   <textarea
                     rows={4}
-                    placeholder="Tell us about your vehicle, insurance situation, or what you need..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#16203B]"
-                    required
+                    name="message"
+                    placeholder="Tell us about your vehicle, insurance situation, or what you need…"
+                    value={data.message}
+                    onChange={form.handleChange}
+                    className={inputClass(!!errors.message)}
                   />
+                </FormField>
+
+                <div>
+                  <div className="flex items-start gap-2.5">
+                    <input
+                      id="qm-consent"
+                      type="checkbox"
+                      name="consent"
+                      checked={data.consent}
+                      onChange={form.handleChange}
+                      aria-invalid={errors.consent ? true : undefined}
+                      aria-describedby={errors.consent ? 'qm-consent-error' : undefined}
+                      className="mt-0.5 w-4 h-4 accent-vnavy"
+                    />
+                    <label htmlFor="qm-consent" className="text-xs text-slate-700 leading-relaxed">
+                      I agree that {SHOP_INFO.name} may use this information to respond to my message.{' '}
+                      <span className="text-vred" aria-hidden="true">*</span>
+                    </label>
+                  </div>
+                  {errors.consent && (
+                    <p id="qm-consent-error" className="mt-1 text-xs font-medium text-vred">
+                      {errors.consent}
+                    </p>
+                  )}
                 </div>
+
+                <TurnstileWidget onToken={turnstile.setToken} />
+
+                {state.status === 'error' && <SubmitErrorNotice message={state.message} />}
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#16203B] hover:bg-[#0F1626] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors flex items-center justify-center gap-2"
+                  disabled={submitting}
+                  aria-busy={submitting}
+                  className="w-full py-3 bg-vnavy hover:bg-vnavy-dark text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-wait"
                 >
-                  <Send className="w-4 h-4 text-[#E7A622]" />
-                  <span>Send Direct Message</span>
+                  {submitting ? (
+                    <Loader2 className="w-4 h-4 text-vamber motion-safe:animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Send className="w-4 h-4 text-vamber" aria-hidden="true" />
+                  )}
+                  <span>{submitting ? 'Sending…' : 'Send Direct Message'}</span>
                 </button>
               </form>
             )}
+            </div>
           </div>
 
         </div>

@@ -1,23 +1,25 @@
-import React from 'react';
-import { ShieldCheck, Palette, Sparkles, Wrench, Flame, ArrowRight, Check } from 'lucide-react';
-import { CORE_SERVICES } from '../../content/shop';
+import { ShieldCheck, Palette, Sparkles, Wrench, Flame, ArrowRight, Check, type LucideIcon } from 'lucide-react';
+import { CORE_SERVICES, type ServiceId } from '../../content/services';
+import { SHOP_INFO } from '../../content/shop';
+import { formatHoursShort } from '../../lib/hours';
+
+/**
+ * SM-5 — exhaustive service → icon table. `Record<ServiceId, …>` makes adding a
+ * service without an icon a compile error; there is no silent default.
+ */
+const SERVICE_ICON: Record<ServiceId, { Icon: LucideIcon; color: string }> = {
+  collision: { Icon: ShieldCheck, color: 'text-vred' },
+  paint: { Icon: Palette, color: 'text-vamber' },
+  dent: { Icon: Sparkles, color: 'text-vnavy' },
+  frame: { Icon: Wrench, color: 'text-vred' },
+  classic: { Icon: Flame, color: 'text-vamber' },
+};
 
 interface ServicesProps {
-  onSelectService: (serviceId: string) => void;
+  onSelectService: (serviceId: ServiceId) => void;
 }
 
-export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
-  const getIcon = (id: string) => {
-    switch (id) {
-      case 'collision': return <ShieldCheck className="w-5 h-5 text-[#D83A27]" />;
-      case 'paint': return <Palette className="w-5 h-5 text-[#E7A622]" />;
-      case 'dent': return <Sparkles className="w-5 h-5 text-[#16203B]" />;
-      case 'frame': return <Wrench className="w-5 h-5 text-[#D83A27]" />;
-      case 'classic': return <Flame className="w-5 h-5 text-[#E7A622]" />;
-      default: return <Wrench className="w-5 h-5 text-[#16203B]" />;
-    }
-  };
-
+export const Services = ({ onSelectService }: ServicesProps) => {
   return (
     <section id="services" className="py-16 bg-[#FAF7F2] border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -47,7 +49,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-slate-200 flex items-center justify-center">
-                      {getIcon(service.id)}
+                      {(() => {
+                        const { Icon, color } = SERVICE_ICON[service.id];
+                        return <Icon className={`w-5 h-5 ${color}`} aria-hidden="true" data-icon={service.id} />;
+                      })()}
                     </div>
                     <span className="text-xs font-mono font-semibold text-slate-400">
                       0{index + 1}.
@@ -86,9 +91,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 </span>
                 <button
                   onClick={() => onSelectService(service.id)}
+                  aria-label={`Get an estimate for ${service.title}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#16203B] hover:text-[#D83A27] transition-colors"
                 >
-                  <span>Select Service</span>
+                  <span>Get Estimate</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -108,9 +114,12 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 Stop by our Cabrillo Avenue shop for an honest, in-person assessment. We inspect the damage, explain your options clearly, and prepare an itemized estimate.
               </p>
               <div className="mt-4 text-xs text-slate-300 space-y-1">
-                <div>📍 1324 Cabrillo Ave, Torrance, CA</div>
-                <div>⏱ Mon–Fri: 8:00 AM – 5:30 PM</div>
-                <div>⏱ Sat: 8:00 AM – 12:00 PM</div>
+                <div>{SHOP_INFO.fullAddress}</div>
+                {SHOP_INFO.hours
+                  .filter((h) => h.open)
+                  .map((h) => (
+                    <div key={h.label}>{formatHoursShort(h)}</div>
+                  ))}
               </div>
             </div>
 

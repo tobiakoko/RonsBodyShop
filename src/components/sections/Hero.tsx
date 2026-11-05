@@ -1,43 +1,13 @@
-import React, { useMemo } from 'react';
 import { Phone, ArrowRight, Star, MapPin, Clock } from 'lucide-react';
 import { SHOP_INFO } from '../../content/shop';
+import { useShopStatus } from '../../lib/useShopStatus';
 
 interface HeroProps {
   onOpenEstimate: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
-  // Compute open/closed status for Pacific Time
-  const statusInfo = useMemo(() => {
-    try {
-      const now = new Date();
-      const ptString = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-      const ptDate = new Date(ptString);
-      const day = ptDate.getDay();
-      const hour = ptDate.getHours() + ptDate.getMinutes() / 60;
-
-      if (day === 0) {
-        return { isOpen: false, text: "Closed Sundays · Opens Mon 8:00 AM" };
-      } else if (day >= 1 && day <= 5) {
-        if (hour >= 8 && hour < 17.5) {
-          return { isOpen: true, text: "Open Today until 5:30 PM" };
-        } else if (hour < 8) {
-          return { isOpen: false, text: "Opens Today at 8:00 AM" };
-        } else {
-          return { isOpen: false, text: "Closed · Opens Tomorrow at 8:00 AM" };
-        }
-      } else if (day === 6) {
-        if (hour >= 8 && hour < 12) {
-          return { isOpen: true, text: "Open Saturday until 12:00 PM" };
-        } else {
-          return { isOpen: false, text: "Closed · Opens Monday at 8:00 AM" };
-        }
-      }
-    } catch {
-      // fallback
-    }
-    return { isOpen: true, text: "Open Mon–Fri: 8:00 AM – 5:30 PM" };
-  }, []);
+export const Hero = ({ onOpenEstimate }: HeroProps) => {
+  const statusInfo = useShopStatus();
 
   return (
     <section className="relative bg-[#16203B] text-white pt-8 pb-14 lg:py-16 overflow-hidden border-b border-[#E7A622]/30">
@@ -74,33 +44,33 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
 
             {/* Subtitle answering: What does it do? */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light max-w-xl">
-              Serving vehicle owners in Torrance and the South Bay for over 40 years. From minor dent removal and insurance collision repairs to frame straightening and classic car restorations, we return your car to factory condition.
+              Serving vehicle owners in Torrance and the South Bay for over {SHOP_INFO.experienceYears.replace('+', '')} years. From minor dent removal and insurance collision repairs to frame straightening and classic car restorations, we return your car to factory condition.
             </p>
 
             {/* Quick Core Services Checklist */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs text-slate-200 font-medium">
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>Collision Repair</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>Custom Paint Matching</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>Dent Removal & PDR</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>Frame Straightening</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>Classic Restorations</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[#E7A622]">✓</span>
+                <span className="text-[#E7A622]" aria-hidden="true">✓</span>
                 <span>All Insurances Handled</span>
               </div>
             </div>
@@ -128,12 +98,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
             <div className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-300">
               <div className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[#E7A622]" />
-                <span>Walk-ins Welcome: 1324 Cabrillo Ave, Torrance</span>
+                <span>Walk-ins Welcome: {SHOP_INFO.address}, {SHOP_INFO.city}</span>
               </div>
               <span className="text-slate-600 hidden sm:inline">|</span>
               <div className="flex items-center gap-1.5 text-amber-300">
                 <Clock className="w-3.5 h-3.5 text-[#E7A622]" />
-                <span>{statusInfo.text}</span>
+                <span>
+                  <span className="sr-only">{statusInfo.isOpen ? 'Open now. ' : 'Closed now. '}</span>
+                  {statusInfo.text}
+                </span>
               </div>
             </div>
 
@@ -147,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
               <div className="aspect-[4/3] w-full overflow-hidden relative bg-slate-900">
                 <img
                   src="/assets/aistudio/IMG_6810_63434b37.jpeg"
-                  alt="Ron's Body Shop facility at 1324 Cabrillo Ave, Torrance, CA"
+                  alt={`${SHOP_INFO.name} facility at ${SHOP_INFO.fullAddress}`}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center"
                 />
@@ -159,7 +132,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
                 <div className="absolute bottom-3 inset-x-3 bg-[#16203B]/90 backdrop-blur-sm border border-slate-700/80 p-2.5 rounded-lg flex items-center justify-between text-xs">
                   <div>
                     <div className="font-bold text-white font-['Oswald'] uppercase">
-                      1324 Cabrillo Avenue
+                      {SHOP_INFO.address}
                     </div>
                     <div className="text-[11px] text-slate-400">
                       Old Town Torrance Facility
@@ -167,7 +140,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] text-[#E7A622] font-semibold uppercase tracking-wider">
-                      Over 40 Years In Business
+                      Since {SHOP_INFO.foundedYear}
                     </span>
                   </div>
                 </div>
@@ -176,11 +149,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenEstimate }) => {
               {/* Verified Trust Strip */}
               <div className="grid grid-cols-3 divide-x divide-slate-800 text-center py-2.5 text-xs bg-[#0F1626]">
                 <div>
-                  <div className="font-['Oswald'] text-base font-bold text-white">40+ YRS</div>
+                  <div className="font-['Oswald'] text-base font-bold text-white">{SHOP_INFO.experienceYears} YRS</div>
                   <div className="text-[10px] text-slate-400">Serving Torrance</div>
                 </div>
                 <div>
-                  <div className="font-['Oswald'] text-base font-bold text-[#E7A622]">4.7 ★</div>
+                  <div className="font-['Oswald'] text-base font-bold text-[#E7A622]">{SHOP_INFO.rating} ★</div>
                   <div className="text-[10px] text-slate-400">Google Rating</div>
                 </div>
                 <div>
