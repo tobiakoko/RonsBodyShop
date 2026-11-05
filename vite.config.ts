@@ -3,8 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
-import { buildAutoBodyShopJsonLd } from './src/lib/structuredData';
-import { SHOP_INFO } from './src/content/shop';
+import { buildAutoBodyShopJsonLd } from './src/lib/structuredData.ts';
+import { SHOP_INFO } from './src/content/shop.ts';
 
 /**
  * Keeps index.html in sync with SHOP_INFO: injects schema.org JSON-LD in place

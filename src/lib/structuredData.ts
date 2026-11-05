@@ -1,5 +1,5 @@
-import { SHOP_INFO } from '../content/shop';
-import { CORE_SERVICES } from '../content/services';
+import { SHOP_INFO } from '../content/shop.ts';
+import { CORE_SERVICES } from '../content/services.ts';
 
 const DAY = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
