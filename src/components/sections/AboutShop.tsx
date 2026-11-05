@@ -1,6 +1,6 @@
 import React from 'react';
-import { ShieldCheck, MapPin, Award, CheckCircle2, Phone } from 'lucide-react';
-import { SHOP_INFO } from '../data/shopData';
+import { CheckCircle2 } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
 
 export const AboutShop: React.FC = () => {
   return (

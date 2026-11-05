@@ -1,6 +1,6 @@
 import React from 'react';
-import { Phone, FileText, CheckCircle2, ShieldCheck, Car, ArrowRight } from 'lucide-react';
-import { SHOP_INFO, HOW_IT_WORKS_STEPS } from '../data/shopData';
+import { Phone, CheckCircle2, ArrowRight } from 'lucide-react';
+import { SHOP_INFO, HOW_IT_WORKS_STEPS } from '../../content/shop';
 
 interface HowItWorksProps {
   onOpenEstimate: () => void;

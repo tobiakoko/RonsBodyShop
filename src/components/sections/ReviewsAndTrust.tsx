@@ -1,6 +1,6 @@
 import React from 'react';
-import { Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import { REAL_REVIEWS, SHOP_INFO } from '../data/shopData';
+import { Star, CheckCircle2 } from 'lucide-react';
+import { REAL_REVIEWS, SHOP_INFO } from '../../content/shop';
 
 export const ReviewsAndTrust: React.FC = () => {
   return (

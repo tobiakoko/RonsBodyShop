@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Phone, Menu, X, ArrowRight, MapPin, Clock } from 'lucide-react';
-import { SHOP_INFO } from '../data/shopData';
+import { Phone, Menu, X, ArrowRight, MapPin } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
 
 interface NavbarProps {
   onOpenEstimate: () => void;

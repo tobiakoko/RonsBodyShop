@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { Phone, ArrowRight, Star, ShieldCheck, MapPin, Clock, Wrench } from 'lucide-react';
-import { SHOP_INFO } from '../data/shopData';
+import { Phone, ArrowRight, Star, MapPin, Clock } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
 
 interface HeroProps {
   onOpenEstimate: () => void;

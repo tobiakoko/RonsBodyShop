@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Palette, Sparkles, Wrench, Flame, ArrowRight, Check } from 'lucide-react';
-import { CORE_SERVICES, ServiceItem } from '../data/shopData';
+import { CORE_SERVICES } from '../../content/shop';
 
 interface ServicesProps {
   onSelectService: (serviceId: string) => void;

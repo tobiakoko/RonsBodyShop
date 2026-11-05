@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Camera, Upload, Check, AlertCircle, Phone, ArrowRight, Shield, Car, CheckCircle2 } from 'lucide-react';
-import { SHOP_INFO, INSURANCE_PARTNERS } from '../data/shopData';
+import { Camera, Check, Phone, ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
+import { SHOP_INFO, INSURANCE_PARTNERS } from '../../content/shop';
 
 interface EstimateCalculatorProps {
   isOpen?: boolean;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SHOP_INFO } from '../data/shopData';
-import { Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
+import { Phone, Mail, MapPin } from 'lucide-react';
 
 interface FooterProps {
   onOpenEstimate: () => void;

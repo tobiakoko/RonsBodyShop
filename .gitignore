@@ -44,3 +44,9 @@ dist-ssr
 # Temporary files
 *.tmp
 *.temp
+# Env (keep the example committed)
+.env.*
+!.env.example
+
+# Vercel
+.vercel

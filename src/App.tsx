@@ -3,18 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { HowItWorks } from './components/HowItWorks';
-import { Services } from './components/Services';
-import { AboutShop } from './components/AboutShop';
-import { InsuranceAdvocacy } from './components/InsuranceAdvocacy';
-import { ReviewsAndTrust } from './components/ReviewsAndTrust';
-import { EstimateCalculator } from './components/EstimateCalculator';
-import { LocationAndHours } from './components/LocationAndHours';
-import { Footer } from './components/Footer';
-import { MobileFloatingBar } from './components/MobileFloatingBar';
+import { useState } from 'react';
+import { Navbar } from './components/layout/Navbar';
+import { Hero } from './components/sections/Hero';
+import { HowItWorks } from './components/sections/HowItWorks';
+import { Services } from './components/sections/Services';
+import { AboutShop } from './components/sections/AboutShop';
+import { InsuranceAdvocacy } from './components/sections/InsuranceAdvocacy';
+import { ReviewsAndTrust } from './components/sections/ReviewsAndTrust';
+import { EstimateCalculator } from './components/sections/EstimateCalculator';
+import { LocationAndHours } from './components/sections/LocationAndHours';
+import { Footer } from './components/layout/Footer';
+import { MobileFloatingBar } from './components/layout/MobileFloatingBar';
 
 export default function App() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
@@ -27,7 +27,7 @@ export default function App() {
     setIsEstimateModalOpen(false);
   };
 
-  const handleSelectService = (serviceId: string) => {
+  const handleSelectService = (_serviceId: string) => {
     const estimateElement = document.getElementById('estimate');
     if (estimateElement) {
       estimateElement.scrollIntoView({ behavior: 'smooth' });

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Scale, Phone, Check, ArrowRight } from 'lucide-react';
-import { SHOP_INFO } from '../data/shopData';
+import { Scale, Phone } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
 
 interface InsuranceAdvocacyProps {
   onOpenEstimate: () => void;

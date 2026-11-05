@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { MapPin, Phone, Mail, Clock, Navigation, CheckCircle2, Send, Car } from 'lucide-react';
-import { SHOP_INFO } from '../data/shopData';
+import { Clock, Navigation, CheckCircle2, Send, Car } from 'lucide-react';
+import { SHOP_INFO } from '../../content/shop';
 
 export const LocationAndHours: React.FC = () => {
   const [name, setName] = useState('');
