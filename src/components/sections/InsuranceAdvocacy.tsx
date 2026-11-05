@@ -8,18 +8,18 @@ interface InsuranceAdvocacyProps {
 
 export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEstimate }) => {
   return (
-    <section id="insurance" className="py-16 bg-[#16203B] text-white border-b border-[#E7A622]/30 relative">
+    <section id="insurance" className="py-16 bg-vnavy text-white border-b border-vamber/30 relative">
       <div className="absolute inset-0 vintage-pinstripe opacity-25 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-10">
-          <div className="text-xs uppercase tracking-widest text-[#E7A622] font-bold mb-1 flex items-center gap-1.5">
+          <div className="text-xs uppercase tracking-widest text-vamber font-bold mb-1 flex items-center gap-1.5">
             <Scale className="w-3.5 h-3.5" />
             <span>California Insurance Code § 758.5</span>
           </div>
-          <h2 className="font-['Oswald'] text-3xl sm:text-4xl uppercase font-bold text-white tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-white tracking-tight">
             You Choose Your Body Shop — Not The Insurance Company
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-300 font-light leading-relaxed">
@@ -29,11 +29,11 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
 
         {/* 3 Practical Truths Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#0F1626] border border-slate-800 rounded-xl p-6 space-y-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#E7A622]/20 text-[#E7A622] flex items-center justify-center font-bold text-sm">
+          <div className="bg-vnavy-dark border border-slate-800 rounded-xl p-6 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-vamber/20 text-vamber flex items-center justify-center font-bold text-sm">
               1
             </div>
-            <h3 className="font-['Oswald'] text-xl uppercase font-bold text-white">
+            <h3 className="font-display text-xl uppercase font-bold text-white">
               One Estimate Is All You Need
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -41,11 +41,11 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
             </p>
           </div>
 
-          <div className="bg-[#0F1626] border border-slate-800 rounded-xl p-6 space-y-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#D83A27]/20 text-[#D83A27] flex items-center justify-center font-bold text-sm">
+          <div className="bg-vnavy-dark border border-slate-800 rounded-xl p-6 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-vred/20 text-vred flex items-center justify-center font-bold text-sm">
               2
             </div>
-            <h3 className="font-['Oswald'] text-xl uppercase font-bold text-white">
+            <h3 className="font-display text-xl uppercase font-bold text-white">
               We Work With All Carriers
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -53,11 +53,11 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
             </p>
           </div>
 
-          <div className="bg-[#0F1626] border border-slate-800 rounded-xl p-6 space-y-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#E7A622]/20 text-[#E7A622] flex items-center justify-center font-bold text-sm">
+          <div className="bg-vnavy-dark border border-slate-800 rounded-xl p-6 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-vamber/20 text-vamber flex items-center justify-center font-bold text-sm">
               3
             </div>
-            <h3 className="font-['Oswald'] text-xl uppercase font-bold text-white">
+            <h3 className="font-display text-xl uppercase font-bold text-white">
               We Advocate For Your Vehicle
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -76,12 +76,12 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
               href={`tel:${SHOP_INFO.phoneRaw}`}
               className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs rounded transition-colors flex items-center gap-2"
             >
-              <Phone className="w-3.5 h-3.5 text-[#E7A622]" />
+              <Phone className="w-3.5 h-3.5 text-vamber" />
               <span>Call Claims Line: {SHOP_INFO.phone}</span>
             </a>
             <button
               onClick={onOpenEstimate}
-              className="px-5 py-2.5 bg-[#E7A622] hover:bg-[#D3951B] text-[#16203B] font-bold text-xs uppercase tracking-wider rounded transition-colors"
+              className="px-5 py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-xs uppercase tracking-wider rounded transition-colors"
             >
               Submit Claim Info
             </button>

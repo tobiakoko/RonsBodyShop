@@ -21,15 +21,15 @@ interface ServicesProps {
 
 export const Services = ({ onSelectService }: ServicesProps) => {
   return (
-    <section id="services" className="py-16 bg-[#FAF7F2] border-b border-slate-200">
+    <section id="services" className="py-16 bg-vcream border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-[#D83A27] font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
             What We Do
           </div>
-          <h2 className="font-['Oswald'] text-3xl sm:text-4xl uppercase font-bold text-[#16203B] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-vnavy tracking-tight">
             Auto Body & Repair Services
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 font-light leading-relaxed">
@@ -48,7 +48,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-slate-200 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-vcream border border-slate-200 flex items-center justify-center">
                       {(() => {
                         const { Icon, color } = SERVICE_ICON[service.id];
                         return <Icon className={`w-5 h-5 ${color}`} aria-hidden="true" data-icon={service.id} />;
@@ -64,7 +64,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-['Oswald'] text-2xl font-bold uppercase text-[#16203B] mt-4 group-hover:text-[#D83A27] transition-colors">
+                <h3 className="font-display text-2xl font-bold uppercase text-vnavy mt-4 group-hover:text-vred transition-colors">
                   {service.title}
                 </h3>
 
@@ -77,7 +77,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <ul className="mt-4 space-y-1.5 text-xs text-slate-700">
                   {service.features.map((feat, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E7A622] shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-vamber shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -92,7 +92,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <button
                   onClick={() => onSelectService(service.id)}
                   aria-label={`Get an estimate for ${service.title}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#16203B] hover:text-[#D83A27] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-vnavy hover:text-vred transition-colors"
                 >
                   <span>Get Estimate</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -102,12 +102,12 @@ export const Services = ({ onSelectService }: ServicesProps) => {
           ))}
 
           {/* Quick Consultation Card */}
-          <div className="bg-[#16203B] text-white rounded-xl border border-[#E7A622]/40 p-6 flex flex-col justify-between">
+          <div className="bg-vnavy text-white rounded-xl border border-vamber/40 p-6 flex flex-col justify-between">
             <div>
-              <div className="text-xs uppercase tracking-wider text-[#E7A622] font-bold pb-3 border-b border-slate-700">
+              <div className="text-xs uppercase tracking-wider text-vamber font-bold pb-3 border-b border-slate-700">
                 Not Sure What You Need?
               </div>
-              <h3 className="font-['Oswald'] text-2xl uppercase font-bold text-white mt-4">
+              <h3 className="font-display text-2xl uppercase font-bold text-white mt-4">
                 Bring Your Car In For Inspection
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
@@ -126,7 +126,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
             <div className="pt-5 mt-5 border-t border-slate-700">
               <button
                 onClick={() => onSelectService('collision')}
-                className="w-full py-2.5 bg-[#E7A622] hover:bg-[#D3951B] text-[#16203B] font-bold text-xs uppercase tracking-wider rounded transition-colors text-center"
+                className="w-full py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-xs uppercase tracking-wider rounded transition-colors text-center"
               >
                 Start Online Estimate
               </button>

@@ -8,15 +8,15 @@ interface HowItWorksProps {
 
 export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
   return (
-    <section id="how-it-works" className="py-14 bg-[#F3EFE6] border-b border-slate-300/80">
+    <section id="how-it-works" className="py-14 bg-vsand border-b border-slate-300/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="text-xs uppercase tracking-widest text-[#D83A27] font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
             Simple & Transparent Process
           </div>
-          <h2 className="font-['Oswald'] text-2xl sm:text-3xl lg:text-4xl uppercase font-bold text-[#16203B] tracking-tight">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase font-bold text-vnavy tracking-tight">
             How To Get Your Vehicle Repaired
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-2 font-light">
@@ -29,11 +29,11 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
           {HOW_IT_WORKS_STEPS.map((item, idx) => (
             <div
               key={item.step}
-              className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm relative group hover:border-[#16203B]/40 transition-colors"
+              className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm relative group hover:border-vnavy/40 transition-colors"
             >
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-                  <span className="font-['Oswald'] text-2xl font-bold text-[#E7A622]">
+                  <span className="font-display text-2xl font-bold text-vamber">
                     STEP {item.step}
                   </span>
                   <span className="text-xs font-mono text-slate-400">
@@ -41,7 +41,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
                   </span>
                 </div>
 
-                <h3 className="font-['Oswald'] text-xl uppercase font-bold text-[#16203B]">
+                <h3 className="font-display text-xl uppercase font-bold text-vnavy">
                   {item.title}
                 </h3>
                 
@@ -50,11 +50,11 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 text-xs font-semibold text-[#16203B]">
+              <div className="pt-4 mt-4 border-t border-slate-100 text-xs font-semibold text-vnavy">
                 {idx === 0 && (
                   <button
                     onClick={onOpenEstimate}
-                    className="inline-flex items-center gap-1.5 text-[#D83A27] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-vred hover:underline"
                   >
                     <span>Request estimate online</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -79,13 +79,13 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
         {/* Direct Action Strip */}
         <div className="mt-8 bg-white rounded-xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#16203B] text-[#E7A622] flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-vnavy text-vamber flex items-center justify-center shrink-0">
               <Phone className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs text-slate-500">Need Immediate Help or Towing Advice?</div>
-              <div className="font-bold text-base text-[#16203B]">
-                Call Our Shop: <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-[#D83A27] hover:underline">{SHOP_INFO.phone}</a>
+              <div className="font-bold text-base text-vnavy">
+                Call Our Shop: <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-vred hover:underline">{SHOP_INFO.phone}</a>
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenEstimate }) => {
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
               onClick={onOpenEstimate}
-              className="w-full sm:w-auto px-5 py-2.5 bg-[#16203B] hover:bg-[#0F1626] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors"
+              className="w-full sm:w-auto px-5 py-2.5 bg-vnavy hover:bg-vnavy-dark text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors"
             >
               Get Free Estimate
             </button>

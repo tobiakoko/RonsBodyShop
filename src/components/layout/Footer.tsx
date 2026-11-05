@@ -8,7 +8,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
   return (
-    <footer className="bg-[#0F1626] text-white border-t border-[#E7A622]/40 pt-16 pb-24 lg:pb-16">
+    <footer className="bg-vnavy-dark text-white border-t border-vamber/40 pt-16 pb-24 lg:pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
                 referrerPolicy="no-referrer"
                 className="h-14 sm:h-16 w-auto object-contain"
               />
-              <div className="font-['Oswald'] text-2xl font-bold tracking-wider uppercase text-white">
+              <div className="font-display text-2xl font-bold tracking-wider uppercase text-white">
                 RON'S BODY SHOP
               </div>
             </div>
@@ -36,32 +36,32 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-['Oswald'] text-sm uppercase font-bold text-[#E7A622] tracking-wider mb-4">
+            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Explore Our Shop
             </h4>
             <ul className="space-y-2 text-xs text-slate-300">
               <li>
-                <a href="#services" className="hover:text-[#E7A622] transition-colors">
+                <a href="#services" className="hover:text-vamber transition-colors">
                   Collision & Structural Repair
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-[#E7A622] transition-colors">
+                <a href="#services" className="hover:text-vamber transition-colors">
                   Computerized Color Matching
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-[#E7A622] transition-colors">
+                <a href="#services" className="hover:text-vamber transition-colors">
                   Paintless Dent Repair (PDR)
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-[#E7A622] transition-colors">
+                <a href="#services" className="hover:text-vamber transition-colors">
                   Classic Car Restoration
                 </a>
               </li>
               <li>
-                <a href="#heritage" className="hover:text-[#E7A622] transition-colors">
+                <a href="#heritage" className="hover:text-vamber transition-colors">
                   Antique Gas Pump Museum
                 </a>
               </li>
@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
 
           {/* California Insurance Notice */}
           <div>
-            <h4 className="font-['Oswald'] text-sm uppercase font-bold text-[#E7A622] tracking-wider mb-4">
+            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Insurance Protection
             </h4>
             <p className="text-xs text-slate-300 leading-relaxed mb-3">
@@ -78,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
             </p>
             <button
               onClick={onOpenEstimate}
-              className="text-xs font-bold text-[#E7A622] hover:text-amber-200 transition-colors uppercase tracking-wider underline"
+              className="text-xs font-bold text-vamber hover:text-amber-200 transition-colors uppercase tracking-wider underline"
             >
               Start Free Photo Estimate →
             </button>
@@ -86,22 +86,22 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
 
           {/* Direct Contact info */}
           <div>
-            <h4 className="font-['Oswald'] text-sm uppercase font-bold text-[#E7A622] tracking-wider mb-4">
+            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Torrance Location
             </h4>
             <div className="space-y-2.5 text-xs text-slate-300">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#E7A622] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-vamber shrink-0 mt-0.5" />
                 <span>1324 Cabrillo Ave, Torrance, CA 90501</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#E7A622] shrink-0" />
-                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="font-semibold text-white hover:text-[#E7A622]">
+                <Phone className="w-4 h-4 text-vamber shrink-0" />
+                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="font-semibold text-white hover:text-vamber">
                   {SHOP_INFO.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#E7A622] shrink-0" />
+                <Mail className="w-4 h-4 text-vamber shrink-0" />
                 <a href={`mailto:${SHOP_INFO.email}`} className="text-slate-300 hover:text-white">
                   {SHOP_INFO.email}
                 </a>

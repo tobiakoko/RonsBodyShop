@@ -10,14 +10,14 @@ export const MobileFloatingBar = ({ onOpenEstimate }: MobileFloatingBarProps) =>
   const status = useShopStatus();
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 bg-[#16203B]/95 backdrop-blur-md border-t border-[#E7A622]/40 lg:hidden shadow-2xl safe-area-bottom">
+    <div className="fixed bottom-0 inset-x-0 z-40 bg-vnavy/95 backdrop-blur-md border-t border-vamber/40 lg:hidden shadow-2xl safe-area-bottom">
       <div className="grid grid-cols-3 divide-x divide-slate-800 text-center py-2 px-1">
         {/* Call Now */}
         <a
           href={`tel:${SHOP_INFO.phoneRaw}`}
-          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-[#E7A622]"
+          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-vamber"
         >
-          <div className="w-8 h-8 rounded-full bg-[#E7A622]/20 flex items-center justify-center mb-0.5 text-[#E7A622]">
+          <div className="w-8 h-8 rounded-full bg-vamber/20 flex items-center justify-center mb-0.5 text-vamber">
             <Phone className="w-4 h-4" aria-hidden="true" />
           </div>
           <span className="text-[11px] font-bold tracking-tight">Call Shop</span>
@@ -30,9 +30,9 @@ export const MobileFloatingBar = ({ onOpenEstimate }: MobileFloatingBarProps) =>
         <button
           type="button"
           onClick={onOpenEstimate}
-          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-[#E7A622]"
+          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-vamber"
         >
-          <div className="w-8 h-8 rounded-full bg-[#D83A27] text-white flex items-center justify-center mb-0.5 shadow">
+          <div className="w-8 h-8 rounded-full bg-vred text-white flex items-center justify-center mb-0.5 shadow">
             <FileText className="w-4 h-4" aria-hidden="true" />
           </div>
           <span className="text-[11px] font-bold tracking-tight text-amber-300">Get Estimate</span>
@@ -44,9 +44,9 @@ export const MobileFloatingBar = ({ onOpenEstimate }: MobileFloatingBarProps) =>
           href={SHOP_INFO.mapUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-[#E7A622]"
+          className="flex flex-col items-center justify-center py-1 text-slate-100 active:text-vamber"
         >
-          <div className="w-8 h-8 rounded-full bg-[#E7A622]/20 flex items-center justify-center mb-0.5 text-[#E7A622]">
+          <div className="w-8 h-8 rounded-full bg-vamber/20 flex items-center justify-center mb-0.5 text-vamber">
             <Navigation className="w-4 h-4" aria-hidden="true" />
           </div>
           <span className="text-[11px] font-bold tracking-tight">Directions</span>

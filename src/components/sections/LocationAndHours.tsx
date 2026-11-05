@@ -20,15 +20,15 @@ export const LocationAndHours = () => {
   const submitting = state.status === 'submitting';
 
   return (
-    <section id="contact" className="py-20 bg-[#F3EFE6] border-b border-slate-300/80">
+    <section id="contact" className="py-20 bg-vsand border-b border-slate-300/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-[#D83A27] font-bold mb-2">
+          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-2">
             Old Town Torrance, California
           </div>
-          <h2 className="font-['Oswald'] text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-[#16203B] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-vnavy tracking-tight">
             Visit Our Shop & Reception
           </h2>
           <p className="mt-2 text-slate-600 text-sm sm:text-base font-light">
@@ -44,8 +44,8 @@ export const LocationAndHours = () => {
             {/* Hours and Live Status Card */}
             <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-7 shadow-sm">
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-2 font-['Oswald'] text-xl uppercase font-bold text-[#16203B]">
-                  <Clock className="w-5 h-5 text-[#E7A622]" />
+                <div className="flex items-center gap-2 font-display text-xl uppercase font-bold text-vnavy">
+                  <Clock className="w-5 h-5 text-vamber" />
                   <span>Shop Operating Hours</span>
                 </div>
                 {/* Live Status indicator */}
@@ -78,7 +78,7 @@ export const LocationAndHours = () => {
                 <div className="text-xs uppercase font-bold tracking-wider text-slate-400 mb-1">
                   Physical Address
                 </div>
-                <div className="font-bold text-slate-900 text-base font-['Oswald'] uppercase">
+                <div className="font-bold text-slate-900 text-base font-display uppercase">
                   {SHOP_INFO.name}
                 </div>
                 <p className="text-sm text-slate-600 mt-1 leading-snug">
@@ -91,7 +91,7 @@ export const LocationAndHours = () => {
                     href={SHOP_INFO.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D83A27] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-vred hover:underline"
                   >
                     <Navigation className="w-3.5 h-3.5" />
                     <span>Open in Google Maps →</span>
@@ -108,7 +108,7 @@ export const LocationAndHours = () => {
                     <span className="text-xs text-slate-500 block">Telephone:</span>
                     <a 
                       href={`tel:${SHOP_INFO.phoneRaw}`}
-                      className="font-bold text-base text-[#16203B] hover:text-[#E7A622] transition-colors"
+                      className="font-bold text-base text-vnavy hover:text-vamber transition-colors"
                     >
                       {SHOP_INFO.phone}
                     </a>
@@ -117,7 +117,7 @@ export const LocationAndHours = () => {
                     <span className="text-xs text-slate-500 block">Email:</span>
                     <a 
                       href={`mailto:${SHOP_INFO.email}`}
-                      className="text-xs text-slate-700 hover:text-[#16203B] font-mono break-all"
+                      className="text-xs text-slate-700 hover:text-vnavy font-mono break-all"
                     >
                       {SHOP_INFO.email}
                     </a>
@@ -128,7 +128,7 @@ export const LocationAndHours = () => {
 
             {/* Parking & Dropoff Info */}
             <div className="p-4 bg-amber-50/70 border border-amber-200/80 rounded-xl text-xs text-amber-900 flex items-start gap-3">
-              <Car className="w-5 h-5 text-[#E7A622] shrink-0 mt-0.5" />
+              <Car className="w-5 h-5 text-vamber shrink-0 mt-0.5" />
               <div>
                 <strong className="font-bold">Convenient Parking & Customer Access:</strong> Ample parking directly in front on Cabrillo Avenue as well as our private customer inspection bay inside the entrance.
               </div>
@@ -138,7 +138,7 @@ export const LocationAndHours = () => {
 
           {/* Right Column: Direct Quick Message Box (5 cols) */}
           <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-6 sm:p-7 shadow-sm">
-            <h3 className="font-['Oswald'] text-2xl uppercase font-bold text-[#16203B]">
+            <h3 className="font-display text-2xl uppercase font-bold text-vnavy">
               Quick Message to Ron
             </h3>
             <p className="text-xs text-slate-500 mt-1 mb-5">

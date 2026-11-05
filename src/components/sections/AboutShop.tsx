@@ -4,15 +4,15 @@ import { SHOP_INFO } from '../../content/shop';
 
 export const AboutShop: React.FC = () => {
   return (
-    <section id="about" className="py-16 bg-[#F3EFE6] border-b border-slate-300/80">
+    <section id="about" className="py-16 bg-vsand border-b border-slate-300/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-[#D83A27] font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
             Over 40 Years in Old Town Torrance
           </div>
-          <h2 className="font-['Oswald'] text-3xl sm:text-4xl uppercase font-bold text-[#16203B] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-vnavy tracking-tight">
             A South Bay Landmark Dedicated To Quality
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 font-light leading-relaxed">
@@ -81,13 +81,13 @@ export const AboutShop: React.FC = () => {
           {/* Right Column: Values & Proof (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
             <div className="bg-white rounded-xl border border-slate-200 p-6 space-y-4 shadow-sm">
-              <h3 className="font-['Oswald'] text-2xl uppercase font-bold text-[#16203B]">
+              <h3 className="font-display text-2xl uppercase font-bold text-vnavy">
                 Why South Bay Drivers Rely On Ron
               </h3>
 
               <div className="space-y-3 text-xs sm:text-sm text-slate-700">
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#D83A27] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block font-semibold">Honest, Straightforward Pricing</strong>
                     No hidden fees or surprise add-ons. We give you a clear written appraisal before work begins.
@@ -95,7 +95,7 @@ export const AboutShop: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#D83A27] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block font-semibold">Precision Alignment & Paint Matching</strong>
                     Our technicians use laser unibody measuring and computerized paint formulation so repairs are seamless.
@@ -103,7 +103,7 @@ export const AboutShop: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#D83A27] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block font-semibold">Full Insurance Claims Assistance</strong>
                     We coordinate directly with your insurance adjuster to ensure all required repairs and proper parts are approved.
@@ -111,7 +111,7 @@ export const AboutShop: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#D83A27] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block font-semibold">Decades of Local Trust</strong>
                     Family-owned and rooted in Torrance since 1980 with an average 4.7-star rating across Google reviews.
@@ -121,12 +121,12 @@ export const AboutShop: React.FC = () => {
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div className="text-xs text-slate-500">
-                  <span className="font-bold text-[#16203B]">1324 Cabrillo Ave</span><br />
+                  <span className="font-bold text-vnavy">1324 Cabrillo Ave</span><br />
                   Old Town Torrance, CA
                 </div>
                 <a
                   href={`tel:${SHOP_INFO.phoneRaw}`}
-                  className="px-4 py-2 bg-[#16203B] hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded transition-colors"
+                  className="px-4 py-2 bg-vnavy hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded transition-colors"
                 >
                   Call Shop
                 </a>
