@@ -224,7 +224,7 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                           <span className="font-bold text-slate-900 text-sm">{opt.wizardLabel}</span>
                           {selected && (
                             <span className="w-5 h-5 rounded-full bg-vnavy text-vamber flex items-center justify-center" aria-hidden="true">
-                              <Check className="w-3 h-3" />
+                              <Check className="w-3 h-3" aria-hidden="true" />
                             </span>
                           )}
                         </div>
@@ -446,7 +446,7 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
   if (isModal) return <EstimateModal titleId={titleId} onClose={onClose}>{content}</EstimateModal>;
 
   return (
-    <section id="estimate" className="py-16 bg-vsand border-b border-slate-300/80 scroll-mt-28">
+    <section id="estimate" className="py-16 bg-vsand border-b border-slate-300/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">{content}</div>
     </section>
   );
@@ -463,7 +463,7 @@ const StepFrame = ({
   headingRef: React.RefObject<HTMLHeadingElement | null>;
   children: ReactNode;
 }) => (
-  <div className="space-y-5 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-200">
+  <div className="space-y-5">
     <h3 ref={headingRef} tabIndex={-1} className="text-sm font-bold text-slate-900 uppercase tracking-wide outline-none">
       {title}
     </h3>

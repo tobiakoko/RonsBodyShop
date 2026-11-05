@@ -45,7 +45,7 @@ export const LocationAndHours = () => {
             <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-7 shadow-sm">
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-2 font-display text-xl uppercase font-bold text-vnavy">
-                  <Clock className="w-5 h-5 text-vamber" />
+                  <Clock className="w-5 h-5 text-vamber" aria-hidden="true" />
                   <span>Shop Operating Hours</span>
                 </div>
                 {/* Live Status indicator */}
@@ -93,7 +93,7 @@ export const LocationAndHours = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-vred hover:underline"
                   >
-                    <Navigation className="w-3.5 h-3.5" />
+                    <Navigation className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>Open in Google Maps →</span>
                   </a>
                 </div>
@@ -128,7 +128,7 @@ export const LocationAndHours = () => {
 
             {/* Parking & Dropoff Info */}
             <div className="p-4 bg-amber-50/70 border border-amber-200/80 rounded-xl text-xs text-amber-900 flex items-start gap-3">
-              <Car className="w-5 h-5 text-vamber shrink-0 mt-0.5" />
+              <Car className="w-5 h-5 text-vamber shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <strong className="font-bold">Convenient Parking & Customer Access:</strong> Ample parking directly in front on Cabrillo Avenue as well as our private customer inspection bay inside the entrance.
               </div>

@@ -48,7 +48,7 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
       <div className="bg-vnavy-dark border-b border-vnavy text-xs py-1.5 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-slate-300">
           <div className="flex items-center gap-2">
-            <MapPin className="w-3.5 h-3.5 text-vamber shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-vamber shrink-0" aria-hidden="true" />
             <span className="truncate">{SHOP_INFO.fullAddress}</span>
             <span className="hidden sm:inline text-slate-500">·</span>
             <span className="hidden sm:inline text-slate-400">Torrance, CA</span>
@@ -59,7 +59,7 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
               href={`tel:${SHOP_INFO.phoneRaw}`} 
               className="flex items-center gap-1.5 font-bold text-vamber hover:text-amber-300 transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-3.5 h-3.5" aria-hidden="true" />
               <span>{SHOP_INFO.phone}</span>
             </a>
           </div>
@@ -76,7 +76,7 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
             alt=""
             width="160"
             height="160"
-            className="h-14 sm:h-18 md:h-20 w-auto object-contain transition-transform duration-200 group-hover:scale-105 drop-shadow-md"
+            className="h-14 sm:h-18 md:h-20 w-auto object-contain transition-transform duration-200 motion-safe:group-hover:scale-105 drop-shadow-md"
           />
           <div className="hidden sm:flex flex-col">
             <span className="font-display text-2xl md:text-3xl tracking-wider uppercase font-bold text-white group-hover:text-vamber transition-colors leading-none">
@@ -109,7 +109,7 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-sm tracking-wide uppercase rounded-md transition-all shadow-md hover:shadow-lg whitespace-nowrap shrink-0"
           >
             <span>Get Free Estimate</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </button>
 
           {/* Mobile Menu Button */}
@@ -152,14 +152,14 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
               className="w-full py-3 bg-vamber text-vnavy font-bold text-center rounded-md text-sm uppercase tracking-wide flex items-center justify-center gap-2"
             >
               <span>Request Free Estimate</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </button>
             <a
               href={`tel:${SHOP_INFO.phoneRaw}`}
               onClick={close}
               className="w-full py-2.5 border border-vamber/50 text-white font-semibold text-center rounded-md text-sm flex items-center justify-center gap-2"
             >
-              <Phone className="w-4 h-4 text-vamber" />
+              <Phone className="w-4 h-4 text-vamber" aria-hidden="true" />
               <span>Call Direct: {SHOP_INFO.phone}</span>
             </a>
           </div>

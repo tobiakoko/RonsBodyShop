@@ -1,4 +1,3 @@
-import React from 'react';
 import { Scale, Phone } from 'lucide-react';
 import { SHOP_INFO } from '../../content/shop';
 
@@ -6,7 +5,7 @@ interface InsuranceAdvocacyProps {
   onOpenEstimate: () => void;
 }
 
-export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEstimate }) => {
+export const InsuranceAdvocacy = ({ onOpenEstimate }: InsuranceAdvocacyProps) => {
   return (
     <section id="insurance" className="py-16 bg-vnavy text-white border-b border-vamber/30 relative">
       <div className="absolute inset-0 vintage-pinstripe opacity-25 pointer-events-none" />
@@ -16,7 +15,7 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
         {/* Section Header */}
         <div className="max-w-3xl mb-10">
           <div className="text-xs uppercase tracking-widest text-vamber font-bold mb-1 flex items-center gap-1.5">
-            <Scale className="w-3.5 h-3.5" />
+            <Scale className="w-3.5 h-3.5" aria-hidden="true" />
             <span>California Insurance Code § 758.5</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-white tracking-tight">
@@ -76,10 +75,10 @@ export const InsuranceAdvocacy: React.FC<InsuranceAdvocacyProps> = ({ onOpenEsti
               href={`tel:${SHOP_INFO.phoneRaw}`}
               className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs rounded transition-colors flex items-center gap-2"
             >
-              <Phone className="w-3.5 h-3.5 text-vamber" />
+              <Phone className="w-3.5 h-3.5 text-vamber" aria-hidden="true" />
               <span>Call Claims Line: {SHOP_INFO.phone}</span>
             </a>
-            <button
+            <button type="button"
               onClick={onOpenEstimate}
               className="px-5 py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-xs uppercase tracking-wider rounded transition-colors"
             >

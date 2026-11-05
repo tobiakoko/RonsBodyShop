@@ -77,7 +77,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <ul className="mt-4 space-y-1.5 text-xs text-slate-700">
                   {service.features.map((feat, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-vamber shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-vamber shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -89,13 +89,13 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <span className="text-[11px] text-slate-500 font-medium">
                   Free Estimates Available
                 </span>
-                <button
+                <button type="button"
                   onClick={() => onSelectService(service.id)}
                   aria-label={`Get an estimate for ${service.title}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-vnavy hover:text-vred transition-colors"
                 >
                   <span>Get Estimate</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -124,7 +124,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
             </div>
 
             <div className="pt-5 mt-5 border-t border-slate-700">
-              <button
+              <button type="button"
                 onClick={() => onSelectService('collision')}
                 className="w-full py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-xs uppercase tracking-wider rounded transition-colors text-center"
               >

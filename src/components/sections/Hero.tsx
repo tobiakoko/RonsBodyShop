@@ -31,7 +31,7 @@ export const Hero = ({ onOpenEstimate }: HeroProps) => {
               <div className="flex items-center gap-1.5 bg-black/30 px-2.5 py-1 rounded border border-white/10 text-slate-200">
                 <div className="flex text-vamber">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-current" />
+                    <Star key={i} className="w-3 h-3 fill-current" aria-hidden="true" />
                   ))}
                 </div>
                 <span className="font-bold text-white text-xs">{SHOP_INFO.rating}</span>
@@ -81,30 +81,30 @@ export const Hero = ({ onOpenEstimate }: HeroProps) => {
             <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={`tel:${SHOP_INFO.phoneRaw}`}
-                className="px-6 py-3.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-sm tracking-wide uppercase rounded-md transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 whitespace-nowrap active:scale-[0.99]"
+                className="px-6 py-3.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-sm tracking-wide uppercase rounded-md transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 whitespace-nowrap motion-safe:active:scale-[0.99]"
               >
-                <Phone className="w-4 h-4 fill-current" />
+                <Phone className="w-4 h-4 fill-current" aria-hidden="true" />
                 <span>Call Shop: {SHOP_INFO.phone}</span>
               </a>
 
-              <button
+              <button type="button"
                 onClick={onOpenEstimate}
                 className="px-6 py-3.5 bg-slate-800/90 hover:bg-slate-800 text-white border border-slate-600 font-bold text-sm uppercase tracking-wide rounded-md transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               >
                 <span>Request Free Estimate</span>
-                <ArrowRight className="w-4 h-4 text-vamber" />
+                <ArrowRight className="w-4 h-4 text-vamber" aria-hidden="true" />
               </button>
             </div>
 
             {/* Shop location & live status bar */}
             <div className="pt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-300">
               <div className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-vamber" />
+                <MapPin className="w-3.5 h-3.5 text-vamber" aria-hidden="true" />
                 <span>Walk-ins Welcome: {SHOP_INFO.address}, {SHOP_INFO.city}</span>
               </div>
               <span className="text-slate-600 hidden sm:inline">|</span>
               <div className="flex items-center gap-1.5 text-amber-300">
-                <Clock className="w-3.5 h-3.5 text-vamber" />
+                <Clock className="w-3.5 h-3.5 text-vamber" aria-hidden="true" />
                 <span>
                   <span className="sr-only">{statusInfo.isOpen ? 'Open now. ' : 'Closed now. '}</span>
                   {statusInfo.text}

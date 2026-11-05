@@ -8,6 +8,7 @@
   --color-vnavy-light: #233154;
   --color-vamber: #E7A622;
   --color-vamber-hover: #D3951B;
+  --color-vamber-ink: #8C5D06; /* amber for text on light backgrounds (5.7:1 on white) */
   --color-vred: #D83A27;
   --color-vcream: #FAF7F2;
   --color-vsand: #F3EFE6;
@@ -29,4 +30,9 @@
 /* Keep fixed bottom bars clear of the iOS home indicator */
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* In-page anchors land below the sticky header */
+section[id] {
+  scroll-margin-top: 7.5rem;
 }

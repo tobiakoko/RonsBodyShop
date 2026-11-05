@@ -1,8 +1,7 @@
-import React from 'react';
 import { Star, CheckCircle2 } from 'lucide-react';
 import { REAL_REVIEWS, SHOP_INFO } from '../../content/shop';
 
-export const ReviewsAndTrust: React.FC = () => {
+export const ReviewsAndTrust = () => {
   return (
     <section id="reviews" className="py-16 bg-vcream border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -27,14 +26,14 @@ export const ReviewsAndTrust: React.FC = () => {
               <div className="font-display text-4xl font-bold text-vnavy">{SHOP_INFO.rating}</div>
               <div className="flex items-center gap-0.5 text-vamber mt-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                 ))}
               </div>
             </div>
             <div className="text-xs text-slate-600 space-y-0.5">
               <div className="font-bold text-vnavy">Google Rating</div>
               <div>Based on {SHOP_INFO.reviewCount} customer reviews</div>
-              <div className="text-[11px] text-slate-400">Torrance, CA · Since 1980</div>
+              <div className="text-[11px] text-slate-400">{SHOP_INFO.city}, {SHOP_INFO.state} · Since {SHOP_INFO.foundedYear}</div>
             </div>
           </div>
         </div>
@@ -51,7 +50,7 @@ export const ReviewsAndTrust: React.FC = () => {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-xs">
                   <div className="flex items-center text-vamber">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                     ))}
                   </div>
                   <span className="text-slate-400 font-medium text-[11px]">
@@ -76,7 +75,7 @@ export const ReviewsAndTrust: React.FC = () => {
                   </div>
                 </div>
                 <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3" />
+                  <CheckCircle2 className="w-3 h-3" aria-hidden="true" />
                   Verified
                 </span>
               </div>
@@ -87,7 +86,7 @@ export const ReviewsAndTrust: React.FC = () => {
         {/* Credentials Strip */}
         <div className="mt-12 py-5 px-6 bg-white border border-slate-200 rounded-xl grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs">
           <div>
-            <div className="font-display text-lg font-bold text-vnavy">40+ YEARS</div>
+            <div className="font-display text-lg font-bold text-vnavy">{SHOP_INFO.experienceYears} YEARS</div>
             <div className="text-slate-500 text-[11px] mt-0.5">Torrance Heritage</div>
           </div>
           <div>
