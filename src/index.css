@@ -1,240 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee&amp;family=Inter:wght@300;400;600;700&amp;family=Lobster&amp;display=swap');
-
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  --font-size: 16px;
-
-  --primary: #1a2332; 
-  --accent: #d64436;  
-  --gold: #f4b942;    
-  --shop-gray: #d1d5db;
-  --brick-white: #f3f4f6;
-
-  --background: #f5f3ed; 
-  --foreground: #0f172a;
-
-  --card: #ffffff;
-  --card-foreground: var(--primary);
-
-  --popover: #ffffff;
-  --popover-foreground: var(--primary);
-
-  --muted: #e8e6df;
-  --muted-foreground: #6b6b6b;
-
-  --destructive: var(--accent);
-  --destructive-foreground: #ffffff;
-
-  --border: rgba(0, 0, 0, 0.15);
-  --input: transparent;
-  --input-background: #ffffff;
-  --switch-background: #cbced4;
-
-  --font-weight-medium: 600;
-  --font-weight-normal: 400;
-
-  --ring: var(--primary);
-
-  --radius: 0.25rem;
-
-  --vintage-red: var(--accent);
-  --vintage-navy: var(--primary);
-  --vintage-cream: #f5f3ed;
-  --vintage-gold: var(--gold);
-  --vintage-blue: #4a90a4;
-  --vintage-dark-gray: #3a3a3a;
-  --vintage-light-gray: #e8e6df;
-  --vintage-wood: #8b7355;
-
-  --font-display: "Bungee", cursive;
-  --font-retro: "Lobster", cursive;
-  --font-sans: "Inter", sans-serif;
+@theme {
+  --font-display: 'Oswald', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --color-vnavy: #16203B;
+  --color-vnavy-dark: #0F1626;
+  --color-vnavy-light: #233154;
+  --color-vamber: #E7A622;
+  --color-vamber-hover: #D3951B;
+  --color-vred: #D83A27;
+  --color-vcream: #FAF7F2;
+  --color-vsand: #F3EFE6;
+  --color-vcharcoal: #1E232B;
 }
 
-.dark {
-  --background: #0f1115;
-  --foreground: #f5f3ed;
-
-  --card: #151923;
-  --card-foreground: #f5f3ed;
-
-  --popover: #151923;
-  --popover-foreground: #f5f3ed;
-
-  --muted: #202534;
-  --muted-foreground: #a0a0a0;
-
-  --border: rgba(255, 255, 255, 0.15);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: var(--gold);
-
-  --primary: #1a2332;
-  --accent: #d64436;
-  --gold: #f4b942;
+/* Vintage subtle halftone / grain overlay utility */
+.vintage-pinstripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(22, 32, 59, 0.02),
+    rgba(22, 32, 59, 0.02) 2px,
+    transparent 2px,
+    transparent 8px
+  );
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
-  --color-primary: var(--primary);
-  --color-accent: var(--accent);
-  --color-gold: var(--gold);
-
-  --color-shop-gray: var(--shop-gray);
-  --color-brick-white: var(--brick-white);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-input-background: var(--input-background);
-  --color-switch-background: var(--switch-background);
-  --color-ring: var(--ring);
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-
-  --color-vintage-red: var(--vintage-red);
-  --color-vintage-navy: var(--vintage-navy);
-  --color-vintage-cream: var(--vintage-cream);
-  --color-vintage-gold: var(--vintage-gold);
-  --color-vintage-blue: var(--vintage-blue);
-  --color-vintage-dark-gray: var(--vintage-dark-gray);
-  --color-vintage-light-gray: var(--vintage-light-gray);
-  --color-vintage-wood: var(--vintage-wood);
-
-  --font-display: var(--font-display);
-  --font-retro: var(--font-retro);
-  --font-sans: var(--font-sans);
+.vintage-metal-border {
+  border: 1px solid rgba(22, 32, 59, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 2px 4px rgba(22, 32, 59, 0.04);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-    background-image: radial-gradient(#9ca3af 0.5px, transparent 0.5px),
-      radial-gradient(#9ca3af 0.5px, #e5e7eb 0.5px);
-    background-size: 4px 4px;
-    background-position: 0 0, 2px 2px;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-    letter-spacing: 0.02em;
-  }
-}
-
-html {
-  font-size: var(--font-size);
-  scroll-behavior: smooth;
-}
-
-@layer utilities {
-  .vintage-texture {
-    position: relative;
-  }
-
-  .vintage-texture::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.02) 2px,
-        rgba(0, 0, 0, 0.02) 4px
-      );
-    pointer-events: none;
-  }
-
-  .terrazzo-pattern {
-    background-color: #d4d4d4;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 2%),
-      radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.3) 0%, transparent 1.5%),
-      radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.6) 0%, transparent 2.5%),
-      radial-gradient(circle at 85% 20%, rgba(0, 0, 0, 0.2) 0%, transparent 1%),
-      radial-gradient(circle at 15% 70%, rgba(255, 255, 255, 0.7) 0%, transparent 1.5%);
-  }
-
-  .vintage-shadow {
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .vintage-border-utility {
-    border: 3px solid currentColor;
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .retro-stripes {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(0, 0, 0, 0.03) 10px,
-      rgba(0, 0, 0, 0.03) 20px
-    );
-  }
-}
-
-@layer components {
-  .brick-wall {
-    background-color: var(--brick-white);
-    background-image: linear-gradient(335deg, #e5e7eb 5px, transparent 5px),
-      linear-gradient(155deg, #e5e7eb 5px, transparent 5px),
-      linear-gradient(335deg, #e5e7eb 5px, transparent 5px),
-      linear-gradient(155deg, #e5e7eb 5px, transparent 5px);
-    background-size: 30px 30px;
-    background-position: 0px 0px, 15px 15px, 15px 0px, 0px 15px;
-  }
-
-  .wood-texture {
-    background-color: #5d4037;
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 20px,
-      rgba(0, 0, 0, 0.1) 20px,
-      rgba(0, 0, 0, 0.1) 40px
-    );
-  }
-
-  .enamel-button {
-    @apply border-2 border-white/30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
-  }
-
-  .vintage-border {
-    border: 8px double var(--gold);
-    outline: 2px solid var(--primary);
-  }
+.vintage-badge-shadow {
+  box-shadow: 0 4px 14px -2px rgba(22, 32, 59, 0.18), 0 1px 3px rgba(22, 32, 59, 0.12);
 }
