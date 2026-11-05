@@ -2,22 +2,77 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ron's Body Shop - Torrance Auto Collision & Restoration</title>
-    <meta name="description" content="Vintage-crafted, mobile-first website for Ron's Body Shop in Torrance, CA. Featuring expert collision repair, frame alignment, custom paint, and classic car restoration." />
-    <meta property="og:title" content="Ron's Body Shop - Torrance Auto Collision & Restoration" />
-    <meta property="og:description" content="Where satisfaction is a tradition. Trusted collision repair, custom paint, and classic restoration in Torrance, CA since 1980." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/png" href="/assets/aistudio/logo_copy_5_ac7ffbc9.PNG" />
-    <!-- Google Fonts: Oswald for vintage Americana signage and Plus Jakarta Sans for crisp mobile readability -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Primary meta -->
+    <title>Ron's Body Shop | Collision Repair & Auto Body in Torrance, CA</title>
+    <meta
+      name="description"
+      content="Collision repair, custom paint, dent removal, frame straightening and classic car restoration in Torrance, CA. I-CAR trained team, all insurance claims handled, free estimates. Call %SHOP_PHONE%."
+    />
+    <meta name="author" content="Ron's Body Shop" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#16203B" />
+    <link rel="canonical" href="https://ronsbodyshop.net/" />
+
+    <!-- Favicons / PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Ron's Body Shop" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- LCP: fetch the hero photo before the JS runs -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset="/media/shop-front-640.avif 640w, /media/shop-front-960.avif 960w, /media/shop-front-1280.avif 1280w"
+      imagesizes="(min-width: 1024px) 460px, (min-width: 640px) 90vw, 100vw"
+      fetchpriority="high"
+    />
+
+    <!-- Fonts: Oswald (display) + Plus Jakarta Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ronsbodyshop.net/" />
+    <meta property="og:site_name" content="Ron's Body Shop" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Ron's Body Shop | Collision Repair & Auto Body in Torrance, CA" />
+    <meta
+      property="og:description"
+      content="Where satisfaction is a tradition. Trusted collision repair, custom paint, and classic restoration in Torrance, CA. Free estimates."
+    />
+    <meta property="og:image" content="https://ronsbodyshop.net/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ron's Body Shop on Cabrillo Ave, Torrance" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ron's Body Shop | Collision Repair & Auto Body in Torrance, CA" />
+    <meta
+      name="twitter:description"
+      content="Trusted collision repair, custom paint, and classic restoration in Torrance, CA. Free estimates."
+    />
+    <meta name="twitter:image" content="https://ronsbodyshop.net/og-image.jpg" />
+
+    <!-- schema.org AutoBodyShop — generated from src/content/shop.ts at build time -->
+    <!--JSON_LD-->
   </head>
   <body class="bg-vcream text-vink font-sans antialiased selection:bg-vamber/30 selection:text-vnavy">
+    <noscript>
+      Ron's Body Shop — %SHOP_ADDRESS% — call %SHOP_PHONE%.
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
