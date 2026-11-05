@@ -9,7 +9,6 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
   return (
     <section id="how-it-works" className="py-14 bg-vsand border-b border-slate-300/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
@@ -19,7 +18,8 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
             How To Get Your Vehicle Repaired
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-2 font-light">
-            We make collision repair and bodywork straightforward from first contact to final delivery.
+            We make collision repair and bodywork straightforward from first contact to final
+            delivery.
           </p>
         </div>
 
@@ -35,15 +35,13 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
                   <span className="font-display text-2xl font-bold text-vamber-ink">
                     STEP {item.step}
                   </span>
-                  <span className="text-xs font-mono text-slate-400">
-                    Phase {idx + 1} of 3
-                  </span>
+                  <span className="text-xs font-mono text-slate-400">Phase {idx + 1} of 3</span>
                 </div>
 
                 <h3 className="font-display text-xl uppercase font-bold text-vnavy">
                   {item.title}
                 </h3>
-                
+
                 <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
                   {item.desc}
                 </p>
@@ -51,7 +49,8 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
 
               <div className="pt-4 mt-4 border-t border-slate-100 text-xs font-semibold text-vnavy">
                 {idx === 0 && (
-                  <button type="button"
+                  <button
+                    type="button"
                     onClick={onOpenEstimate}
                     className="inline-flex items-center gap-1.5 text-vred hover:underline"
                   >
@@ -60,9 +59,7 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
                   </button>
                 )}
                 {idx === 1 && (
-                  <span className="text-slate-500">
-                    We handle adjuster supplements directly
-                  </span>
+                  <span className="text-slate-500">We handle adjuster supplements directly</span>
                 )}
                 {idx === 2 && (
                   <span className="text-emerald-700 flex items-center gap-1">
@@ -84,13 +81,17 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
             <div>
               <div className="text-xs text-slate-500">Need Immediate Help or Towing Advice?</div>
               <div className="font-bold text-base text-vnavy">
-                Call Our Shop: <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-vred hover:underline">{SHOP_INFO.phone}</a>
+                Call Our Shop:{' '}
+                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-vred hover:underline">
+                  {SHOP_INFO.phone}
+                </a>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            <button type="button"
+            <button
+              type="button"
               onClick={onOpenEstimate}
               className="w-full sm:w-auto px-5 py-2.5 bg-vnavy hover:bg-vnavy-dark text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors"
             >
@@ -98,7 +99,6 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
             </button>
           </div>
         </div>
-
       </div>
     </section>
   );

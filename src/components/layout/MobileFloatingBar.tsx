@@ -50,7 +50,9 @@ export const MobileFloatingBar = ({ onOpenEstimate }: MobileFloatingBarProps) =>
             <Navigation className="w-4 h-4" aria-hidden="true" />
           </div>
           <span className="text-[11px] font-bold tracking-tight">Directions</span>
-          <span className="text-[9px] text-slate-400">{SHOP_INFO.address.replace(/ Ave$/, '')}</span>
+          <span className="text-[9px] text-slate-400">
+            {SHOP_INFO.address.replace(/ Ave$/, '')}
+          </span>
         </a>
       </div>
     </div>

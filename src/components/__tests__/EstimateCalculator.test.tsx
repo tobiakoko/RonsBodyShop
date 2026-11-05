@@ -73,6 +73,9 @@ describe('EstimateCalculator', () => {
 
   it('pre-selects a damage type from the Services section', () => {
     render(<EstimateCalculator preselect={{ id: 'frame', nonce: 1 }} />);
-    expect(screen.getByRole('radio', { name: /frame alignment/i })).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByRole('radio', { name: /frame alignment/i })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
   });
 });

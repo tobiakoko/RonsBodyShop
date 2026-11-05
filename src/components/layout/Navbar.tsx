@@ -54,9 +54,11 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
             <span className="hidden sm:inline text-slate-400">Torrance, CA</span>
           </div>
           <div className="flex items-center gap-4 text-xs">
-            <span className="hidden md:inline text-slate-400">{formatHoursShort(SHOP_INFO.hours[0])}</span>
-            <a 
-              href={`tel:${SHOP_INFO.phoneRaw}`} 
+            <span className="hidden md:inline text-slate-400">
+              {formatHoursShort(SHOP_INFO.hours[0])}
+            </span>
+            <a
+              href={`tel:${SHOP_INFO.phoneRaw}`}
               className="flex items-center gap-1.5 font-bold text-vamber hover:text-amber-300 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" aria-hidden="true" />
@@ -68,11 +70,14 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
 
       {/* Main Navigation (3-Zone Top Bar Contract) */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 min-h-[5.75rem] py-2 flex items-center justify-between gap-6 sm:gap-8">
-        
         {/* Zone 1: Prominent Official Emblem & Wordmark */}
-        <a href="#main" aria-label={`${SHOP_INFO.name} — back to top`} className="flex items-center gap-3.5 sm:gap-4 whitespace-nowrap shrink-0 group py-1">
-          <img 
-            src="/media/logo-160.webp" 
+        <a
+          href="#main"
+          aria-label={`${SHOP_INFO.name} — back to top`}
+          className="flex items-center gap-3.5 sm:gap-4 whitespace-nowrap shrink-0 group py-1"
+        >
+          <img
+            src="/media/logo-160.webp"
             alt=""
             width="160"
             height="160"
@@ -89,7 +94,10 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
         </a>
 
         {/* Zone 2: Nav Links */}
-        <nav aria-label="Primary" className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-200">
+        <nav
+          aria-label="Primary"
+          className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-200"
+        >
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
@@ -121,14 +129,22 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" aria-hidden="true" />
+            ) : (
+              <Menu className="w-6 h-6" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <nav id="mobile-nav" aria-label="Mobile" className="lg:hidden bg-vnavy-dark border-b border-vamber/40 px-5 py-6 space-y-4 max-h-[calc(100dvh-8rem)] overflow-y-auto">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="lg:hidden bg-vnavy-dark border-b border-vamber/40 px-5 py-6 space-y-4 max-h-[calc(100dvh-8rem)] overflow-y-auto"
+        >
           <div className="flex flex-col space-y-3 font-medium text-slate-200 text-sm">
             {NAV_LINKS.map((l) => (
               <a

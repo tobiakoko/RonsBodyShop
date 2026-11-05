@@ -1,4 +1,13 @@
-import { ShieldCheck, Palette, Sparkles, Wrench, Flame, ArrowRight, Check, type LucideIcon } from 'lucide-react';
+import {
+  ShieldCheck,
+  Palette,
+  Sparkles,
+  Wrench,
+  Flame,
+  ArrowRight,
+  Check,
+  type LucideIcon,
+} from 'lucide-react';
 import { CORE_SERVICES, type ServiceId } from '../../content/services';
 import { SHOP_INFO } from '../../content/shop';
 import { formatHoursShort } from '../../lib/hours';
@@ -23,7 +32,6 @@ export const Services = ({ onSelectService }: ServicesProps) => {
   return (
     <section id="services" className="py-16 bg-vcream border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
           <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
@@ -33,7 +41,9 @@ export const Services = ({ onSelectService }: ServicesProps) => {
             Auto Body & Repair Services
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 font-light leading-relaxed">
-            From minor scratch repair and paintless dent removal to full-frame realignment and custom paint, our Torrance facility delivers quality automotive bodywork backed by four decades of experience.
+            From minor scratch repair and paintless dent removal to full-frame realignment and
+            custom paint, our Torrance facility delivers quality automotive bodywork backed by four
+            decades of experience.
           </p>
         </div>
 
@@ -51,16 +61,20 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                     <div className="w-8 h-8 rounded-lg bg-vcream border border-slate-200 flex items-center justify-center">
                       {(() => {
                         const { Icon, color } = SERVICE_ICON[service.id];
-                        return <Icon className={`w-5 h-5 ${color}`} aria-hidden="true" data-icon={service.id} />;
+                        return (
+                          <Icon
+                            className={`w-5 h-5 ${color}`}
+                            aria-hidden="true"
+                            data-icon={service.id}
+                          />
+                        );
                       })()}
                     </div>
                     <span className="text-xs font-mono font-semibold text-slate-400">
                       0{index + 1}.
                     </span>
                   </div>
-                  <span className="text-xs text-slate-500 font-medium">
-                    {service.subtitle}
-                  </span>
+                  <span className="text-xs text-slate-500 font-medium">{service.subtitle}</span>
                 </div>
 
                 {/* Title */}
@@ -77,7 +91,10 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <ul className="mt-4 space-y-1.5 text-xs text-slate-700">
                   {service.features.map((feat, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-vamber shrink-0 mt-0.5" aria-hidden="true" />
+                      <Check
+                        className="w-3.5 h-3.5 text-vamber shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -89,7 +106,8 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <span className="text-[11px] text-slate-500 font-medium">
                   Free Estimates Available
                 </span>
-                <button type="button"
+                <button
+                  type="button"
                   onClick={() => onSelectService(service.id)}
                   aria-label={`Get an estimate for ${service.title}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-vnavy hover:text-vred transition-colors"
@@ -111,7 +129,8 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 Bring Your Car In For Inspection
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
-                Stop by our Cabrillo Avenue shop for an honest, in-person assessment. We inspect the damage, explain your options clearly, and prepare an itemized estimate.
+                Stop by our Cabrillo Avenue shop for an honest, in-person assessment. We inspect the
+                damage, explain your options clearly, and prepare an itemized estimate.
               </p>
               <div className="mt-4 text-xs text-slate-300 space-y-1">
                 <div>{SHOP_INFO.fullAddress}</div>
@@ -124,7 +143,8 @@ export const Services = ({ onSelectService }: ServicesProps) => {
             </div>
 
             <div className="pt-5 mt-5 border-t border-slate-700">
-              <button type="button"
+              <button
+                type="button"
                 onClick={() => onSelectService('collision')}
                 className="w-full py-2.5 bg-vamber hover:bg-vamber-hover text-vnavy font-bold text-xs uppercase tracking-wider rounded transition-colors text-center"
               >
@@ -133,7 +153,6 @@ export const Services = ({ onSelectService }: ServicesProps) => {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

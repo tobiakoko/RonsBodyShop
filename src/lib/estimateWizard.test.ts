@@ -38,16 +38,19 @@ describe('estimateReducer', () => {
   });
 
   it('SUBMIT → submitting → RESOLVED stores the server ticket', () => {
-    let s: WizardState = fill({ ...initialWizardState(), step: 4 }, {
-      damageType: 'collision',
-      vehicleMake: 'Ford',
-      vehicleModel: 'F-150',
-      vehicleYear: '2020',
-      paymentType: 'out-of-pocket',
-      contactName: 'Sam',
-      contactPhone: '310-555-0100',
-      consent: true,
-    });
+    let s: WizardState = fill(
+      { ...initialWizardState(), step: 4 },
+      {
+        damageType: 'collision',
+        vehicleMake: 'Ford',
+        vehicleModel: 'F-150',
+        vehicleYear: '2020',
+        paymentType: 'out-of-pocket',
+        contactName: 'Sam',
+        contactPhone: '310-555-0100',
+        consent: true,
+      },
+    );
     s = estimateReducer(s, { type: 'SUBMIT' });
     expect(s.status).toBe('submitting');
     s = estimateReducer(s, { type: 'RESOLVED', ticket: 'RBS-123456' });
@@ -55,7 +58,10 @@ describe('estimateReducer', () => {
   });
 
   it('SUBMIT with an earlier invalid step jumps back to it', () => {
-    const s = estimateReducer(fill({ ...initialWizardState('collision'), step: 4 }, { consent: true }), { type: 'SUBMIT' });
+    const s = estimateReducer(
+      fill({ ...initialWizardState('collision'), step: 4 }, { consent: true }),
+      { type: 'SUBMIT' },
+    );
     expect(s).toMatchObject({ status: 'editing', step: 2 });
   });
 

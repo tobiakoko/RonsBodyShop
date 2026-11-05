@@ -27,7 +27,10 @@ export async function submitLead<T>(
     throw new LeadSubmitError('Network error — please check your connection.');
   }
 
-  const body = (await res.json().catch(() => null)) as { reference?: string; error?: string } | null;
+  const body = (await res.json().catch(() => null)) as {
+    reference?: string;
+    error?: string;
+  } | null;
   if (!res.ok || !body?.reference) {
     throw new LeadSubmitError(body?.error ?? 'Submission failed.');
   }

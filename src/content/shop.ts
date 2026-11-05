@@ -29,7 +29,13 @@ export interface ReviewItem {
 }
 
 const HOURS: HoursEntry[] = [
-  { label: 'Monday – Friday', short: 'Mon–Fri', days: [1, 2, 3, 4, 5], open: '08:00', close: '17:30' },
+  {
+    label: 'Monday – Friday',
+    short: 'Mon–Fri',
+    days: [1, 2, 3, 4, 5],
+    open: '08:00',
+    close: '17:30',
+  },
   { label: 'Saturday', short: 'Sat', days: [6], open: '08:00', close: '12:00' },
   { label: 'Sunday', short: 'Sun', days: [0] },
 ];

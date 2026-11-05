@@ -11,7 +11,10 @@ import { SHOP_INFO } from '../../content/shop';
 beforeEach(() => {
   vi.stubGlobal(
     'fetch',
-    vi.fn(async () => new Response(JSON.stringify({ error: 'We could not send your request.' }), { status: 502 })),
+    vi.fn(
+      async () =>
+        new Response(JSON.stringify({ error: 'We could not send your request.' }), { status: 502 }),
+    ),
   );
 });
 afterEach(() => vi.unstubAllGlobals());
@@ -32,7 +35,10 @@ it('estimate wizard: failed submit shows the phone fallback', async () => {
   await user.click(screen.getByRole('button', { name: /submit free estimate request/i }));
 
   const alert = await screen.findByRole('alert');
-  expect(within(alert).getByRole('link', { name: SHOP_INFO.phone })).toHaveAttribute('href', `tel:${SHOP_INFO.phoneRaw}`);
+  expect(within(alert).getByRole('link', { name: SHOP_INFO.phone })).toHaveAttribute(
+    'href',
+    `tel:${SHOP_INFO.phoneRaw}`,
+  );
   // Can retry from the error state
   expect(screen.getByRole('button', { name: /submit free estimate request/i })).toBeEnabled();
 });

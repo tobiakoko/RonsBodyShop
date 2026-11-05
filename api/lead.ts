@@ -111,7 +111,10 @@ function makeReference(): string {
 
 /** Strip line breaks and cap length before anything user-supplied touches a header. */
 function headerSafe(value: string, max = 80): string {
-  return value.replace(/[\r\n\t]+/g, ' ').trim().slice(0, max);
+  return value
+    .replace(/[\r\n\t]+/g, ' ')
+    .trim()
+    .slice(0, max);
 }
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);

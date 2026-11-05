@@ -18,7 +18,17 @@ import { SubmitErrorNotice } from '../ui/SubmitErrorNotice';
 import { TurnstileWidget } from '../ui/Turnstile';
 import { useTurnstile } from '../ui/useTurnstile';
 
-const POPULAR_MAKES = ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Mercedes-Benz', 'BMW', 'Lexus', 'Nissan', 'Classic / Custom'];
+const POPULAR_MAKES = [
+  'Toyota',
+  'Honda',
+  'Ford',
+  'Chevrolet',
+  'Mercedes-Benz',
+  'BMW',
+  'Lexus',
+  'Nissan',
+  'Classic / Custom',
+];
 
 interface EstimateCalculatorProps {
   isModal?: boolean;
@@ -31,7 +41,11 @@ interface EstimateCalculatorProps {
  * Renders inline (`<section id="estimate">`) and as a modal. The two instances
  * keep independent wizard state on purpose — they are alternate entry points.
  */
-export const EstimateCalculator = ({ isModal = false, onClose, preselect }: EstimateCalculatorProps) => {
+export const EstimateCalculator = ({
+  isModal = false,
+  onClose,
+  preselect,
+}: EstimateCalculatorProps) => {
   const [state, dispatch] = useReducer(estimateReducer, preselect?.id ?? '', initialWizardState);
   const { status, step, data, errors } = state;
   const uid = useId();
@@ -64,8 +78,10 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
     let active = true;
     submitLead('estimate', data, turnstile.getToken())
       .then(({ reference }) => active && dispatch({ type: 'RESOLVED', ticket: reference }))
-      .catch((err: unknown) =>
-        active && dispatch({ type: 'REJECTED', message: err instanceof Error ? err.message : '' }),
+      .catch(
+        (err: unknown) =>
+          active &&
+          dispatch({ type: 'REJECTED', message: err instanceof Error ? err.message : '' }),
       );
     return () => {
       active = false;
@@ -83,8 +99,13 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
       <div className="bg-vnavy text-white p-5 sm:p-6 border-b-2 border-vamber">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-vamber">Free Online Estimate</span>
-            <h2 id={titleId} className="font-display text-2xl sm:text-3xl uppercase font-bold text-white mt-0.5">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-vamber">
+              Free Online Estimate
+            </span>
+            <h2
+              id={titleId}
+              className="font-display text-2xl sm:text-3xl uppercase font-bold text-white mt-0.5"
+            >
               Request Your Free Estimate
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 mt-1">
@@ -119,7 +140,11 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                   }`}
                 >
                   {canJump ? (
-                    <button type="button" className="hover:underline" onClick={() => dispatch({ type: 'GOTO', step: s.n })}>
+                    <button
+                      type="button"
+                      className="hover:underline"
+                      onClick={() => dispatch({ type: 'GOTO', step: s.n })}
+                    >
                       {label}
                     </button>
                   ) : (
@@ -138,12 +163,17 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
             <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2">
               <Check className="w-8 h-8 stroke-[2.5]" aria-hidden="true" />
             </div>
-            <span className="text-xs uppercase font-bold tracking-widest text-vnavy">Estimate Request Received</span>
-            <h3 className="font-display text-3xl font-bold uppercase text-slate-900">Reference #{state.ticket}</h3>
+            <span className="text-xs uppercase font-bold tracking-widest text-vnavy">
+              Estimate Request Received
+            </span>
+            <h3 className="font-display text-3xl font-bold uppercase text-slate-900">
+              Reference #{state.ticket}
+            </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Thank you, <strong className="text-slate-900">{data.contactName}</strong>. We've received your{' '}
-              {data.vehicleYear} {data.vehicleMake} details and will call you at{' '}
-              <strong className="text-slate-900">{data.contactPhone}</strong> within 1–2 business hours.
+              Thank you, <strong className="text-slate-900">{data.contactName}</strong>. We've
+              received your {data.vehicleYear} {data.vehicleMake} details and will call you at{' '}
+              <strong className="text-slate-900">{data.contactPhone}</strong> within 1–2 business
+              hours.
             </p>
 
             <div className="p-4 bg-vcream border border-amber-200/80 rounded-lg text-left text-xs space-y-2 text-slate-700">
@@ -152,8 +182,14 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                 Next Steps with {SHOP_INFO.name}:
               </div>
               <ul className="list-disc pl-4 space-y-1 text-slate-600">
-                <li>Have photos of the damage? Text them to {SHOP_INFO.phone} with your reference number.</li>
-                <li>If using insurance, we handle adjuster communication and supplemental filings directly.</li>
+                <li>
+                  Have photos of the damage? Text them to {SHOP_INFO.phone} with your reference
+                  number.
+                </li>
+                <li>
+                  If using insurance, we handle adjuster communication and supplemental filings
+                  directly.
+                </li>
                 <li>Drop-offs welcome {formatHoursShort(weekdayHours)}.</li>
               </ul>
             </div>
@@ -217,13 +253,20 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                         aria-checked={selected}
                         onClick={() => set('damageType', opt.id)}
                         className={`text-left p-4 rounded-lg border transition-all ${
-                          selected ? 'border-vnavy bg-slate-50 ring-2 ring-vamber' : 'border-slate-200 hover:border-slate-300 bg-white'
+                          selected
+                            ? 'border-vnavy bg-slate-50 ring-2 ring-vamber'
+                            : 'border-slate-200 hover:border-slate-300 bg-white'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-slate-900 text-sm">{opt.wizardLabel}</span>
+                          <span className="font-bold text-slate-900 text-sm">
+                            {opt.wizardLabel}
+                          </span>
                           {selected && (
-                            <span className="w-5 h-5 rounded-full bg-vnavy text-vamber flex items-center justify-center" aria-hidden="true">
+                            <span
+                              className="w-5 h-5 rounded-full bg-vnavy text-vamber flex items-center justify-center"
+                              aria-hidden="true"
+                            >
                               <Check className="w-3 h-3" aria-hidden="true" />
                             </span>
                           )}
@@ -272,7 +315,12 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                       className={inputClass(!!errors.vehicleMake)}
                     />
                   </FormField>
-                  <FormField id={fid('model')} label="Model / Trim" required error={errors.vehicleModel}>
+                  <FormField
+                    id={fid('model')}
+                    label="Model / Trim"
+                    required
+                    error={errors.vehicleModel}
+                  >
                     <input
                       type="text"
                       autoComplete="off"
@@ -300,11 +348,19 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
 
             {step === 3 && (
               <StepFrame headingRef={stepHeading} title="How Will This Repair Be Handled?">
-                <div role="radiogroup" aria-label="Payment type" className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div
+                  role="radiogroup"
+                  aria-label="Payment type"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                >
                   {(
                     [
                       ['insurance', 'Insurance Claim', 'We coordinate adjusters & deductibles'],
-                      ['out-of-pocket', 'Customer Pay / Out-of-Pocket', 'Direct transparent estimate'],
+                      [
+                        'out-of-pocket',
+                        'Customer Pay / Out-of-Pocket',
+                        'Direct transparent estimate',
+                      ],
                     ] as const
                   ).map(([value, title, desc]) => (
                     <button
@@ -314,7 +370,9 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                       aria-checked={data.paymentType === value}
                       onClick={() => set('paymentType', value)}
                       className={`p-3.5 rounded-lg border text-left transition-all ${
-                        data.paymentType === value ? 'border-vnavy bg-slate-50 ring-2 ring-vamber' : 'border-slate-200 bg-white'
+                        data.paymentType === value
+                          ? 'border-vnavy bg-slate-50 ring-2 ring-vamber'
+                          : 'border-slate-200 bg-white'
                       }`}
                     >
                       <div className="font-bold text-slate-900 text-sm">{title}</div>
@@ -322,11 +380,18 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                     </button>
                   ))}
                 </div>
-                {errors.paymentType && <p className="text-xs font-medium text-vred">{errors.paymentType}</p>}
+                {errors.paymentType && (
+                  <p className="text-xs font-medium text-vred">{errors.paymentType}</p>
+                )}
 
                 {data.paymentType === 'insurance' && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
-                    <FormField id={fid('carrier')} label="Insurance Carrier" required error={errors.insuranceCarrier}>
+                    <FormField
+                      id={fid('carrier')}
+                      label="Insurance Carrier"
+                      required
+                      error={errors.insuranceCarrier}
+                    >
                       <select
                         value={data.insuranceCarrier}
                         onChange={(e) => set('insuranceCarrier', e.target.value)}
@@ -341,7 +406,11 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                         <option value="Other">Other Carrier</option>
                       </select>
                     </FormField>
-                    <FormField id={fid('claim')} label="Claim Number (if available)" error={errors.claimNumber}>
+                    <FormField
+                      id={fid('claim')}
+                      label="Claim Number (if available)"
+                      error={errors.claimNumber}
+                    >
                       <input
                         type="text"
                         placeholder="e.g. 0123456-CA"
@@ -368,7 +437,12 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                       className={inputClass(!!errors.contactName)}
                     />
                   </FormField>
-                  <FormField id={fid('phone')} label="Phone Number" required error={errors.contactPhone}>
+                  <FormField
+                    id={fid('phone')}
+                    label="Phone Number"
+                    required
+                    error={errors.contactPhone}
+                  >
                     <input
                       type="tel"
                       autoComplete="tel"
@@ -388,7 +462,11 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                     className={inputClass(!!errors.contactEmail)}
                   />
                 </FormField>
-                <FormField id={fid('notes')} label="Details or Special Needs (optional)" error={errors.notes}>
+                <FormField
+                  id={fid('notes')}
+                  label="Details or Special Needs (optional)"
+                  error={errors.notes}
+                >
                   <textarea
                     rows={3}
                     placeholder="Describe the damage, tow assistance needed, timeline…"
@@ -402,7 +480,8 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-md text-xs text-amber-900 space-y-1">
                   <div className="font-bold uppercase tracking-wider">Summary of Request:</div>
                   <div className="text-amber-800">
-                    {selectedService?.wizardLabel} for {data.vehicleYear} {data.vehicleMake} {data.vehicleModel} (Billing:{' '}
+                    {selectedService?.wizardLabel} for {data.vehicleYear} {data.vehicleMake}{' '}
+                    {data.vehicleModel} (Billing:{' '}
                     {data.paymentType === 'insurance' ? data.insuranceCarrier : 'Customer Pay'})
                   </div>
                 </div>
@@ -418,9 +497,15 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
                       aria-describedby={errors.consent ? fid('consent-error') : undefined}
                       className="mt-0.5 w-4 h-4 accent-vnavy"
                     />
-                    <label htmlFor={fid('consent')} className="text-xs text-slate-700 leading-relaxed">
-                      I agree that {SHOP_INFO.name} may use the information above to contact me about this estimate. We
-                      never sell or share your information. <span className="text-vred" aria-hidden="true">*</span>
+                    <label
+                      htmlFor={fid('consent')}
+                      className="text-xs text-slate-700 leading-relaxed"
+                    >
+                      I agree that {SHOP_INFO.name} may use the information above to contact me
+                      about this estimate. We never sell or share your information.{' '}
+                      <span className="text-vred" aria-hidden="true">
+                        *
+                      </span>
                     </label>
                   </div>
                   {errors.consent && (
@@ -434,7 +519,11 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
 
                 {status === 'error' && <SubmitErrorNotice message={state.errorMessage} />}
 
-                <StepNav step={step} submitting={submitting} onBack={() => dispatch({ type: 'BACK' })} />
+                <StepNav
+                  step={step}
+                  submitting={submitting}
+                  onBack={() => dispatch({ type: 'BACK' })}
+                />
               </StepFrame>
             )}
           </form>
@@ -443,7 +532,12 @@ export const EstimateCalculator = ({ isModal = false, onClose, preselect }: Esti
     </div>
   );
 
-  if (isModal) return <EstimateModal titleId={titleId} onClose={onClose}>{content}</EstimateModal>;
+  if (isModal)
+    return (
+      <EstimateModal titleId={titleId} onClose={onClose}>
+        {content}
+      </EstimateModal>
+    );
 
   return (
     <section id="estimate" className="py-16 bg-vsand border-b border-slate-300/80">
@@ -464,14 +558,26 @@ const StepFrame = ({
   children: ReactNode;
 }) => (
   <div className="space-y-5">
-    <h3 ref={headingRef} tabIndex={-1} className="text-sm font-bold text-slate-900 uppercase tracking-wide outline-none">
+    <h3
+      ref={headingRef}
+      tabIndex={-1}
+      className="text-sm font-bold text-slate-900 uppercase tracking-wide outline-none"
+    >
       {title}
     </h3>
     {children}
   </div>
 );
 
-const StepNav = ({ step, submitting = false, onBack }: { step: Step; submitting?: boolean; onBack: () => void }) => {
+const StepNav = ({
+  step,
+  submitting = false,
+  onBack,
+}: {
+  step: Step;
+  submitting?: boolean;
+  onBack: () => void;
+}) => {
   const meta = STEPS[step - 1];
   return (
     <div className={`flex pt-4 ${step === 1 ? 'justify-end' : 'justify-between'} gap-3`}>
@@ -518,7 +624,15 @@ const StepNav = ({ step, submitting = false, onBack }: { step: Step; submitting?
 };
 
 /** Dialog chrome: Escape closes, background scroll locked, focus moved in and restored on close. */
-const EstimateModal = ({ titleId, onClose, children }: { titleId: string; onClose?: () => void; children: ReactNode }) => {
+const EstimateModal = ({
+  titleId,
+  onClose,
+  children,
+}: {
+  titleId: string;
+  onClose?: () => void;
+  children: ReactNode;
+}) => {
   const dialog = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

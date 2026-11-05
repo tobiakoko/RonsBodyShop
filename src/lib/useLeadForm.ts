@@ -55,7 +55,9 @@ export function useLeadForm<T extends Record<string, FormValue>>(options: {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const target = e.target;
       const value =
-        target instanceof HTMLInputElement && target.type === 'checkbox' ? target.checked : target.value;
+        target instanceof HTMLInputElement && target.type === 'checkbox'
+          ? target.checked
+          : target.value;
       setField(target.name as keyof T, value as T[keyof T]);
     },
     [setField],
@@ -78,7 +80,10 @@ export function useLeadForm<T extends Record<string, FormValue>>(options: {
         if (mounted.current) setState({ status: 'success', reference });
       } catch (err) {
         if (mounted.current)
-          setState({ status: 'error', message: err instanceof Error ? err.message : 'Submission failed.' });
+          setState({
+            status: 'error',
+            message: err instanceof Error ? err.message : 'Submission failed.',
+          });
       }
     },
     [data, getToken, kind, schema, state.status],

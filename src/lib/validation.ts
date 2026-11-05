@@ -101,7 +101,10 @@ export function validateEstimateStep(
   };
   let schema: z.ZodType = estimateFields.pick(mask);
   if (step === 3)
-    schema = schema.refine((d) => carrierRequired(d as Parameters<typeof carrierRequired>[0]), CARRIER_RULE);
+    schema = schema.refine(
+      (d) => carrierRequired(d as Parameters<typeof carrierRequired>[0]),
+      CARRIER_RULE,
+    );
   const result = schema.safeParse(data);
   return result.success ? {} : toFieldErrors(result.error);
 }

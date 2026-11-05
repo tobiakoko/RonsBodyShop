@@ -41,9 +41,15 @@ describe('estimateSchema', () => {
   });
 
   it('requires a carrier only for insurance claims', () => {
-    expect(estimateSchema.safeParse({ ...validEstimate, insuranceCarrier: '' }).success).toBe(false);
+    expect(estimateSchema.safeParse({ ...validEstimate, insuranceCarrier: '' }).success).toBe(
+      false,
+    );
     expect(
-      estimateSchema.safeParse({ ...validEstimate, paymentType: 'out-of-pocket', insuranceCarrier: '' }).success,
+      estimateSchema.safeParse({
+        ...validEstimate,
+        paymentType: 'out-of-pocket',
+        insuranceCarrier: '',
+      }).success,
     ).toBe(true);
   });
 
@@ -59,12 +65,20 @@ describe('validateEstimateStep', () => {
   });
 
   it('applies the carrier rule on step 3', () => {
-    expect(validateEstimateStep(3, { ...validEstimate, insuranceCarrier: '' })).toHaveProperty('insuranceCarrier');
+    expect(validateEstimateStep(3, { ...validEstimate, insuranceCarrier: '' })).toHaveProperty(
+      'insuranceCarrier',
+    );
   });
 });
 
 describe('messageSchema', () => {
-  const valid = { name: 'Al', contact: 'al@example.com', message: 'Quote for a bumper?', consent: true, company: '' };
+  const valid = {
+    name: 'Al',
+    contact: 'al@example.com',
+    message: 'Quote for a bumper?',
+    consent: true,
+    company: '',
+  };
 
   it('accepts valid input', () => {
     expect(messageSchema.safeParse(valid).success).toBe(true);

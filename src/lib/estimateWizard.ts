@@ -109,18 +109,23 @@ export function estimateReducer(state: WizardState, action: WizardAction): Wizar
 
     case 'NEXT': {
       if (state.status !== 'editing' || state.step === LAST_STEP) return state;
-      const errors = validateEstimateStep(state.step, state.data as unknown as Record<string, unknown>);
+      const errors = validateEstimateStep(
+        state.step,
+        state.data as unknown as Record<string, unknown>,
+      );
       if (Object.keys(errors).length) return { ...state, errors };
       return { ...state, step: (state.step + 1) as Step, errors: {} };
     }
 
     case 'BACK':
-      if (state.status === 'submitting' || state.status === 'success' || state.step === 1) return state;
+      if (state.status === 'submitting' || state.status === 'success' || state.step === 1)
+        return state;
       return { ...state, status: 'editing', step: (state.step - 1) as Step, errors: {} };
 
     case 'GOTO': {
       // Only backwards jumps (to already-validated steps) are allowed.
-      if (state.status === 'submitting' || state.status === 'success' || action.step >= state.step) return state;
+      if (state.status === 'submitting' || state.status === 'success' || action.step >= state.step)
+        return state;
       return { ...state, status: 'editing', step: action.step, errors: {} };
     }
 
@@ -128,7 +133,8 @@ export function estimateReducer(state: WizardState, action: WizardAction): Wizar
       if (state.status !== 'editing' && state.status !== 'error') return state;
       if (state.step !== LAST_STEP) return state;
       const invalid = firstInvalidStep(state.data);
-      if (invalid) return { ...state, status: 'editing', step: invalid.step, errors: invalid.errors };
+      if (invalid)
+        return { ...state, status: 'editing', step: invalid.step, errors: invalid.errors };
       return { ...state, status: 'submitting', errors: {}, errorMessage: undefined };
     }
 

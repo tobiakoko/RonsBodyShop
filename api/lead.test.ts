@@ -8,7 +8,13 @@ vi.mock('resend', () => ({
   },
 }));
 
-const message = { name: 'Al', contact: 'al@example.com', message: 'Hello', consent: true, company: '' };
+const message = {
+  name: 'Al',
+  contact: 'al@example.com',
+  message: 'Hello',
+  consent: true,
+  company: '',
+};
 const post = (body: unknown) =>
   handleLead(new Request('http://x/api/lead', { method: 'POST', body: JSON.stringify(body) }));
 

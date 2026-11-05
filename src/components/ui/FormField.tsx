@@ -12,7 +12,15 @@ interface FormFieldProps {
 }
 
 /** Label + control + error, wired up for screen readers. */
-export const FormField = ({ id, label, error, required, hint, className = '', children }: FormFieldProps) => {
+export const FormField = ({
+  id,
+  label,
+  error,
+  required,
+  hint,
+  className = '',
+  children,
+}: FormFieldProps) => {
   const errorId = `${id}-error`;
   const hintId = hint ? `${id}-hint` : undefined;
   const describedBy = [error ? errorId : undefined, hintId].filter(Boolean).join(' ') || undefined;

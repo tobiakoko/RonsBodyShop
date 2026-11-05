@@ -23,10 +23,30 @@ const outDir = 'public/media';
 
 /** key → raw file prefix, output widths, alt text. */
 const JOBS = [
-  { key: 'shopFront', in: 'IMG_6810', widths: [640, 960, 1280], alt: "Ron's Body Shop building with a vintage Chevy delivery truck out front" },
-  { key: 'customerLounge', in: 'IMG_6812', widths: [640, 1024], alt: 'Customer lounge with restored vintage Crown gasoline pumps' },
-  { key: 'reception', in: 'IMG_6604', widths: [640, 1024], alt: 'Reception desk and vintage Wurlitzer jukebox' },
-  { key: 'awardsWall', in: 'IMG_6815', widths: [640, 1024], alt: 'Wall of certifications and community awards' },
+  {
+    key: 'shopFront',
+    in: 'IMG_6810',
+    widths: [640, 960, 1280],
+    alt: "Ron's Body Shop building with a vintage Chevy delivery truck out front",
+  },
+  {
+    key: 'customerLounge',
+    in: 'IMG_6812',
+    widths: [640, 1024],
+    alt: 'Customer lounge with restored vintage Crown gasoline pumps',
+  },
+  {
+    key: 'reception',
+    in: 'IMG_6604',
+    widths: [640, 1024],
+    alt: 'Reception desk and vintage Wurlitzer jukebox',
+  },
+  {
+    key: 'awardsWall',
+    in: 'IMG_6815',
+    widths: [640, 1024],
+    alt: 'Wall of certifications and community awards',
+  },
 ];
 
 const files = await readdir(srcDir);
@@ -63,15 +83,25 @@ for (const job of JOBS) {
 
 // Open Graph / Twitter card image (exactly 1200×630)
 const hero = find('IMG_6810', ['.jpeg', '.jpg']);
-await sharp(path.join(srcDir, hero)).rotate().resize(1200, 630, { fit: 'cover' }).jpeg({ quality: 78, mozjpeg: true }).toFile('public/og-image.jpg');
+await sharp(path.join(srcDir, hero))
+  .rotate()
+  .resize(1200, 630, { fit: 'cover' })
+  .jpeg({ quality: 78, mozjpeg: true })
+  .toFile('public/og-image.jpg');
 console.log('✓ og-image.jpg');
 
 // Logo → lowercase filename
 const logo = files.find((f) => /^logo.*\.png$/i.test(f));
 if (logo) {
   await copyFile(path.join(srcDir, logo), 'public/logo.png'); // full size, for schema.org / social
-  await sharp(path.join(srcDir, logo)).resize(160).webp({ quality: 85 }).toFile(`${outDir}/logo-160.webp`);
-  await sharp(path.join(srcDir, logo)).resize(160).png({ compressionLevel: 9 }).toFile(`${outDir}/logo-160.png`);
+  await sharp(path.join(srcDir, logo))
+    .resize(160)
+    .webp({ quality: 85 })
+    .toFile(`${outDir}/logo-160.webp`);
+  await sharp(path.join(srcDir, logo))
+    .resize(160)
+    .png({ compressionLevel: 9 })
+    .toFile(`${outDir}/logo-160.png`);
   console.log('✓ logo.png + 160px variants');
 }
 

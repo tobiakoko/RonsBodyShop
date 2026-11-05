@@ -9,9 +9,7 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
   return (
     <footer className="bg-vnavy-dark text-white border-t border-vamber/40 pt-16 pb-24 lg:pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-          
           {/* Brand & Emblem */}
           <div className="space-y-4">
             <div className="flex items-center gap-3.5">
@@ -28,7 +26,9 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Where satisfaction is a tradition. Serving Torrance and the South Bay with dedicated collision repair, unibody straightening, and vintage vehicle preservation since {SHOP_INFO.foundedYear}.
+              Where satisfaction is a tradition. Serving Torrance and the South Bay with dedicated
+              collision repair, unibody straightening, and vintage vehicle preservation since{' '}
+              {SHOP_INFO.foundedYear}.
             </p>
             <div className="text-[11px] text-amber-300/80 font-medium">
               BAR Licensed · I-CAR Trained Team
@@ -75,7 +75,8 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
               Insurance Protection
             </h2>
             <p className="text-xs text-slate-300 leading-relaxed mb-3">
-              California Insurance Code § 758.5 gives you the legal right to select Ron's Body Shop regardless of what any insurer recommends.
+              California Insurance Code § 758.5 gives you the legal right to select Ron's Body Shop
+              regardless of what any insurer recommends.
             </p>
             <button
               type="button"
@@ -98,7 +99,10 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-vamber shrink-0" aria-hidden="true" />
-                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="font-semibold text-white hover:text-vamber">
+                <a
+                  href={`tel:${SHOP_INFO.phoneRaw}`}
+                  className="font-semibold text-white hover:text-vamber"
+                >
                   {SHOP_INFO.phone}
                 </a>
               </div>
@@ -110,7 +114,6 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Quiet Copyright Row */}
@@ -122,7 +125,6 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
             <span>Crafted with pride in Old Town Torrance, CA</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

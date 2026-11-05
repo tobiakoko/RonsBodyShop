@@ -14,7 +14,9 @@ describe('Services', () => {
   it('passes the selected service id up', async () => {
     const onSelect = vi.fn();
     render(<Services onSelectService={onSelect} />);
-    await userEvent.click(screen.getByRole('button', { name: /estimate for frame straightening/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /estimate for frame straightening/i }),
+    );
     expect(onSelect).toHaveBeenCalledWith('frame');
   });
 });

@@ -1,19 +1,19 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --font-display: 'Oswald', sans-serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --color-vnavy: #16203B;
-  --color-vnavy-dark: #0F1626;
+  --color-vnavy: #16203b;
+  --color-vnavy-dark: #0f1626;
   --color-vnavy-light: #233154;
-  --color-vamber: #E7A622;
-  --color-vamber-hover: #D3951B;
-  --color-vamber-ink: #8C5D06; /* amber for text on light backgrounds (5.7:1 on white) */
-  --color-vred: #D83A27;
-  --color-vcream: #FAF7F2;
-  --color-vsand: #F3EFE6;
-  --color-vcharcoal: #1E232B;
-  --color-vink: #1A1D20; /* body text */
+  --color-vamber: #e7a622;
+  --color-vamber-hover: #d3951b;
+  --color-vamber-ink: #8c5d06; /* amber for text on light backgrounds (5.7:1 on white) */
+  --color-vred: #d83a27;
+  --color-vcream: #faf7f2;
+  --color-vsand: #f3efe6;
+  --color-vcharcoal: #1e232b;
+  --color-vink: #1a1d20; /* body text */
 }
 
 /* Vintage subtle halftone / grain overlay utility */

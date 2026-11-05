@@ -9,45 +9,32 @@ export interface MediaImage {
 }
 
 export const MEDIA = {
-  "shopFront": {
-    "slug": "shop-front",
-    "widths": [
-      640,
-      960,
-      1280
-    ],
-    "width": 1280,
-    "height": 1707,
-    "alt": "Ron's Body Shop building with a vintage Chevy delivery truck out front"
+  shopFront: {
+    slug: 'shop-front',
+    widths: [640, 960, 1280],
+    width: 1280,
+    height: 1707,
+    alt: "Ron's Body Shop building with a vintage Chevy delivery truck out front",
   },
-  "customerLounge": {
-    "slug": "customer-lounge",
-    "widths": [
-      640,
-      1024
-    ],
-    "width": 1024,
-    "height": 768,
-    "alt": "Customer lounge with restored vintage Crown gasoline pumps"
+  customerLounge: {
+    slug: 'customer-lounge',
+    widths: [640, 1024],
+    width: 1024,
+    height: 768,
+    alt: 'Customer lounge with restored vintage Crown gasoline pumps',
   },
-  "reception": {
-    "slug": "reception",
-    "widths": [
-      640,
-      1024
-    ],
-    "width": 1024,
-    "height": 1365,
-    "alt": "Reception desk and vintage Wurlitzer jukebox"
+  reception: {
+    slug: 'reception',
+    widths: [640, 1024],
+    width: 1024,
+    height: 1365,
+    alt: 'Reception desk and vintage Wurlitzer jukebox',
   },
-  "awardsWall": {
-    "slug": "awards-wall",
-    "widths": [
-      640,
-      1024
-    ],
-    "width": 1024,
-    "height": 768,
-    "alt": "Wall of certifications and community awards"
-  }
+  awardsWall: {
+    slug: 'awards-wall',
+    widths: [640, 1024],
+    width: 1024,
+    height: 768,
+    alt: 'Wall of certifications and community awards',
+  },
 } as const satisfies Record<string, MediaImage>;

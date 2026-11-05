@@ -14,7 +14,13 @@ const srcSet = (img: MediaImage, ext: 'avif' | 'webp') =>
   img.widths.map((w) => `/media/${img.slug}-${w}.${ext} ${w}w`).join(', ');
 
 /** AVIF → WebP <picture> with intrinsic width/height (no layout shift). */
-export const ResponsiveImage = ({ image, sizes, priority = false, className, alt }: ResponsiveImageProps) => (
+export const ResponsiveImage = ({
+  image,
+  sizes,
+  priority = false,
+  className,
+  alt,
+}: ResponsiveImageProps) => (
   <picture>
     <source type="image/avif" srcSet={srcSet(image, 'avif')} sizes={sizes} />
     <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={sizes} />

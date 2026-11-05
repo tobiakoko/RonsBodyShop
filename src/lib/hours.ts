@@ -49,7 +49,8 @@ export function zonedNow(date: Date, timeZone: string): { day: Weekday; minutes:
     minute: '2-digit',
     hourCycle: 'h23',
   }).formatToParts(date);
-  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((p) => p.type === type)?.value ?? '';
+  const get = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((p) => p.type === type)?.value ?? '';
   return {
     day: WEEKDAY_INDEX[get('weekday')],
     minutes: Number(get('hour')) * 60 + Number(get('minute')),

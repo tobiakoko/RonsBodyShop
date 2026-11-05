@@ -7,7 +7,6 @@ export const AboutShop = () => {
   return (
     <section id="about" className="py-16 bg-vsand border-b border-slate-300/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
@@ -17,13 +16,14 @@ export const AboutShop = () => {
             A South Bay Landmark Dedicated To Quality
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 font-light leading-relaxed">
-            Unlike cold corporate collision chains, Ron's Body Shop was built on traditional pride, personal honesty, and authentic automotive heritage. When you walk into our shop, you're treated like a neighbor.
+            Unlike cold corporate collision chains, Ron's Body Shop was built on traditional pride,
+            personal honesty, and authentic automotive heritage. When you walk into our shop, you're
+            treated like a neighbor.
           </p>
         </div>
 
         {/* 2-Column Split: Story & Real Atmosphere Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
           {/* Left Column: Authentic Shop Atmosphere Collage (7 cols) */}
           <div className="lg:col-span-7 grid grid-cols-2 gap-3.5">
             {/* Image 1: Vintage Chevy Delivery Truck */}
@@ -90,39 +90,52 @@ export const AboutShop = () => {
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <strong className="text-slate-900 block font-semibold">Honest, Straightforward Pricing</strong>
-                    No hidden fees or surprise add-ons. We give you a clear written appraisal before work begins.
+                    <strong className="text-slate-900 block font-semibold">
+                      Honest, Straightforward Pricing
+                    </strong>
+                    No hidden fees or surprise add-ons. We give you a clear written appraisal before
+                    work begins.
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <strong className="text-slate-900 block font-semibold">Precision Alignment & Paint Matching</strong>
-                    Our technicians use laser unibody measuring and computerized paint formulation so repairs are seamless.
+                    <strong className="text-slate-900 block font-semibold">
+                      Precision Alignment & Paint Matching
+                    </strong>
+                    Our technicians use laser unibody measuring and computerized paint formulation
+                    so repairs are seamless.
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <strong className="text-slate-900 block font-semibold">Full Insurance Claims Assistance</strong>
-                    We coordinate directly with your insurance adjuster to ensure all required repairs and proper parts are approved.
+                    <strong className="text-slate-900 block font-semibold">
+                      Full Insurance Claims Assistance
+                    </strong>
+                    We coordinate directly with your insurance adjuster to ensure all required
+                    repairs and proper parts are approved.
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-vred shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <strong className="text-slate-900 block font-semibold">Decades of Local Trust</strong>
-                    Family-owned and rooted in Torrance since {SHOP_INFO.foundedYear} with an average {SHOP_INFO.rating}-star rating across Google reviews.
+                    <strong className="text-slate-900 block font-semibold">
+                      Decades of Local Trust
+                    </strong>
+                    Family-owned and rooted in Torrance since {SHOP_INFO.foundedYear} with an
+                    average {SHOP_INFO.rating}-star rating across Google reviews.
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div className="text-xs text-slate-500">
-                  <span className="font-bold text-vnavy">{SHOP_INFO.address}</span><br />
+                  <span className="font-bold text-vnavy">{SHOP_INFO.address}</span>
+                  <br />
                   Old Town Torrance, CA
                 </div>
                 <a
@@ -134,9 +147,7 @@ export const AboutShop = () => {
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

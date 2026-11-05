@@ -101,6 +101,7 @@ npm run build
 ```
 
 The build process:
+
 1. Compiles TypeScript (`tsc -b`)
 2. Bundles and optimizes assets with Vite
 3. Outputs production-ready files to `/dist`
