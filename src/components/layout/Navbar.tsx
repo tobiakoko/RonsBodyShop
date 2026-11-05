@@ -72,7 +72,7 @@ export const Navbar = ({ onOpenEstimate }: NavbarProps) => {
         {/* Zone 1: Prominent Official Emblem & Wordmark */}
         <a href="#main" aria-label={`${SHOP_INFO.name} — back to top`} className="flex items-center gap-3.5 sm:gap-4 whitespace-nowrap shrink-0 group py-1">
           <img 
-            src="/assets/aistudio/logo_copy_5_ac7ffbc9.PNG" 
+            src="/media/logo-160.webp" 
             alt=""
             width="160"
             height="160"

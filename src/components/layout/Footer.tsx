@@ -1,4 +1,3 @@
-import React from 'react';
 import { SHOP_INFO } from '../../content/shop';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
@@ -6,7 +5,7 @@ interface FooterProps {
   onOpenEstimate: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
+export const Footer = ({ onOpenEstimate }: FooterProps) => {
   return (
     <footer className="bg-vnavy-dark text-white border-t border-vamber/40 pt-16 pb-24 lg:pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -17,9 +16,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
           <div className="space-y-4">
             <div className="flex items-center gap-3.5">
               <img
-                src="/assets/aistudio/logo_copy_5_ac7ffbc9.PNG"
-                alt="Ron's Body Shop Emblem"
-                referrerPolicy="no-referrer"
+                src="/media/logo-160.webp"
+                alt=""
+                width="160"
+                height="160"
+                loading="lazy"
                 className="h-14 sm:h-16 w-auto object-contain"
               />
               <div className="font-display text-2xl font-bold tracking-wider uppercase text-white">
@@ -27,18 +28,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Where satisfaction is a tradition. Serving Torrance and the South Bay with dedicated collision repair, unibody straightening, and vintage vehicle preservation since 1980.
+              Where satisfaction is a tradition. Serving Torrance and the South Bay with dedicated collision repair, unibody straightening, and vintage vehicle preservation since {SHOP_INFO.foundedYear}.
             </p>
             <div className="text-[11px] text-amber-300/80 font-medium">
-              BAR License · I-CAR Certified Team
+              BAR Licensed · I-CAR Trained Team
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
+            <h2 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Explore Our Shop
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs text-slate-300">
               <li>
                 <a href="#services" className="hover:text-vamber transition-colors">
@@ -61,7 +62,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
                 </a>
               </li>
               <li>
-                <a href="#heritage" className="hover:text-vamber transition-colors">
+                <a href="#about" className="hover:text-vamber transition-colors">
                   Antique Gas Pump Museum
                 </a>
               </li>
@@ -70,38 +71,39 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
 
           {/* California Insurance Notice */}
           <div>
-            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
+            <h2 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Insurance Protection
-            </h4>
+            </h2>
             <p className="text-xs text-slate-300 leading-relaxed mb-3">
               California Insurance Code § 758.5 gives you the legal right to select Ron's Body Shop regardless of what any insurer recommends.
             </p>
             <button
+              type="button"
               onClick={onOpenEstimate}
               className="text-xs font-bold text-vamber hover:text-amber-200 transition-colors uppercase tracking-wider underline"
             >
-              Start Free Photo Estimate →
+              Start Free Estimate →
             </button>
           </div>
 
           {/* Direct Contact info */}
           <div>
-            <h4 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
+            <h2 className="font-display text-sm uppercase font-bold text-vamber tracking-wider mb-4">
               Torrance Location
-            </h4>
+            </h2>
             <div className="space-y-2.5 text-xs text-slate-300">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-vamber shrink-0 mt-0.5" />
-                <span>1324 Cabrillo Ave, Torrance, CA 90501</span>
+                <MapPin className="w-4 h-4 text-vamber shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{SHOP_INFO.fullAddress}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-vamber shrink-0" />
+                <Phone className="w-4 h-4 text-vamber shrink-0" aria-hidden="true" />
                 <a href={`tel:${SHOP_INFO.phoneRaw}`} className="font-semibold text-white hover:text-vamber">
                   {SHOP_INFO.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-vamber shrink-0" />
+                <Mail className="w-4 h-4 text-vamber shrink-0" aria-hidden="true" />
                 <a href={`mailto:${SHOP_INFO.email}`} className="text-slate-300 hover:text-white">
                   {SHOP_INFO.email}
                 </a>
@@ -114,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEstimate }) => {
         {/* Quiet Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <div>
-            © {new Date().getFullYear()} Ron's Body Shop, Inc. All rights reserved.
+            © {new Date().getFullYear()} {SHOP_INFO.name}. All rights reserved.
           </div>
           <div className="flex items-center gap-2 text-slate-400">
             <span>Crafted with pride in Old Town Torrance, CA</span>

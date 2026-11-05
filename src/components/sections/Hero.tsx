@@ -1,6 +1,8 @@
 import { Phone, ArrowRight, Star, MapPin, Clock } from 'lucide-react';
 import { SHOP_INFO } from '../../content/shop';
 import { useShopStatus } from '../../lib/useShopStatus';
+import { MEDIA } from '../../content/media';
+import { ResponsiveImage } from '../ui/ResponsiveImage';
 
 interface HeroProps {
   onOpenEstimate: () => void;
@@ -118,10 +120,11 @@ export const Hero = ({ onOpenEstimate }: HeroProps) => {
               
               {/* Photo showing real Torrance shop building and classic 1940s Chevy delivery truck */}
               <div className="aspect-[4/3] w-full overflow-hidden relative bg-slate-900">
-                <img
-                  src="/assets/aistudio/IMG_6810_63434b37.jpeg"
+                <ResponsiveImage
+                  image={MEDIA.shopFront}
                   alt={`${SHOP_INFO.name} facility at ${SHOP_INFO.fullAddress}`}
-                  referrerPolicy="no-referrer"
+                  sizes="(min-width: 1024px) 460px, (min-width: 640px) 90vw, 100vw"
+                  priority
                   className="w-full h-full object-cover object-center"
                 />
                 
