@@ -277,7 +277,7 @@ export const EstimateCalculator = ({
                   })}
                 </div>
                 {errors.damageType && (
-                  <p id={fid('damage-error')} className="text-xs font-medium text-vred">
+                  <p id={fid('damage-error')} className="text-xs font-medium text-vred-ink">
                     {errors.damageType}
                   </p>
                 )}
@@ -381,7 +381,7 @@ export const EstimateCalculator = ({
                   ))}
                 </div>
                 {errors.paymentType && (
-                  <p className="text-xs font-medium text-vred">{errors.paymentType}</p>
+                  <p className="text-xs font-medium text-vred-ink">{errors.paymentType}</p>
                 )}
 
                 {data.paymentType === 'insurance' && (
@@ -503,13 +503,13 @@ export const EstimateCalculator = ({
                     >
                       I agree that {SHOP_INFO.name} may use the information above to contact me
                       about this estimate. We never sell or share your information.{' '}
-                      <span className="text-vred" aria-hidden="true">
+                      <span className="text-vred-ink" aria-hidden="true">
                         *
                       </span>
                     </label>
                   </div>
                   {errors.consent && (
-                    <p id={fid('consent-error')} className="mt-1 text-xs font-medium text-vred">
+                    <p id={fid('consent-error')} className="mt-1 text-xs font-medium text-vred-ink">
                       {errors.consent}
                     </p>
                   )}

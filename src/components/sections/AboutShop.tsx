@@ -9,7 +9,7 @@ export const AboutShop = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred-ink font-bold mb-1">
             Over {SHOP_INFO.experienceYears.replace('+', '')} Years in Old Town Torrance
           </div>
           <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-vnavy tracking-tight">

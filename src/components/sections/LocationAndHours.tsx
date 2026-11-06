@@ -29,7 +29,7 @@ export const LocationAndHours = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-2">
+          <div className="text-xs uppercase tracking-widest text-vred-ink font-bold mb-2">
             Old Town Torrance, California
           </div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-vnavy tracking-tight">
@@ -56,10 +56,14 @@ export const LocationAndHours = () => {
                   <span
                     className={`text-xs font-bold uppercase tracking-wide ${status.isOpen ? 'text-emerald-700' : 'text-slate-600'}`}
                   >
-                    {status.isOpen ? '● Open Now' : '○ Currently Closed'}
+                    {status.phase === 'unknown'
+                      ? 'Open Weekdays'
+                      : status.isOpen
+                        ? '● Open Now'
+                        : '○ Currently Closed'}
                   </span>
                   <div className="text-[11px] text-slate-500">{status.text}</div>
-                  <div className="text-[11px] text-slate-400">{status.subtext}</div>
+                  <div className="text-[11px] text-slate-500">{status.subtext}</div>
                 </div>
               </div>
 
@@ -85,7 +89,7 @@ export const LocationAndHours = () => {
             {/* Contact Details & Address Card */}
             <div className="bg-white rounded-xl border border-slate-200 p-6 sm:p-7 shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <div className="text-xs uppercase font-bold tracking-wider text-slate-400 mb-1">
+                <div className="text-xs uppercase font-bold tracking-wider text-slate-500 mb-1">
                   Physical Address
                 </div>
                 <div className="font-bold text-slate-900 text-base font-display uppercase">
@@ -101,7 +105,7 @@ export const LocationAndHours = () => {
                     href={SHOP_INFO.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-vred hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-vred-ink hover:underline"
                   >
                     <Navigation className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>Open in Google Maps →</span>
@@ -110,7 +114,7 @@ export const LocationAndHours = () => {
               </div>
 
               <div>
-                <div className="text-xs uppercase font-bold tracking-wider text-slate-400 mb-1">
+                <div className="text-xs uppercase font-bold tracking-wider text-slate-500 mb-1">
                   Direct Inquiries
                 </div>
                 <div className="space-y-2 mt-1">
@@ -253,13 +257,13 @@ export const LocationAndHours = () => {
                       >
                         I agree that {SHOP_INFO.name} may use this information to respond to my
                         message.{' '}
-                        <span className="text-vred" aria-hidden="true">
+                        <span className="text-vred-ink" aria-hidden="true">
                           *
                         </span>
                       </label>
                     </div>
                     {errors.consent && (
-                      <p id="qm-consent-error" className="mt-1 text-xs font-medium text-vred">
+                      <p id="qm-consent-error" className="mt-1 text-xs font-medium text-vred-ink">
                         {errors.consent}
                       </p>
                     )}

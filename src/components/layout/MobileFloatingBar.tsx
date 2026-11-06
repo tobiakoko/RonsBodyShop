@@ -22,7 +22,11 @@ export const MobileFloatingBar = ({ onOpenEstimate }: MobileFloatingBarProps) =>
           </div>
           <span className="text-[11px] font-bold tracking-tight">Call Shop</span>
           <span className={`text-[9px] ${status.isOpen ? 'text-emerald-300' : 'text-slate-400'}`}>
-            {status.isOpen ? status.text : 'Closed now'}
+            {status.phase === 'unknown'
+              ? 'Tap to call'
+              : status.isOpen
+                ? status.text
+                : 'Closed now'}
           </span>
         </a>
 

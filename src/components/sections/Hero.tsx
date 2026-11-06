@@ -127,7 +127,11 @@ export const Hero = ({ onOpenEstimate }: HeroProps) => {
                 <Clock className="w-3.5 h-3.5 text-vamber" aria-hidden="true" />
                 <span>
                   <span className="sr-only">
-                    {statusInfo.isOpen ? 'Open now. ' : 'Closed now. '}
+                    {statusInfo.phase === 'unknown'
+                      ? 'Hours: '
+                      : statusInfo.isOpen
+                        ? 'Open now. '
+                        : 'Closed now. '}
                   </span>
                   {statusInfo.text}
                 </span>
@@ -143,7 +147,7 @@ export const Hero = ({ onOpenEstimate }: HeroProps) => {
                 <ResponsiveImage
                   image={MEDIA.shopFront}
                   alt={`${SHOP_INFO.name} facility at ${SHOP_INFO.fullAddress}`}
-                  sizes="(min-width: 1024px) 460px, (min-width: 640px) 90vw, 100vw"
+                  sizes="(min-width: 1024px) 460px, (min-width: 640px) calc(100vw - 3rem), calc(100vw - 2rem)"
                   priority
                   className="w-full h-full object-cover object-center"
                 />

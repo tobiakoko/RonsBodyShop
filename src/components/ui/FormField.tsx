@@ -39,7 +39,7 @@ export const FormField = ({
       <label htmlFor={id} className="block text-xs font-semibold text-slate-700 uppercase mb-1">
         {label}
         {required && (
-          <span className="text-vred" aria-hidden="true">
+          <span className="text-vred-ink" aria-hidden="true">
             {' '}
             *
           </span>
@@ -52,7 +52,7 @@ export const FormField = ({
         </p>
       )}
       {error && (
-        <p id={errorId} className="mt-1 text-xs font-medium text-vred">
+        <p id={errorId} className="mt-1 text-xs font-medium text-vred-ink">
           {error}
         </p>
       )}

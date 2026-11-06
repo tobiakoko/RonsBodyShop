@@ -11,7 +11,7 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred-ink font-bold mb-1">
             Simple & Transparent Process
           </div>
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase font-bold text-vnavy tracking-tight">
@@ -35,7 +35,7 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
                   <span className="font-display text-2xl font-bold text-vamber-ink">
                     STEP {item.step}
                   </span>
-                  <span className="text-xs font-mono text-slate-400">Phase {idx + 1} of 3</span>
+                  <span className="text-xs font-mono text-slate-500">Phase {idx + 1} of 3</span>
                 </div>
 
                 <h3 className="font-display text-xl uppercase font-bold text-vnavy">
@@ -52,7 +52,7 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
                   <button
                     type="button"
                     onClick={onOpenEstimate}
-                    className="inline-flex items-center gap-1.5 text-vred hover:underline"
+                    className="inline-flex items-center gap-1.5 text-vred-ink hover:underline"
                   >
                     <span>Request estimate online</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -82,7 +82,7 @@ export const HowItWorks = ({ onOpenEstimate }: HowItWorksProps) => {
               <div className="text-xs text-slate-500">Need Immediate Help or Towing Advice?</div>
               <div className="font-bold text-base text-vnavy">
                 Call Our Shop:{' '}
-                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-vred hover:underline">
+                <a href={`tel:${SHOP_INFO.phoneRaw}`} className="text-vred-ink hover:underline">
                   {SHOP_INFO.phone}
                 </a>
               </div>

@@ -57,7 +57,7 @@ export function zonedNow(date: Date, timeZone: string): { day: Weekday; minutes:
   };
 }
 
-export type ShopPhase = 'open' | 'opening-later-today' | 'closed';
+export type ShopPhase = 'open' | 'opening-later-today' | 'closed' | 'unknown';
 
 export interface ShopStatus {
   phase: ShopPhase;

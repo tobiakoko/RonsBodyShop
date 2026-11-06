@@ -34,7 +34,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
+          <div className="text-xs uppercase tracking-widest text-vred-ink font-bold mb-1">
             What We Do
           </div>
           <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-vnavy tracking-tight">
@@ -70,7 +70,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                         );
                       })()}
                     </div>
-                    <span className="text-xs font-mono font-semibold text-slate-400">
+                    <span className="text-xs font-mono font-semibold text-slate-500">
                       0{index + 1}.
                     </span>
                   </div>
@@ -78,7 +78,7 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-2xl font-bold uppercase text-vnavy mt-4 group-hover:text-vred transition-colors">
+                <h3 className="font-display text-2xl font-bold uppercase text-vnavy mt-4 group-hover:text-vred-ink transition-colors">
                   {service.title}
                 </h3>
 
@@ -109,8 +109,8 @@ export const Services = ({ onSelectService }: ServicesProps) => {
                 <button
                   type="button"
                   onClick={() => onSelectService(service.id)}
-                  aria-label={`Get an estimate for ${service.title}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-vnavy hover:text-vred transition-colors"
+                  aria-label={`Get Estimate for ${service.title}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-vnavy hover:text-vred-ink transition-colors"
                 >
                   <span>Get Estimate</span>
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

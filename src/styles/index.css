@@ -1,8 +1,12 @@
 @import 'tailwindcss';
+/* Self-hosted variable fonts (no render-blocking request to Google). */
+@import '@fontsource-variable/oswald';
+@import '@fontsource-variable/plus-jakarta-sans';
 
 @theme {
-  --font-display: 'Oswald', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Oswald Variable', 'Oswald', sans-serif;
+  --font-sans:
+    'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --color-vnavy: #16203b;
   --color-vnavy-dark: #0f1626;
   --color-vnavy-light: #233154;
@@ -10,6 +14,7 @@
   --color-vamber-hover: #d3951b;
   --color-vamber-ink: #8c5d06; /* amber for text on light backgrounds (5.7:1 on white) */
   --color-vred: #d83a27;
+  --color-vred-ink: #b42f1f; /* red for small text on light backgrounds (5.4:1 on cream) */
   --color-vcream: #faf7f2;
   --color-vsand: #f3efe6;
   --color-vcharcoal: #1e232b;

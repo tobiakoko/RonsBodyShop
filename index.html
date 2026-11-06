@@ -13,6 +13,22 @@
     <meta name="author" content="Ron's Body Shop" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#16203B" />
+
+    <!-- Preload the Latin subsets of the self-hosted fonts (headline is the LCP element) -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/node_modules/@fontsource-variable/oswald/files/oswald-latin-wght-normal.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2"
+    />
     <link rel="canonical" href="https://ronsbodyshop.net/" />
 
     <!-- Favicons / PWA -->
@@ -22,24 +38,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Ron's Body Shop" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- LCP: fetch the hero photo before the JS runs -->
-    <link
-      rel="preload"
-      as="image"
-      type="image/avif"
-      imagesrcset="/media/shop-front-640.avif 640w, /media/shop-front-960.avif 960w, /media/shop-front-1280.avif 1280w"
-      imagesizes="(min-width: 1024px) 460px, (min-width: 640px) 90vw, 100vw"
-      fetchpriority="high"
-    />
-
-    <!-- Fonts: Oswald (display) + Plus Jakarta Sans (body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

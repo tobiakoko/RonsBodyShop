@@ -118,7 +118,8 @@ export const Footer = ({ onOpenEstimate }: FooterProps) => {
 
         {/* Quiet Copyright Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <div>
+          {/* Year can differ between prerender and the visitor's clock. */}
+          <div suppressHydrationWarning>
             © {new Date().getFullYear()} {SHOP_INFO.name}. All rights reserved.
           </div>
           <div className="flex items-center gap-2 text-slate-400">

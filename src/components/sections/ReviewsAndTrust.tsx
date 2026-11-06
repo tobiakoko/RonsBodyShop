@@ -8,7 +8,7 @@ export const ReviewsAndTrust = () => {
         {/* Section Header with Verified 4.7 Rating */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="text-xs uppercase tracking-widest text-vred font-bold mb-1">
+            <div className="text-xs uppercase tracking-widest text-vred-ink font-bold mb-1">
               Verified Reputation
             </div>
             <h2 className="font-display text-3xl sm:text-4xl uppercase font-bold text-vnavy tracking-tight">
@@ -33,7 +33,7 @@ export const ReviewsAndTrust = () => {
             <div className="text-xs text-slate-600 space-y-0.5">
               <div className="font-bold text-vnavy">Google Rating</div>
               <div>Based on {SHOP_INFO.reviewCount} customer reviews</div>
-              <div className="text-[11px] text-slate-400">
+              <div className="text-[11px] text-slate-500">
                 {SHOP_INFO.city}, {SHOP_INFO.state} · Since {SHOP_INFO.foundedYear}
               </div>
             </div>
@@ -55,7 +55,7 @@ export const ReviewsAndTrust = () => {
                       <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                     ))}
                   </div>
-                  <span className="text-slate-400 font-medium text-[11px]">{review.source}</span>
+                  <span className="text-slate-500 font-medium text-[11px]">{review.source}</span>
                 </div>
 
                 {/* Body Quote */}
