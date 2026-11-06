@@ -1,6 +1,6 @@
 {
   "name": "Ron's Body Shop",
-  "short_name": "Ron's",
+  "short_name": "Ron's Body Shop",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -25,7 +25,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#2563eb",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#16203B",
+  "background_color": "#FAF7F2",
+  "display": "standalone",
+  "start_url": "/"
 }

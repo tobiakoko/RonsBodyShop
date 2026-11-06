@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Oswald', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --color-vnavy: #16203b;
+  --color-vnavy-dark: #0f1626;
+  --color-vnavy-light: #233154;
+  --color-vamber: #e7a622;
+  --color-vamber-hover: #d3951b;
+  --color-vamber-ink: #8c5d06; /* amber for text on light backgrounds (5.7:1 on white) */
+  --color-vred: #d83a27;
+  --color-vcream: #faf7f2;
+  --color-vsand: #f3efe6;
+  --color-vcharcoal: #1e232b;
+  --color-vink: #1a1d20; /* body text */
+}
+
+/* Vintage subtle halftone / grain overlay utility */
+.vintage-pinstripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(22, 32, 59, 0.02),
+    rgba(22, 32, 59, 0.02) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+/* Keep fixed bottom bars clear of the iOS home indicator */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* In-page anchors land below the sticky header */
+section[id] {
+  scroll-margin-top: 7.5rem;
+}
