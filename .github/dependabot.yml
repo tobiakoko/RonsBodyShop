@@ -7,6 +7,19 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # Pinned on purpose (see README/package.json): typescript-eslint supports
+      # TypeScript < 6.1 and eslint-plugin-jsx-a11y does not support ESLint 10 yet.
+      # Remove these once both plugins catch up.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major, version-update:semver-minor]
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: '@eslint/js'
+        update-types: [version-update:semver-major]
+      # Keep Node types on the runtime's major line (CI and engines: Node 22+).
+      - dependency-name: '@types/node'
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
