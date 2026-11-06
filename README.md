@@ -15,7 +15,7 @@ npm run dev          # http://localhost:5173 (forms need the API; see below)
 
 | Script                    | What it does                                            |
 | ------------------------- | ------------------------------------------------------- |
-| `npm run build`           | Typecheck, then production build to `dist/`             |
+| `npm run build`           | Typecheck, build to `dist/`, then prerender the HTML    |
 | `npm run typecheck`       | `tsc --noEmit`                                          |
 | `npm run lint`            | ESLint (TypeScript, React Hooks, jsx-a11y)              |
 | `npm test`                | Vitest + Testing Library                                |
@@ -70,6 +70,8 @@ instructions/               build spec
 - **Business data lives only in `src/content/shop.ts`.** Phone, address, hours, rating, and founding year are all read from `SHOP_INFO`. That includes the live open/closed badge and the schema.org JSON-LD, which `vite.config.ts` injects into `index.html` at build time. Change the hours in one place and everything follows.
 - **Colors use brand tokens** (`bg-vnavy`, `text-vamber`, …) from `@theme`. Never use arbitrary hex.
 - State machines are explicit (`useReducer` + discriminated unions). See `instructions/04-state-machines.md`.
+- **The page is prerendered.** `npm run build` renders `<App/>` to static HTML (`src/entry-server.tsx` → `scripts/prerender.mjs`) and the browser hydrates it. Keep render output deterministic: anything time- or browser-dependent belongs in an effect or behind `useSyncExternalStore` with a server snapshot (see `useShopStatus`). `prerender.test.tsx` fails on any hydration mismatch.
+- Fonts are self-hosted (`@fontsource-variable/*`), so the CSP allows fonts from `'self'` only.
 
 ## Images
 
